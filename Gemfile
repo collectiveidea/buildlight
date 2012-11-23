@@ -3,7 +3,10 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.9'
 gem 'rails-api'
 
-gem 'pg', group: :deployment
+group :deployment do
+  gem 'pg'
+  gem 'unicorn'
+end
 
 group :development, :test do
   gem 'rspec-rails'
