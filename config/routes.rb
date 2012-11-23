@@ -1,4 +1,4 @@
 Buildlight::Application.routes.draw do
-  resources :colors, only: :index
+  get '/' => 'colors#index'
   post '/' => 'webhooks#create'
 end
