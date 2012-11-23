@@ -9,5 +9,5 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'sqlite3'
-  gem 'debugger'
+  gem 'debugger' unless ENV['CI']
 end
