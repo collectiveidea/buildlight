@@ -7,7 +7,7 @@ gem 'pg', group: :deployment
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'capybara'
+  gem 'factory_girl_rails'
   gem 'sqlite3'
   gem 'debugger' unless ENV['CI']
 end
