@@ -1,8 +1,6 @@
 class Status < ActiveRecord::Base
   attr_accessible :project, :status
 
-  scope :recent, order('created_at DESC')
-
   # Set colors based on travis-ci's status code
   def status_code=(code)
     self.yellow = false
@@ -19,7 +17,7 @@ class Status < ActiveRecord::Base
   def self.colors
     red    = where(red: true).any?
     yellow = where(yellow: true).any?
-    
+
     {red: red, yellow: yellow, green: !red }
   end
 end
