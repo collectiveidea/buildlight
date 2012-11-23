@@ -4,8 +4,7 @@ class WebhooksController < ApplicationController
     @status = Status.new
     @status.project_id   = json["repository"]["id"]
     @status.project_name = json["repository"]["name"]
-    @status.status       = json["status_message"]
-    @status.payload = request.body.read
+    @status.status_code  = json["status"]
     @status.save!
     head :ok
   end

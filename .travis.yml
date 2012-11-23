@@ -6,5 +6,5 @@ before_script:
 notifications:
   webhooks:
     urls:
-      - https://buildlight.herokuapp.com/
+      - https://buildlight.collectiveidea.com/
     on_start: true
