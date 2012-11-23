@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :status do
     project_id '123'
     project_name 'buildlight'
-    color 'green'
+    red false
+    yellow false
   end
 end

@@ -11,21 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121123182506) do
+ActiveRecord::Schema.define(:version => 20121123195427) do
 
   create_table "statuses", :force => true do |t|
     t.string   "project_id"
     t.string   "project_name"
-    t.string   "color"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.text     "payload"
+    t.boolean  "red"
+    t.boolean  "yellow"
   end
 
-  add_index "statuses", ["color"], :name => "index_statuses_on_color"
-  add_index "statuses", ["project_id", "color", "created_at"], :name => "index_statuses_on_project_id_and_color_and_created_at"
-  add_index "statuses", ["project_id", "color"], :name => "index_statuses_on_project_id_and_color"
   add_index "statuses", ["project_id"], :name => "index_statuses_on_project_id"
   add_index "statuses", ["project_name"], :name => "index_statuses_on_project_name"
+  add_index "statuses", ["red"], :name => "index_statuses_on_red"
+  add_index "statuses", ["yellow"], :name => "index_statuses_on_yellow"
 
 end

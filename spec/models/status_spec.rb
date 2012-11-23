@@ -8,17 +8,25 @@ describe Status do
 
     it "sets 0 to green" do
       @status.status_code = 0
-      expect(@status.color).to eq("green")
+      expect(@status.red).to be_false
+      expect(@status.yellow).to be_false
     end
 
     it "sets 1 to red" do
       @status.status_code = 1
-      expect(@status.color).to eq("red")
+      expect(@status.red).to be_true
+      expect(@status.yellow).to be_false
     end
 
     it "sets nil to yellow" do
       @status.status_code = nil
-      expect(@status.color).to eq("yellow")
+      expect(@status.yellow).to be_true
+    end
+
+    it "keeps the red color if yellow" do
+      @status.red = true
+      @status.status_code = nil
+      expect(@status.red).to be_true
     end
   end
 end

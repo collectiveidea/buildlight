@@ -3,28 +3,23 @@ class Status < ActiveRecord::Base
 
   scope :recent, order('created_at DESC')
 
-  # Set color based on travis-ci's status code
+  # Set colors based on travis-ci's status code
   def status_code=(code)
-    self.color = case code
+    self.yellow = false
+    case code
       when 0
-        'green'
+        self.red = false
       when 1
-        'red'
+        self.red = true
       else
-        'yellow'
+        self.yellow = true
       end
   end
 
   def self.colors
-    yellow = green = false
-    color = recent.first.try(:color)
-    if color == 'yellow'
-      yellow = true
-      green = recent.where("color != 'yellow'").first.try(:color) == 'green'
-    elsif color == 'green'
-      green = true
-    end
+    red    = where(red: true).any?
+    yellow = where(yellow: true).any?
     
-    {red: !green, yellow: yellow, green: green }
+    {red: red, yellow: yellow, green: !red }
   end
 end
