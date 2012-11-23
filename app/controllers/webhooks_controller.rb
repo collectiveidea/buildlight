@@ -1,9 +1,10 @@
 class WebhooksController < ApplicationController
   def create
+    json = JSON.parse params[:payload]
     @status = Status.new
-    @status.project_id = params[:payload][:repository][:id]
-    @status.project_name = params[:payload][:repository][:name]
-    @status.status = params[:payload][:status_message]
+    @status.project_id   = json[:repository][:id]
+    @status.project_name = json[:repository][:name]
+    @status.status       = json[:status_message]
     @status.save!
     head :ok
   end

@@ -7,3 +7,4 @@ notifications:
   webhooks:
     urls:
       - https://buildlight.herokuapp.com/
+    on_start: true
