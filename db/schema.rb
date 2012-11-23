@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121123160543) do
+ActiveRecord::Schema.define(:version => 20121123172057) do
 
   create_table "statuses", :force => true do |t|
     t.string   "project_id"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20121123160543) do
     t.string   "status"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.text     "payload"
   end
 
   add_index "statuses", ["project_id", "status", "created_at"], :name => "index_statuses_on_project_id_and_status_and_created_at"
