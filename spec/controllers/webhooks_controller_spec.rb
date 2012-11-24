@@ -13,6 +13,7 @@ describe WebhooksController do
       expect(status.red).to be_false
       expect(status.project_id).to eq("347744")
       expect(status.project_name).to eq("buildlight")
+      expect(status.username).to eq("collectiveidea")
     end
   end
 end
