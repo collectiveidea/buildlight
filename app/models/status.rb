@@ -14,9 +14,10 @@ class Status < ActiveRecord::Base
       end
   end
 
-  def self.colors
-    red    = where(red: true).any?
-    yellow = where(yellow: true).any?
+  def self.colors(username = nil)
+    user_scope = username.present? ? where(username: username) : scoped
+    red    = user_scope.where(red: true).any?
+    yellow = user_scope.where(yellow: true).any?
 
     {red: red, yellow: yellow, green: !red }
   end

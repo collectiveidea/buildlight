@@ -26,4 +26,23 @@ describe ColorsController do
       expect(json['red']).to be_true
     end
   end
+
+  describe "show" do
+    it "shows the status for a single user" do
+      FactoryGirl.create :status, username: 'collectiveidea', red: false
+      FactoryGirl.create :status, username: 'danielmorrison', red: true
+      get :show, id: 'collectiveidea'
+      json = JSON.parse(response.body)
+      expect(json['red']).to be_false
+    end
+
+    it "shows the status for all users separated by a comma" do
+      FactoryGirl.create :status, username: 'collectiveidea', red: false, yellow: true
+      FactoryGirl.create :status, username: 'danielmorrison', red: true,  yellow: false
+      get :show, id: 'collectiveidea,danielmorrison'
+      json = JSON.parse(response.body)
+      expect(json['red']).to be_true
+      expect(json['yellow']).to be_true
+    end
+  end
 end
