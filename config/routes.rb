@@ -1,5 +1,5 @@
 Buildlight::Application.routes.draw do
-  get ':id' => 'colors#show'
-  get '/' => 'colors#index'
+  get ':id(.:format)' => 'colors#show'
+  get '/(.:format)' => 'colors#index'
   post '/' => 'webhooks#create'
 end
