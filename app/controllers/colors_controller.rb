@@ -12,7 +12,7 @@ class ColorsController < ApplicationController
     if params[:format] == 'ryg'
       render text: Status.colors(ids).map {|k, v| v ? k[0].upcase : k[0].downcase }.join
     else
-      render json: Status.colors()
+      render json: Status.colors(ids)
     end
   end
 end
