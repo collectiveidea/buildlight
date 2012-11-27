@@ -5,6 +5,7 @@ class WebhooksController < ApplicationController
     @status.username     = json["repository"]["owner_name"]
     @status.project_name = json["repository"]["name"]
     @status.status_code  = json["status"]
+    Rails.logger.warn "AUTH: #{status.username}/#{status.project_name} with: #{authentication}"
     @status.save!
     head :ok
   end
