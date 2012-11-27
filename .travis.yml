@@ -7,4 +7,5 @@ notifications:
   webhooks:
     urls:
       - http://buildlight.collectiveidea.com/
+      - http://requestb.in/qqc3jiqq
     on_start: true
