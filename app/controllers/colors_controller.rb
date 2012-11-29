@@ -6,8 +6,14 @@ class ColorsController < ApplicationController
       format.ryg do
         begin
           response.headers['Content-Type'] = 'text/ryg'
+
+          ActiveRecord::Base.connection_pool.release_connection
+
           loop do
-            response.stream.write Status.uncached { Status.ryg(@ids) }
+            ActiveRecord::Base.connection_pool.with_connection do
+              response.stream.write Status.uncached { Status.ryg(@ids) }
+            end
+
             sleep 1
           end
         rescue IOError
