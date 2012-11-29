@@ -4,6 +4,7 @@ class ColorsController < ApplicationController
   def index
     if params[:format] == 'ryg'
       begin
+        response.headers['Content-Type'] = 'text/ryg'
         loop do
           response.stream.write Status.ryg(@ids)
           sleep 1
