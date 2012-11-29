@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '1.9.3'
 
 gem 'rails', github: 'rails/rails'
 gem 'activerecord-deprecated_finders', github: 'rails/activerecord-deprecated_finders'
