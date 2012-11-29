@@ -6,7 +6,7 @@ class ColorsController < ApplicationController
       begin
         response.headers['Content-Type'] = 'text/ryg'
         loop do
-          response.stream.write Status.ryg(@ids)
+          response.stream.write Status.uncached { Status.ryg(@ids) }
           sleep 1
         end
       rescue IOError
