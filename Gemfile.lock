@@ -99,7 +99,7 @@ GEM
     multipart-post (1.1.5)
     pg (0.14.1)
     polyglot (0.3.3)
-    puma (1.6.3)
+    puma (2.0.0.b3)
       rack (~> 1.2)
     rabl (0.7.6)
       activesupport (>= 2.3.14)
@@ -151,7 +151,7 @@ DEPENDENCIES
   factory_girl_rails
   journey!
   pg
-  puma
+  puma (~> 2.0.0.b3)
   rails!
   rspec-rails
   sqlite3

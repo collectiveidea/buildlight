@@ -9,7 +9,7 @@ gem 'crashlog'
 
 group :deployment do
   gem 'pg'
-  gem 'puma'
+  gem 'puma', '~> 2.0.0.b3'
 end
 
 group :development, :test do
