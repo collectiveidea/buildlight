@@ -9,7 +9,7 @@ gem 'crashlog'
 
 group :deployment do
   gem 'pg'
-  gem 'unicorn'
+  gem 'puma'
 end
 
 group :development, :test do
