@@ -21,4 +21,8 @@ class Status < ActiveRecord::Base
 
     {red: red, yellow: yellow, green: !red }
   end
+
+  def self.ryg(username = nil)
+    Status.colors(username).map {|k, v| v ? k[0].upcase : k[0].downcase }.join
+  end
 end
