@@ -14,7 +14,7 @@ class ColorsController < ApplicationController
           response.stream.close
         end
       end
-      format.json { render json: Status.colors(@ids) }
+      format.any { render json: Status.colors(@ids) }
     end
   end
 
