@@ -146,9 +146,12 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-deprecated_finders!
+  activerecord-jdbc-adapter
+  activerecord-jdbcpostgresql-adapter
   crashlog
   debugger
   factory_girl_rails
+  jdbc-postgres
   journey!
   pg
   puma (~> 2.0.0.b3)
