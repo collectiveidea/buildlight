@@ -10,7 +10,9 @@ worker_processes 3
 preload_app true
 
 # Restart any workers that haven't responded in 30 seconds
-timeout 30
+# timeout 30
+
+listen ENV.fetch("PORT", 3000).to_i, :tcp_nopush => false
 
 after_fork do |server, worker|
   ActiveRecord::Base.establish_connection

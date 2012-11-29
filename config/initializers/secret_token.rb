@@ -2,6 +2,11 @@
 
 # Your secret key for verifying the integrity of signed cookies.
 # If you change this key, all old signed cookies will become invalid!
+
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Buildlight::Application.config.secret_token = 'f47bcb0ac1b272776f6ffd5272839d038eb8ec6fd5c4d1607c65fe6b4bc523db2746539460d0a0de80af49ee86d2fc85d4ba91ce8011c767127d82e538858246'
+# You can use `rake secret` to generate a secure secret key.
+
+# Make sure your secret_key_base is kept private
+# if you're sharing your code publicly.
+Buildlight::Application.config.secret_key_base = '89783ed09101d5ac5c8960c7602aa1bf948bb6115c3e6cf0ceb4c6a4ea7cb2aec3073d02d446cdf9b89e4d6e9fa3975df023473e8add73ce205eb50c35185521'
