@@ -3,7 +3,7 @@ class WebhooksController < ApplicationController
   def create
     json = JSON.parse params[:payload]
     @status = Status.find_or_initialize_by_project_id(json["repository"]["id"].to_s)
-    @status.payload = json if ENV['DEBUG']
+    @status.payload = params[:payload] if ENV['DEBUG']
     @status.username     = json["repository"]["owner_name"]
     @status.project_name = json["repository"]["name"]
     @status.status_code  = json["status"]
