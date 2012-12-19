@@ -6,7 +6,7 @@ class WebhooksController < ApplicationController
     @status.payload = params[:payload] if ENV['DEBUG']
     @status.username     = json["repository"]["owner_name"]
     @status.project_name = json["repository"]["name"]
-    @status.status_code  = json["status"]
+    @status.status_code  = json["status_message"]
     Rails.logger.warn "AUTH: #{@status.username}/#{@status.project_name} with: #{request.headers['Authorization']}"
     @status.save!
     head :ok

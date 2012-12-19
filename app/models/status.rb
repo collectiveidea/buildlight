@@ -3,12 +3,12 @@ class Status < ActiveRecord::Base
   def status_code=(code)
     self.yellow = false
     case code
-      when 0
-        self.red = false
-      when 1
-        self.red = true
-      else
+      when 'Pending'
         self.yellow = true
+      when 'Passed'
+        self.red = false
+      else
+        self.red = true
       end
   end
 
