@@ -9,6 +9,7 @@ class WebhooksController < ApplicationController
     @status.status_code  = json["status_message"]
     Rails.logger.warn "AUTH: #{@status.username}/#{@status.project_name} with: #{request.headers['Authorization']}"
     @status.save!
+    Pusher.trigger(@status.username, @status.project_name, @status)
     head :ok
   end
 

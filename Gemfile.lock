@@ -113,6 +113,9 @@ GEM
       rack (~> 1.2)
     puma (2.0.0.b3-java)
       rack (~> 1.2)
+    pusher (0.11.1)
+      multi_json (~> 1.0)
+      signature (~> 0.1.6)
     rabl (0.7.6)
       activesupport (>= 2.3.14)
       multi_json (~> 1.0)
@@ -133,6 +136,7 @@ GEM
       rspec-core (~> 2.12.0)
       rspec-expectations (~> 2.12.0)
       rspec-mocks (~> 2.12.0)
+    signature (0.1.6)
     sprockets (2.8.1)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -167,6 +171,7 @@ DEPENDENCIES
   journey!
   pg
   puma (~> 2.0.0.b3)
+  pusher
   rails!
   rspec-rails
   sqlite3
