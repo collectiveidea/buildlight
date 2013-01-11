@@ -32,6 +32,9 @@ Buildlight::Application.configure do
   # Generate digests for assets URLs.
   config.assets.digest = true
 
+  # Version of your assets, change this if you want to expire all your assets.
+  config.assets.version = '1.0'
+
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
@@ -78,8 +81,4 @@ Buildlight::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-
-  # Default the production mode queue to an synchronous queue. You will probably
-  # want to replace this with an out-of-process queueing solution.
-  # config.queue = ActiveSupport::SynchronousQueue.new
 end
