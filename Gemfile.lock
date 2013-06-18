@@ -61,6 +61,9 @@ GEM
       railties (>= 3.0.0)
     faraday (0.8.7)
       multipart-post (~> 1.1)
+    figaro (0.6.4)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
     hashr (0.0.22)
     hike (1.2.3)
     i18n (0.6.4)
@@ -149,6 +152,7 @@ DEPENDENCIES
   crashlog
   debugger
   factory_girl_rails
+  figaro
   pg
   puma (~> 2.0.0.b3)
   pusher

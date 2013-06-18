@@ -1,0 +1,3 @@
+# Add application configuration variables here, as shown below.
+#
+SECRET_TOKEN: something-random-and-at-least-30-characters

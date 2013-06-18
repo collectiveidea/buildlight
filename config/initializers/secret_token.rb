@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Buildlight::Application.config.secret_key_base = 'c50e1a49fb23e993971386c970a1cdc5b9889b7705403a608724dd84ba52e59cbf483b80ab481e43dda3401c8dc635fd5fb2b43353d414869cd3cfab2027ca82'
+Buildlight::Application.config.secret_key_base = ENV["SECRET_TOKEN"]
