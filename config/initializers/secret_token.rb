@@ -1,6 +1,6 @@
 # Be sure to restart your server when you modify this file.
 
-# Your secret key for verifying the integrity of signed cookies.
+# Your secret key is used for verifying the integrity of signed cookies.
 # If you change this key, all old signed cookies will become invalid!
 
 # Make sure the secret is at least 30 characters and all random,
@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Buildlight::Application.config.secret_key_base = '89783ed09101d5ac5c8960c7602aa1bf948bb6115c3e6cf0ceb4c6a4ea7cb2aec3073d02d446cdf9b89e4d6e9fa3975df023473e8add73ce205eb50c35185521'
+Buildlight::Application.config.secret_key_base = 'c50e1a49fb23e993971386c970a1cdc5b9889b7705403a608724dd84ba52e59cbf483b80ab481e43dda3401c8dc635fd5fb2b43353d414869cd3cfab2027ca82'

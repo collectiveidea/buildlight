@@ -1,9 +1,7 @@
-source :rubygems
-ruby '1.9.3' #, :engine => "jruby", :engine_version => "1.7.0"
+source 'https://rubygems.org'
+ruby '2.0.0' #, :engine => "jruby", :engine_version => "1.7.0"
 
-gem 'rails',   github: 'rails/rails'
-gem 'journey', github: 'rails/journey'
-gem 'activerecord-deprecated_finders', github: 'rails/activerecord-deprecated_finders'
+gem 'rails',   '4.0.0.rc2'
 
 gem 'pusher'
 gem 'crashlog'
