@@ -3,6 +3,10 @@ class ColorsController < ApplicationController
 
   def index
     respond_to do |format|
+      format.html do
+        @colors = Status.colors(@ids)
+        render 'index'
+      end
       format.ryg do
         begin
           response.headers['Content-Type'] = 'text/ryg'
@@ -20,7 +24,7 @@ class ColorsController < ApplicationController
           response.stream.close
         end
       end
-      format.any { render json: Status.colors(@ids) }
+      format.json { render json: Status.colors(@ids) }
     end
   end
 
