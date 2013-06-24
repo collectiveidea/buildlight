@@ -16,6 +16,7 @@ group :deployment do
   gem 'activerecord-jdbcpostgresql-adapter', platform: :jruby
 
   gem 'puma', '~> 2.0.0.b3'
+  gem 'rails_12factor'
 end
 
 group :development, :test do
