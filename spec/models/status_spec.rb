@@ -12,6 +12,12 @@ describe Status do
       expect(@status.yellow).to be_false
     end
 
+    it "sets Fixed to green" do
+      @status.status_code = 'Fixed'
+      expect(@status.red).to be_false
+      expect(@status.yellow).to be_false
+    end
+
     it "sets Still Failing to red" do
       @status.status_code = 'Still Failing'
       expect(@status.red).to be_true

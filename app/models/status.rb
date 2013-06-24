@@ -5,7 +5,7 @@ class Status < ActiveRecord::Base
     case code
       when 'Pending'
         self.yellow = true
-      when 'Passed'
+      when 'Passed', "Fixed"
         self.red = false
       else
         self.red = true
