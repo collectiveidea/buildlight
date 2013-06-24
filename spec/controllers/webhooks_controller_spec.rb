@@ -24,5 +24,11 @@ describe WebhooksController do
       Pusher.should_receive(:trigger).with('collectiveidea', 'buildlight', kind_of(Status))
       post :create, payload: json_fixture('travis.json')
     end
+
+    it 'ignores non master branches' do
+      expect(Status.count).to eq(0)
+      post :create, payload: json_fixture('travis.json').sub(%("branch":"master"), %("branch":"not-master"))
+      expect(Status.count).to eq(0)
+    end
   end
 end
