@@ -5,7 +5,7 @@ describe WebhooksController do
     before do
       Pusher.stub(:trigger).and_return(true)
     end
-    
+
     it 'recieves a json payload' do
       post :create, payload: json_fixture('travis.json')
       expect(response).to be_success
@@ -23,6 +23,12 @@ describe WebhooksController do
     it 'notifies Pusher' do
       Pusher.should_receive(:trigger).with('collectiveidea', 'buildlight', kind_of(Status))
       post :create, payload: json_fixture('travis.json')
+    end
+
+    it 'ignores pull requests' do
+      expect(Status.count).to eq(0)
+      post :create, payload: json_fixture('travis.json').sub(%("type":"push"), %("type":"pull_request"))
+      expect(Status.count).to eq(0)
     end
   end
 end
