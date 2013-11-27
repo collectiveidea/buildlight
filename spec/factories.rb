@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :status do
-    project_id '123'
-    project_name 'buildlight'
+    sequence(:project_id)   {|i| i.to_s }
+    sequence(:project_name) {|i| "buildlight#{i}" }
     red false
     yellow false
   end

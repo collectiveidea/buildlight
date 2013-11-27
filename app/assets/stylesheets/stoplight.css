@@ -3,7 +3,6 @@
 html{
   background: linear-gradient(#08f, #fff);
   padding: 40px;
-  width: 170px;
   height: 100%;
   margin: 0 auto;
 }
@@ -38,6 +37,7 @@ html{
   border-radius: 10px;
   position: relative;
   border: solid 5px #333;
+  margin: auto;
 }
 
 

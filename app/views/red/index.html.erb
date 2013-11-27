@@ -1,0 +1,22 @@
+<div id="what-is-red">
+  <% if @red_projects.any? %>
+  <h2>The following projects are failing</h2>
+  <ul>
+    <% @red_projects.each do |red| %>
+    <li><%= red.project_name %></li>
+    <% end %>
+  </ul>
+  <% else %>
+  <div>
+    <% 5.times do %>
+    <%= image_tag "https://github.global.ssl.fastly.net/images/icons/emoji/tada.png?v5" %>
+    <% end %>
+  </div>
+  <h1>You have no failing projects.</h1>
+  <div>
+    <% 5.times do %>
+    <%= image_tag "https://github.global.ssl.fastly.net/images/icons/emoji/tada.png?v5" %>
+    <% end %>
+  </div>
+  <% end %>
+</div>
