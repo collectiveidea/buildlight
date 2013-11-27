@@ -26,7 +26,7 @@ group :development, :test do
 
   platform :mri do
     gem 'sqlite3'
-    gem 'debugger' unless ENV['CI']
+    gem 'debugger'
   end
 
   platform :jruby do
