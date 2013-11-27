@@ -1,1 +1,1 @@
-web: bin/puma -t 1:32 -b tcp://0.0.0.0:$PORT 
+web: bundle exec puma -t 1:32 -b tcp://0.0.0.0:$PORT
