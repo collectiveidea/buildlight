@@ -11,3 +11,4 @@ notifications:
     urls:
       - http://buildlight.collectiveidea.com/
     on_start: true
+cache: bundler
