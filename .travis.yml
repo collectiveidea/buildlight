@@ -5,7 +5,7 @@ before_install:
   - cp config/application.example.yml config/application.yml
   - gem install bundler
 before_script:
-  - rake db:migrate
+  - bundle exec rake db:migrate
 notifications:
   webhooks:
     urls:
