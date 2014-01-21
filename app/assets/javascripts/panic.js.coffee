@@ -1,5 +1,5 @@
 $ ->
-  setTimeout updateStatus, 1000
+  setTimeout updateStatus, 30000
 
 updateStatus = () ->
   $.get "panic.json", (data) ->
@@ -9,4 +9,4 @@ updateStatus = () ->
       else
         $("."+color).removeClass "lighted"
 
-    setTimeout updateStatus, 1000
+  setTimeout updateStatus, 30000
