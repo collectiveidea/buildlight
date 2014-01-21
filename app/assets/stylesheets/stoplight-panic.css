@@ -1,0 +1,124 @@
+/* Based on http://cssdeck.com/labs/traffic-light-using-css by @samarkandiy */
+
+html{
+  background: linear-gradient(#08f, #fff);
+  padding: 37px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.protector{
+  background: transparent;
+  width: 100px;
+  height: 0;
+  position: absolute;
+  top: 14px;
+  left: -30px;
+  border-right: solid 30px transparent;
+  border-left: solid 30px transparent;
+  border-top: solid 60px #111;
+  border-radius: 10px;
+  z-index: -1;
+}
+
+.protector:nth-child(2){
+  top: 90px;
+}
+
+.protector:nth-child(3){
+  top: 164px;
+}
+
+.trafficlight{
+  background: #222;
+  background-image: linear-gradient(transparent 2%, #111 2%, transparent 3%, #111 30%);
+  width: 100px;
+  height: 248px;
+  border-radius: 10px;
+  position: relative;
+  border: solid 5px #333;
+  margin-left: 50px;
+}
+
+
+.trafficlight:before{
+  background: #222;
+  background-image: radial-gradient(#444, #000);
+  content: "";
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  position: absolute;
+  top: -30px;
+  margin-left: 0px;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+
+.red{
+  background: red;
+  background-image: radial-gradient(brown, transparent);
+  background-size: 5px 5px; 
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  box-shadow: 
+    0 0 20px #111 inset,
+    0 0 10px red;
+  opacity: .1;
+}
+
+.red.lighted {
+  opacity: 1;
+}
+
+.yellow{
+  background: yellow;
+  background-image: radial-gradient(orange, transparent);
+  background-size: 5px 5px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  position: absolute;
+  top: 96px;
+  left: 20px;
+  box-shadow: 
+    0 0 20px #111 inset,
+    0 0 10px yellow;
+  opacity: .1;
+}
+.yellow.lighted {
+  animation: 6s yellow infinite;
+}
+
+.green{
+  background: green;
+  background-image: radial-gradient(lime, transparent);
+  background-size: 5px 5px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  position: absolute;
+  top: 170px;
+  left: 20px;
+  box-shadow: 
+    0 0 20px #111 inset,
+    0 0 10px lime;
+    opacity: .1;
+}
+.green.lighted {
+  opacity: 1;  
+}
+
+@keyframes yellow{
+  0%{opacity: .1;}
+  20%{opacity: 1;}
+  40%{opacity: .1;}
+  60%{opacity: 1;}
+  80%{opacity: .1;}
+  100%{opacity: 1;}
+}
