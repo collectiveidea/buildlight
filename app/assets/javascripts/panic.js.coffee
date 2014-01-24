@@ -1,12 +1,17 @@
 $ ->
-  setTimeout updateStatus, 30000
+  updateStatus()
+
+toggleLight = (color, lighted) ->
+  if lighted
+    $("#buildlight-"+color).addClass "lighted"
+  else
+    $("#buildlight-"+color).removeClass "lighted"
 
 updateStatus = () ->
   $.get "panic.json", (data) ->
     for color of data
-      if data[color]
-        $("."+color).addClass "lighted"
-      else
-        $("."+color).removeClass "lighted"
+      toggleLight color, data[color]
 
-  setTimeout updateStatus, 30000
+  setTimeout updateStatus, 1000
+
+window.toggleLight = toggleLight
