@@ -26,7 +26,6 @@ group :development, :test do
 
   platform :mri do
     gem 'sqlite3'
-    gem 'debugger'
   end
 
   platform :jruby do
