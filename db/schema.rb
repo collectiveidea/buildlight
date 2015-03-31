@@ -9,28 +9,28 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121124190606) do
+ActiveRecord::Schema.define(version: 20121124190606) do
 
-  create_table "statuses", :force => true do |t|
-    t.string   "project_id"
-    t.string   "project_name"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+  create_table "statuses", force: :cascade do |t|
+    t.string   "project_id",   limit: 255
+    t.string   "project_name", limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.text     "payload"
     t.boolean  "red"
     t.boolean  "yellow"
-    t.string   "username"
+    t.string   "username",     limit: 255
   end
 
-  add_index "statuses", ["project_id"], :name => "index_statuses_on_project_id"
-  add_index "statuses", ["project_name"], :name => "index_statuses_on_project_name"
-  add_index "statuses", ["red"], :name => "index_statuses_on_red"
-  add_index "statuses", ["username", "project_name"], :name => "index_statuses_on_username_and_project_name"
-  add_index "statuses", ["username", "red"], :name => "index_statuses_on_username_and_red"
-  add_index "statuses", ["username", "yellow"], :name => "index_statuses_on_username_and_yellow"
-  add_index "statuses", ["username"], :name => "index_statuses_on_username"
-  add_index "statuses", ["yellow"], :name => "index_statuses_on_yellow"
+  add_index "statuses", ["project_id"], name: "index_statuses_on_project_id"
+  add_index "statuses", ["project_name"], name: "index_statuses_on_project_name"
+  add_index "statuses", ["red"], name: "index_statuses_on_red"
+  add_index "statuses", ["username", "project_name"], name: "index_statuses_on_username_and_project_name"
+  add_index "statuses", ["username", "red"], name: "index_statuses_on_username_and_red"
+  add_index "statuses", ["username", "yellow"], name: "index_statuses_on_username_and_yellow"
+  add_index "statuses", ["username"], name: "index_statuses_on_username"
+  add_index "statuses", ["yellow"], name: "index_statuses_on_yellow"
 
 end

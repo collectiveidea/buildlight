@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe RedController do
   let!(:red1) { FactoryGirl.create :status, red: true, username: 'user1' }

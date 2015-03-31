@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe ColorsController do
   describe "index" do
@@ -6,7 +6,7 @@ describe ColorsController do
       FactoryGirl.create :status, red: true
       get :index, :format => :json
       json = JSON.parse(response.body)
-      expect(json['red']).to be_true
+      expect(json['red']).to be(true)
     end
 
     it "shows the red and yellow lights on if the last status is yellow, but previous non-yellow was red" do
@@ -14,8 +14,8 @@ describe ColorsController do
       2.times { FactoryGirl.create :status, red: false, yellow: true }
       get :index, :format => :json
       json = JSON.parse(response.body)
-      expect(json['yellow']).to be_true
-      expect(json['red']).to be_true
+      expect(json['yellow']).to be(true)
+      expect(json['red']).to be(true)
     end
 
     it "shows the red light on if the last status is green, but another project is red" do
@@ -23,7 +23,7 @@ describe ColorsController do
       FactoryGirl.create :status, red: false
       get :index, :format => :json
       json = JSON.parse(response.body)
-      expect(json['red']).to be_true
+      expect(json['red']).to be(true)
     end
   end
 
@@ -33,7 +33,7 @@ describe ColorsController do
       FactoryGirl.create :status, username: 'danielmorrison', red: true
       get :show, id: 'collectiveidea', :format => :json
       json = JSON.parse(response.body)
-      expect(json['red']).to be_false
+      expect(json['red']).to be(false)
     end
 
     it "shows the status for all users separated by a comma" do
@@ -41,8 +41,8 @@ describe ColorsController do
       FactoryGirl.create :status, username: 'danielmorrison', red: true,  yellow: false
       get :show, id: 'collectiveidea,danielmorrison', :format => :json
       json = JSON.parse(response.body)
-      expect(json['red']).to be_true
-      expect(json['yellow']).to be_true
+      expect(json['red']).to be(true)
+      expect(json['yellow']).to be(true)
     end
   end
 end

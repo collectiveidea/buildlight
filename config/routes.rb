@@ -1,4 +1,4 @@
-Buildlight::Application.routes.draw do
+Rails.application.routes.draw do
   get 'what-is-red/:id(.:format)' => 'red#show'
   get 'what-is-red(.:format)' => 'red#index'
 
