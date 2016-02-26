@@ -8,12 +8,12 @@ Catches webhooks from Travis-CI and provides data to power our office stoplight.
 
 ## Add Projects
 
-Simply add this to your .travis.yml file: 
+Simply add this to your .travis.yml file:
 
 ```
 notifications:
   webhooks:
     urls:
       - http://buildlight.collectiveidea.com/
-    on_start: true
+    on_start: always
 ```
