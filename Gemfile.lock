@@ -182,8 +182,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-jdbcpostgresql-adapter
-  activerecord-jdbcsqlite3-adapter
   byebug
   coffee-rails (~> 4.1.0)
   crashlog

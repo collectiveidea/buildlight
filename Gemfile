@@ -12,8 +12,7 @@ gem 'sass-rails',   '~> 4.0.0'
 gem 'uglifier'
 
 group :deployment do
-  gem 'pg', platform: :mri
-  gem 'activerecord-jdbcpostgresql-adapter', platform: :jruby
+  gem 'pg'
 
   gem 'puma'
   gem 'rails_12factor'
@@ -24,12 +23,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
 
-  platform :mri do
-    gem 'sqlite3'
-    gem 'byebug'
-  end
-
-  platform :jruby do
-    gem 'activerecord-jdbcsqlite3-adapter'
-  end
+  gem 'sqlite3'
+  gem 'byebug'
 end
