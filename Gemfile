@@ -6,9 +6,9 @@ gem 'rails',   '~> 4.2.0'
 gem 'pusher'
 gem 'crashlog'
 
-gem 'coffee-rails', '~> 4.1.0'
-gem 'jquery-rails', '~> 4.0.0'
-gem 'sass-rails',   '~> 4.0.0'
+gem 'coffee-rails'
+gem 'jquery-rails'
+gem 'sass-rails'
 gem 'uglifier'
 
 group :deployment do
