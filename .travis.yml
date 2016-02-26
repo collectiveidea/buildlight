@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.2
+  - 2.3
 before_install:
   - cp config/application.example.yml config/application.yml
   - gem install bundler
