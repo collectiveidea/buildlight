@@ -4,7 +4,6 @@ ruby "2.3.0"
 gem 'rails',   '~> 4.2.0'
 
 gem 'pusher'
-gem 'crashlog'
 
 gem 'coffee-rails'
 gem 'jquery-rails'
