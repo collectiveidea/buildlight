@@ -6,6 +6,8 @@
 
 Catches webhooks from Travis-CI and provides data to power our office stoplight.
 
+![Collective Idea stoplight](http://buildlight.collectiveidea.com/collectiveidea.gif)
+
 ## Add Projects
 
 Simply add this to your .travis.yml file:
