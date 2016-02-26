@@ -11,4 +11,5 @@ notifications:
   webhooks:
     urls:
       - http://buildlight.collectiveidea.com/
+    on_start: always
 cache: bundler
