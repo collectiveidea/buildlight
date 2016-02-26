@@ -94,15 +94,14 @@ GEM
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     pg (0.18.1)
-    puma (2.11.1)
-      rack (>= 1.1, < 2.0)
+    puma (3.0.1)
     pusher (0.14.4)
       httpclient (~> 2.5)
       multi_json (~> 1.0)
       signature (~> 0.1.8)
     rabl (0.11.6)
       activesupport (>= 2.3.14)
-    rack (1.6.0)
+    rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.1)
@@ -202,3 +201,6 @@ DEPENDENCIES
   sass-rails (~> 4.0.0)
   sqlite3
   uglifier
+
+BUNDLED WITH
+   1.11.2
