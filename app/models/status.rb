@@ -28,6 +28,6 @@ class Status < ActiveRecord::Base
     red    = "failing" if where(red: true).any?
     yellow = "building" if where(yellow: true).any?
     green = "passing" if !red
-    [red, yellow, green].compact.join("-")
+    [green, red, yellow].compact.join("-") # combines status to send "passing|failing-building"
   end
 end
