@@ -104,4 +104,23 @@ describe Status do
       expect(status.name).to eq("collectiveidea/foo")
     end
   end
+
+  describe "#devices" do
+    it "returns the list of Device objects that care about this status" do
+      device1 = FactoryGirl.create(:device, usernames: ["collectiveidea"], projects: ["deadmanssnitch/foo"])
+      device2 = FactoryGirl.create(:device, usernames: ["collectiveidea", "deadmanssnitch"])
+      device3 = FactoryGirl.create(:device, usernames: ["deadmanssnitch"], projects: ["collectiveidea/foo"])
+      device4 = FactoryGirl.create(:device, usernames: [], projects: ["collectiveidea/foo"])
+      device5 = FactoryGirl.create(:device, usernames: ["deadmanssnitch"], projects: [])
+
+      status = FactoryGirl.create(:status, username: "collectiveidea", project_name: "foo")
+
+      expect(status.devices).to include(device1)
+      expect(status.devices).to include(device2)
+      expect(status.devices).to include(device3)
+      expect(status.devices).to include(device4)
+      expect(status.devices).to include(device4)
+      expect(status.devices).not_to include(device5)
+    end
+  end
 end

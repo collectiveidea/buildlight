@@ -15,6 +15,12 @@ class Status < ActiveRecord::Base
   def name
     "#{username}/#{project_name}"
   end
+
+  # Devices that are "watching" this Status
+  def devices
+    Device.where.contains(usernames: [username]) + Device.where.contains(projects: [name])
+  end
+
   def self.colors(username = nil)
     user_scope = username.present? ? where(username: username) : all
     red    = user_scope.where(red: true).any?
