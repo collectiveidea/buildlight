@@ -88,6 +88,11 @@ GEM
       faraday (~> 0.9.0)
       faraday_middleware (>= 0.9.0)
     pg (0.18.4)
+    pg_array_parser (0.0.9)
+    postgres_ext (3.0.0)
+      activerecord (>= 4.0.0)
+      arel (>= 4.0.1)
+      pg_array_parser (~> 0.0.9)
     puma (3.4.0)
     pusher (0.17.0)
       httpclient (~> 2.7)
@@ -178,6 +183,7 @@ DEPENDENCIES
   jquery-rails
   particlerb
   pg
+  postgres_ext
   puma
   pusher
   rails (~> 4.2.0)

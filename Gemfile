@@ -4,6 +4,7 @@ ruby "2.3.1"
 gem 'rails',   '~> 4.2.0'
 
 gem "pg"
+gem "postgres_ext"
 
 gem 'honeybadger'
 gem 'particlerb'
