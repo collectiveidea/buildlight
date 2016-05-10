@@ -11,7 +11,7 @@ class WebhooksController < ApplicationController
       Rails.logger.warn "AUTH: #{@status.username}/#{@status.project_name} with: #{request.headers['Authorization']}"
       @status.save!
       Pusher.trigger(@status.username, @status.project_name, @status)
-      Particle.publish(name: "state", data: Status.current_status, ttl: 3600, private: false)
+      Particle.publish(name: "build_state", data: Status.current_status, ttl: 3600, private: false)
     end
     head :ok
   end
