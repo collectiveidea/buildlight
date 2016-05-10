@@ -12,6 +12,9 @@ class Status < ActiveRecord::Base
       end
   end
 
+  def name
+    "#{username}/#{project_name}"
+  end
   def self.colors(username = nil)
     user_scope = username.present? ? where(username: username) : all
     red    = user_scope.where(red: true).any?

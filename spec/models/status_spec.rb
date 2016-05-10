@@ -97,4 +97,11 @@ describe Status do
       end
     end
   end
+
+  describe "#name" do
+    it "returns the full github-style name" do
+      status = Status.new(username: "collectiveidea", project_name: "foo")
+      expect(status.name).to eq("collectiveidea/foo")
+    end
+  end
 end
