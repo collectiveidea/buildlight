@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :device do
     usernames []
     projects []
+    sequence(:identifier)   {|i| "device-#{i}" }
   end
 
   factory :status do
