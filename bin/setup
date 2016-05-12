@@ -4,26 +4,33 @@ require 'pathname'
 # path to your application root.
 APP_ROOT = Pathname.new File.expand_path('../../',  __FILE__)
 
+def run(command, error_on_failure: true)
+  system(command).tap do |result|
+    if error_on_failure && !result
+      raise "Setup can't complete.\nCommand: #{command}\n exited with a non-zero status code: #{result.inspect}\n#{$?}"
+    end
+  end
+end
+
 Dir.chdir APP_ROOT do
   # This script is a starting point to setup your application.
   # Add necessary setup steps to this file:
 
   puts "== Installing dependencies =="
-  system "gem install bundler --conservative"
-  system "bundle check || bundle install"
+  run "gem install bundler --conservative"
+  run "bundle check || bundle install"
 
-  # puts "\n== Copying sample files =="
-  # unless File.exist?("config/database.yml")
-  #   system "cp config/database.yml.sample config/database.yml"
-  # end
+  puts "\n== Copying sample files =="
+  run "cp -n config/application.example.yml config/application.yml", error_on_failure: false
 
   puts "\n== Preparing database =="
-  system "bin/rake db:setup"
+  run "bin/rake db:create"
+  run "bin/rake db:migrate"
 
-  puts "\n== Removing old logs and tempfiles =="
-  system "rm -f log/*"
-  system "rm -rf tmp/cache"
-
-  puts "\n== Restarting application server =="
-  system "touch tmp/restart.txt"
+  # puts "\n== Removing old logs and tempfiles =="
+  # system "rm -f log/*"
+  # system "rm -rf tmp/cache"
+  #
+  # puts "\n== Restarting application server =="
+  # system "touch tmp/restart.txt"
 end

@@ -8,7 +8,7 @@ class WebhooksController < ApplicationController
       @status.username     = json["repository"]["owner_name"]
       @status.project_name = json["repository"]["name"]
       @status.status_code  = json["status_message"]
-      Rails.logger.warn "AUTH: #{@status.username}/#{@status.project_name} with: #{request.headers['Authorization']}"
+      Rails.logger.warn "AUTH: #{@status.name} with: #{request.headers['Authorization']}"
       @status.save!
       Pusher.trigger(@status.username, @status.project_name, @status)
       Particle.publish(name: "build_state", data: Status.current_status, ttl: 3600, private: false)
@@ -18,11 +18,11 @@ class WebhooksController < ApplicationController
 
   private
   def authorize(status, authentication)
-    string = "#{status.username}/#{status.project_name}#{User.find_or_create_by_username(status.username).travis_token}"
+    string = "#{status.name}#{User.find_or_create_by_username(status.username).travis_token}"
     if Digest::SHA256.new.hexdigest(string) == authentication
       true
     else
-      Rails.logger.warn "AUTH FAILURE: #{status.username}/#{status.project_name} with: #{authentication}"
+      Rails.logger.warn "AUTH FAILURE: #{status.name} with: #{authentication}"
       true
     end
   end
