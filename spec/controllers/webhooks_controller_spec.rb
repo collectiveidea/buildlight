@@ -3,7 +3,8 @@ require 'rails_helper'
 describe WebhooksController do
   describe 'POST create' do
     before do
-      Pusher.stub(:trigger).and_return(true)
+      allow(Pusher).to receive(:trigger).and_return(true)
+      allow(Particle).to receive(:publish)
     end
 
     it 'recieves a json payload' do
@@ -21,7 +22,12 @@ describe WebhooksController do
     end
 
     it 'notifies Pusher' do
-      Pusher.should_receive(:trigger).with('collectiveidea', 'buildlight', kind_of(Status))
+      expect(Pusher).to receive(:trigger).with('collectiveidea', 'buildlight', kind_of(Status))
+      post :create, payload: json_fixture('travis.json')
+    end
+
+    it 'notifies Particle' do
+      expect(Particle).to receive(:publish).with({name: "build_state", data: "passing", ttl: 3600, private: false})
       post :create, payload: json_fixture('travis.json')
     end
 

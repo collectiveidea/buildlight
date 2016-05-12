@@ -23,4 +23,11 @@ class Status < ActiveRecord::Base
   def self.ryg(username = nil)
     Status.colors(username).map {|k, v| v ? k[0].upcase : k[0].downcase }.join
   end
+
+  def self.current_status
+    red    = "failing" if where(red: true).any?
+    yellow = "building" if where(yellow: true).any?
+    green = "passing" if !red
+    [green, red, yellow].compact.join("-") # combines status to send "passing|failing-building"
+  end
 end

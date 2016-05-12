@@ -3,7 +3,8 @@ ruby "2.3.1"
 
 gem 'rails',   '~> 4.2.0'
 
-gem "honeybadger"
+gem 'honeybadger'
+gem 'particlerb'
 gem 'pusher'
 
 gem 'coffee-rails'
