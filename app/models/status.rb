@@ -1,4 +1,4 @@
-class Status < ActiveRecord::Base
+class Status < ApplicationRecord
   # Set colors based on travis-ci's status code
   def status_code=(code)
     self.yellow = false
