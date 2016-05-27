@@ -1,9 +1,5 @@
 # BuildLight
 
-![BuildLightLogo](http://buildlight.collectiveidea.com/buildlight.png)
-
-## Overview
-
 Catches webhooks from Travis-CI and provides data to power our office stoplight.
 
 ![Collective Idea stoplight](http://buildlight.collectiveidea.com/collectiveidea.gif)
@@ -19,3 +15,7 @@ notifications:
       - http://buildlight.collectiveidea.com/
     on_start: always
 ```
+
+## License
+
+This software is © Copyright [Collective Idea](http://collectiveidea.com) and released under the MIT License.
