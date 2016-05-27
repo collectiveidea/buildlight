@@ -8,7 +8,6 @@ gem "postgres_ext"
 
 gem 'honeybadger'
 gem 'particlerb'
-gem 'pusher'
 
 gem 'coffee-rails'
 gem 'jquery-rails'
