@@ -15,10 +15,6 @@ gem 'jquery-rails'
 gem 'sass-rails'
 gem 'uglifier'
 
-group :deployment do
-  gem 'rails_12factor'
-end
-
 group :development, :test do
   gem 'figaro'
   gem 'rspec-rails'
