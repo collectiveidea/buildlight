@@ -8,6 +8,7 @@ gem "postgres_ext"
 
 gem 'honeybadger'
 gem 'particlerb'
+gem 'puma'
 
 gem 'coffee-rails'
 gem 'jquery-rails'
@@ -15,7 +16,6 @@ gem 'sass-rails'
 gem 'uglifier'
 
 group :deployment do
-  gem 'puma'
   gem 'rails_12factor'
 end
 
