@@ -18,7 +18,8 @@ class Status < ApplicationRecord
 
   # Devices that are "watching" this Status
   def devices
-    Device.where.contains(usernames: [username]) + Device.where.contains(projects: [name])
+    Device.where("usernames @> ARRAY[?]::varchar[]", [username]).
+      or(Device.where("projects @> ARRAY[?]::varchar[]", [name]))
   end
 
   def self.colors(username = nil)
