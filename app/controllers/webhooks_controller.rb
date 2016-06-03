@@ -14,15 +14,4 @@ class WebhooksController < ApplicationController
     end
     head :ok
   end
-
-  private
-  def authorize(status, authentication)
-    string = "#{status.name}#{User.find_or_create_by_username(status.username).travis_token}"
-    if Digest::SHA256.new.hexdigest(string) == authentication
-      true
-    else
-      Rails.logger.warn "AUTH FAILURE: #{status.name} with: #{authentication}"
-      true
-    end
-  end
 end
