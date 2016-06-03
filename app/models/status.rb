@@ -1,4 +1,4 @@
-class Status < ActiveRecord::Base
+class Status < ApplicationRecord
   # Set colors based on travis-ci's status code
   def status_code=(code)
     self.yellow = false
@@ -18,7 +18,8 @@ class Status < ActiveRecord::Base
 
   # Devices that are "watching" this Status
   def devices
-    Device.where.contains(usernames: [username]) + Device.where.contains(projects: [name])
+    Device.where("usernames @> ARRAY[?]::varchar[]", [username]).
+      or(Device.where("projects @> ARRAY[?]::varchar[]", [name]))
   end
 
   def self.colors(username = nil)
