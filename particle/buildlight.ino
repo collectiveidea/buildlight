@@ -16,6 +16,7 @@ void setup() {
 
   // Subscribe to events
   Particle.subscribe("build_state", stateHandler);
+  Particle.publish("ready", "true", PRIVATE);
 }
 
 void loop() {
