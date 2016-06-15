@@ -10,7 +10,9 @@ class WebhooksController < ApplicationController
       @status.status_code  = json["status_message"]
       Rails.logger.warn "AUTH: #{@status.name} with: #{request.headers['Authorization']}"
       @status.save!
-      Particle.publish(name: "build_state", data: Status.current_status, ttl: 3600, private: false)
+      @status.devices.each do |device|
+        TriggerParticle.call(device)
+      end
     end
     head :ok
   end
