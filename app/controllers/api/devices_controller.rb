@@ -1,6 +1,6 @@
 class API::DevicesController < ApplicationController
   def trigger
-    Particle.publish(name: "build_state", data: Status.current_status, ttl: 3600, private: false)
+    TriggerParticle.call(Status.current_status)
     head :ok
   end
 end
