@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   # use a namespace to avoid resources colliding with usernames
   namespace :api do
-    resources :devices, only: [] do
+    resource :device, only: [] do
       post :trigger
     end
   end

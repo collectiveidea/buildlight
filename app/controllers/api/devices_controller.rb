@@ -1,6 +1,8 @@
 class API::DevicesController < ApplicationController
   def trigger
-    TriggerParticle.call(Status.current_status)
+    if device = Device.find_by(identifier: params[:coreid])
+      TriggerParticle.call(device)
+    end
     head :ok
   end
 end
