@@ -16,7 +16,7 @@ gem 'uglifier'
 
 group :development, :test do
   gem 'figaro'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 3.5.0.beta4'
   gem 'factory_girl_rails'
   gem 'byebug'
 end
