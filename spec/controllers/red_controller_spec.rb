@@ -19,7 +19,7 @@ describe RedController do
     end
 
     it "responds with the list of red projects serialized as json" do
-      get :index, format: :json
+      get :index, params: {format: :json}
 
       expect(response.body).to eq([red1, red2].to_json)
     end
@@ -29,7 +29,7 @@ describe RedController do
     render_views
 
     it "responds with the list of red project names" do
-      get :show, id: 'user1'
+      get :show, params: {id: 'user1'}
 
       expect(response.body).to match(/#{red1.project_name}/)
       expect(response.body).not_to match(/#{red2.project_name}/)
@@ -38,7 +38,7 @@ describe RedController do
     end
 
     it "responds with the list of red projects serialized as json" do
-      get :show, id: 'user1', format: :json
+      get :show, params: {id: 'user1', format: :json}
 
       expect(response.body).to eq([red1].to_json)
     end

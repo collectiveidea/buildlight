@@ -9,12 +9,12 @@ describe API::DevicesController do
 
     it "notifies Particle" do
       expect(Particle).to receive(:publish).with({name: "build_state", data: "passing", ttl: 3600, private: false})
-      post :trigger, name: "ready", data: "true", coreid: "abc123", published_at: "2016-06-14T22:06:10.976Z"
+      post :trigger, params: {name: "ready", data: "true", coreid: "abc123", published_at: "2016-06-14T22:06:10.976Z"}
     end
 
     it "does not notify if there is no device" do
       expect(Particle).not_to receive(:publish)
-      post :trigger, name: "ready", data: "true", coreid: "FAKE", published_at: "2016-06-14T22:06:10.976Z"
+      post :trigger, params: {name: "ready", data: "true", coreid: "FAKE", published_at: "2016-06-14T22:06:10.976Z"}
     end
   end
 end
