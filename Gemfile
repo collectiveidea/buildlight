@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby "2.3.1"
 
-gem 'rails', '>= 5.0.0.rc1', '< 5.1'
+gem 'rails', '~> 5.0.0'
 
 gem "pg"
 
@@ -16,7 +16,7 @@ gem 'uglifier'
 
 group :development, :test do
   gem 'figaro'
-  gem 'rspec-rails', '>= 3.5.0.beta4'
+  gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'byebug'
 end
