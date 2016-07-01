@@ -7,12 +7,12 @@ describe WebhooksController do
     end
 
     it 'recieves a json payload' do
-      post :create, payload: json_fixture('travis.json')
+      post :create, params: {payload: json_fixture('travis.json')}
       expect(response).to be_success
     end
 
     it 'saves useful data' do
-      post :create, payload: json_fixture('travis.json')
+      post :create, params: {payload: json_fixture('travis.json')}
       status = Status.order("created_at DESC").first
       expect(status.red).to be(false)
       expect(status.project_id).to eq("347744")
@@ -23,12 +23,12 @@ describe WebhooksController do
     it 'notifies Particle' do
       FactoryGirl.create(:device, usernames: ["collectiveidea"])
       expect(Particle).to receive(:publish).with({name: "build_state", data: "passing", ttl: 3600, private: false})
-      post :create, payload: json_fixture('travis.json')
+      post :create, params: {payload: json_fixture('travis.json')}
     end
 
     it 'ignores pull requests' do
       expect(Status.count).to eq(0)
-      post :create, payload: json_fixture('travis.json').sub(%("type":"push"), %("type":"pull_request"))
+      post :create, params: {payload: json_fixture('travis.json').sub(%("type":"push"), %("type":"pull_request"))}
       expect(Status.count).to eq(0)
     end
   end
