@@ -14,6 +14,10 @@ gem 'jquery-rails'
 gem 'sass-rails'
 gem 'uglifier'
 
+group :production do
+  gem "lograge"
+end
+
 group :development, :test do
   gem 'figaro'
   gem 'rspec-rails'
