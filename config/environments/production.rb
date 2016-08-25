@@ -71,10 +71,12 @@ Rails.application.configure do
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
-  # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = ::Logger::Formatter.new
+  # Enable Lograge
+  config.lograge.enabled = true
 
+  # Use default logging formatter so that PID and timestamp are not suppressed.
   if ENV["RAILS_LOG_TO_STDOUT"].present?
+    config.log_formatter = ::Logger::Formatter.new
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::TaggedLogging.new(logger)
