@@ -28,8 +28,10 @@ describe RedController do
   describe "#show" do
     render_views
 
+    let(:device) { FactoryGirl.create(:device, identifier: "abc123", usernames: ["user1"]) }
+
     it "responds with the list of red project names" do
-      get :show, params: {id: 'user1'}
+      get :show, params: {id: 'abc123'}
 
       expect(response.body).to match(/#{red1.project_name}/)
       expect(response.body).not_to match(/#{red2.project_name}/)
@@ -38,7 +40,7 @@ describe RedController do
     end
 
     it "responds with the list of red projects serialized as json" do
-      get :show, params: {id: 'user1', format: :json}
+      get :show, params: {id: 'abc123', format: :json}
 
       expect(response.body).to eq([red1].to_json)
     end

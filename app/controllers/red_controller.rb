@@ -8,8 +8,8 @@ class RedController < ApplicationController
   end
 
   def show
-    usernames = params[:id].split(',')
-    @red_projects = Status.where(red: true, username: usernames)
+    device = Device.find_by!(identifier: params[:id])
+    @red_projects = device.statuses.where(red: true)
     respond_to do |format|
       format.html { render :index }
       format.json { render json: @red_projects }
