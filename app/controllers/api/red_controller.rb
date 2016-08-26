@@ -4,7 +4,7 @@ class API::RedController < ApplicationController
     @red_projects = device.statuses.where(red: true)
     respond_to do |format|
       format.html
-      format.json { render json: @red_projects }
+      format.json { render json: @red_projects.to_json(only: [:username, :project_name]) }
     end
   end
 end
