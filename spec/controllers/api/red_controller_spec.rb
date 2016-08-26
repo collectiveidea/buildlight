@@ -23,7 +23,8 @@ describe API::RedController do
     it "responds with the list of red projects serialized as json" do
       get :show, params: {id: 'abc123', format: :json}
 
-      expect(response.body).to eq([red1].to_json)
+      response_json = JSON.parse(response.body)
+      expect(response_json).to match_array([{"project_name" => red1.project_name, "username" => red1.username}])
     end
   end
 end
