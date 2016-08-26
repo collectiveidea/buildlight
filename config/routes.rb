@@ -5,11 +5,9 @@ Rails.application.routes.draw do
   namespace :api do
     resource :device, only: [] do
       post :trigger
+      get ':id/red' => 'red#show'
     end
   end
-
-  get 'what-is-red/:id(.:format)' => 'red#show'
-  get 'what-is-red(.:format)' => 'red#index'
 
   get ':id(.:format)' => 'colors#show'
   get '/(.:format)' => 'colors#index'
