@@ -1,41 +1,6 @@
 require 'rails_helper'
 
 describe Status do
-  describe "status_code=" do
-    before do
-      @status = Status.new
-    end
-
-    it "sets Passed to green" do
-      @status.status_code = 'Passed'
-      expect(@status.red).to be(false)
-      expect(@status.yellow).to be(false)
-    end
-
-    it "sets Fixed to green" do
-      @status.status_code = 'Fixed'
-      expect(@status.red).to be(false)
-      expect(@status.yellow).to be(false)
-    end
-
-    it "sets Still Failing to red" do
-      @status.status_code = 'Still Failing'
-      expect(@status.red).to be(true)
-      expect(@status.yellow).to be(false)
-    end
-
-    it "sets Pending to yellow" do
-      @status.status_code = 'Pending'
-      expect(@status.yellow).to be(true)
-    end
-
-    it "keeps the red color if yellow" do
-      @status.red = true
-      @status.status_code = 'Pending'
-      expect(@status.red).to be(true)
-    end
-  end
-
   describe "colors" do
     describe "without a username" do
       it "shows the red light on if the last status is red" do

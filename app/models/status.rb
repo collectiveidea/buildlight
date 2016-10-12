@@ -1,17 +1,4 @@
 class Status < ApplicationRecord
-  # Set colors based on travis-ci's status code
-  def status_code=(code)
-    self.yellow = false
-    case code
-      when 'Pending'
-        self.yellow = true
-      when 'Passed', "Fixed"
-        self.red = false
-      else
-        self.red = true
-      end
-  end
-
   def name
     "#{username}/#{project_name}"
   end

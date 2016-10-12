@@ -7,6 +7,7 @@ FactoryGirl.define do
   end
 
   factory :status do
+    service "travis"
     sequence(:project_id)   {|i| i.to_s }
     sequence(:project_name) {|i| "buildlight#{i}" }
     red false
