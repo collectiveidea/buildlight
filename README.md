@@ -1,5 +1,7 @@
 # BuildLight
 
+[![Build Status](https://travis-ci.org/collectiveidea/buildlight.svg?branch=master)](https://travis-ci.org/collectiveidea/buildlight)
+
 Catches webhooks from Travis-CI and provides data to power our office stoplight.
 
 ![Collective Idea stoplight](https://buildlight.collectiveidea.com/collectiveidea.gif)
