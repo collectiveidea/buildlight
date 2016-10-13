@@ -13,6 +13,6 @@ before_script:
 notifications:
   webhooks:
     urls:
-      - http://buildlight.collectiveidea.com/
+      - https://buildlight.collectiveidea.com/
     on_start: always
 cache: bundler
