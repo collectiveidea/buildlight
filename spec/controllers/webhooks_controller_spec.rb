@@ -53,7 +53,7 @@ describe WebhooksController do
 
       it 'ignores pull requests' do
         expect(Status.count).to eq(0)
-        data = JSON.parse(json_fixture('circle.json'))
+        data = JSON.parse(json_fixture('circle_pr.json'))
         data["payload"]["pull_requests"] = [{"not": "empty"}]
         post :create, params: data
         expect(Status.count).to eq(0)
