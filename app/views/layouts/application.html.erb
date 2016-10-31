@@ -10,7 +10,7 @@
     <%= csrf_meta_tags %>
   </head>
 
-  <body<%= " data-failing" if @colors[:red] %><%= " data-building" if @colors[:yellow] %><%= " data-passing" if @colors[:green] %>>
+  <body<% if defined? @colors %><%= " data-failing" if @colors[:red] %><%= " data-building" if @colors[:yellow] %><%= " data-passing" if @colors[:green] %><% end %>>
     <%= yield %>
   </body>
 </html>
