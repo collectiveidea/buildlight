@@ -6,7 +6,7 @@ describe ColorsController do
       FactoryGirl.create :status, red: true
       get :index, params: {format: :json}
       json = JSON.parse(response.body)
-      expect(json['red']).to be(true)
+      expect(json['red']).to be_truthy
     end
 
     it "shows the red and yellow lights on if the last status is yellow, but previous non-yellow was red" do
@@ -15,7 +15,7 @@ describe ColorsController do
       get :index, params: {format: :json}
       json = JSON.parse(response.body)
       expect(json['yellow']).to be(true)
-      expect(json['red']).to be(true)
+      expect(json['red']).to be_truthy
     end
 
     it "shows the red light on if the last status is green, but another project is red" do
@@ -23,7 +23,7 @@ describe ColorsController do
       FactoryGirl.create :status, red: false
       get :index, params: {format: :json}
       json = JSON.parse(response.body)
-      expect(json['red']).to be(true)
+      expect(json['red']).to be_truthy
     end
   end
 
@@ -41,7 +41,7 @@ describe ColorsController do
       FactoryGirl.create :status, username: 'danielmorrison', red: true,  yellow: false
       get :show, params: {id: 'collectiveidea,danielmorrison', format: :json}
       json = JSON.parse(response.body)
-      expect(json['red']).to be(true)
+      expect(json['red']).to be_truthy
       expect(json['yellow']).to be(true)
     end
   end

@@ -1,30 +1,14 @@
 <div class="messages">
-  <% if @colors[:red] %>
-    <div class="message message--failure">
-      <p>The following projects are <em>failing:</em></p>
-      <ul>
-        <li><a href="http://github.com/collectiveidea/">collectiveidea/some-project</a></li>
-        <li><a href="http://github.com/collectiveidea/">collectiveidea/some-project</a></li>
-      </ul>
-    </div>
-  <% end %>
-
-  <% if @colors[:yellow] %>
-    <div class="message message--building">
-      <p>The following projects are <em>building:</em></p>
-      <ul>
-        <li><a href="http://github.com/collectiveidea/">collectiveidea/some-project</a></li>
-        <li><a href="http://github.com/collectiveidea/">collectiveidea/some-project</a></li>
-      </ul>
-    </div>
-  <% end %>
-
   <% if @colors[:green] %>
     <div class="message message--passing">
       <p>
         Hooray! All projects are passing.
         <%= image_tag "https://github.global.ssl.fastly.net/images/icons/emoji/tada.png?v5", alt: "tada emoji", class: "emoji" %>
       </p>
+    </div>
+  <% else %>
+    <div class="message message--failure">
+      <p>Rats. <%= pluralize @colors[:red], "project is", "projects are" %> <em>failing.</em></p>
     </div>
   <% end %>
 

@@ -11,7 +11,8 @@ class Status < ApplicationRecord
 
   def self.colors(username = nil)
     user_scope = username.present? ? where(username: username) : all
-    red    = user_scope.where(red: true).any?
+    red    = user_scope.where(red: true).count
+    red    = false if red.zero?
     yellow = user_scope.where(yellow: true).any?
 
     {red: red, yellow: yellow, green: !red }
