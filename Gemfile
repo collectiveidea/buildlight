@@ -9,6 +9,7 @@ gem 'honeybadger'
 gem 'particlerb'
 gem 'puma'
 
+gem 'autoprefixer-rails'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'sass-rails'

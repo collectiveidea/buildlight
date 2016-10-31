@@ -1,8 +1,43 @@
-<div class="trafficlight">
-  <div class="protector"></div>
-  <div class="protector"></div>
-  <div class="protector"></div>
-  <div class="red<%= " lighted" if @colors[:red] %>"></div>
-  <div class="yellow<%= " lighted" if @colors[:yellow] %>"></div>
-  <div class="green<%= " lighted" if @colors[:green] %>"></div>
+<div class="messages">
+  <% if @colors[:green] %>
+    <div class="message message--passing">
+      <p>
+        Hooray! All projects are passing.
+        <%= image_tag "https://github.global.ssl.fastly.net/images/icons/emoji/tada.png?v5", alt: "tada emoji", class: "emoji" %>
+      </p>
+    </div>
+  <% else %>
+    <div class="message message--failure">
+      <p>Rats. <%= pluralize @colors[:red], "project is", "projects are" %> <em>failing.</em></p>
+    </div>
+  <% end %>
+
+  <div class="messages__footer">
+    <p>
+      Like this?
+      <a href="https://github.com/collectiveidea/buildlight">Fork it on Github</a>.
+    </p>
+  </div>
+</div>
+
+<div class="light" aria-hidden="true">
+  <div class="light__box">
+    <div class="light__box__bulb bulb bulb--red">
+      <span class="bulb__glow"></span>
+      <span class="bulb__disc"></span>
+      <span class="bulb__text">Uh oh.</span>
+    </div>
+
+    <div class="light__box__bulb bulb bulb--yellow">
+      <span class="bulb__glow"></span>
+      <span class="bulb__disc"></span>
+      <span class="bulb__text">Building&hellip;</span>
+    </div>
+
+    <div class="light__box__bulb bulb bulb--green">
+      <span class="bulb__glow"></span>
+      <span class="bulb__disc"></span>
+      <span class="bulb__text">All good.</span>
+    </div>
+  </div>
 </div>
