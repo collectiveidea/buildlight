@@ -1,0 +1,43 @@
+// Messages
+// -----------------------------------------------------------------------------
+
+.messages {
+  left: 5vmin;
+  position: absolute;
+  top: 5vmin;
+  z-index: 10;
+
+  &__footer {
+    font-size: .8em;
+    opacity: .5;
+  }
+}
+
+.message {
+  font-size: 0;
+  overflow: hidden;
+  padding-bottom: .5em;
+  transition: font-size $base-transition-speed,
+              opacity $base-transition-speed;
+
+  .emoji {
+    height: 1em;
+    width: auto;
+  }
+
+  > * {
+    margin-top: 0;
+  }
+
+  > :first-child {
+    font-size: 1.5em;
+    margin-bottom: .25em;
+  }
+
+  [data-failing] &--failure,
+  [data-building] &--building,
+  [data-passing] &--passing {
+    font-size: 1em;
+    opacity: 1;
+  }
+}

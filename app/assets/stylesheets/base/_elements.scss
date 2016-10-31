@@ -1,0 +1,27 @@
+// Elements
+// -----------------------------------------------------------------------------
+
+html {
+  font-family: $base-font-family;
+  line-height: 1.4;
+}
+
+body {
+  background-color: $base-background-color;
+  color: $base-text-color;
+  font-size: 1em;
+}
+
+ol,
+ul {
+  padding-left: 1rem;
+}
+
+a {
+  color: currentColor;
+
+  &:focus,
+  &:hover {
+    color: $strong-text-color;
+  }
+}

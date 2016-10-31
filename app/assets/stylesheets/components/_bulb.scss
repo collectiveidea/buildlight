@@ -1,0 +1,80 @@
+// Lightbulbs - the circles that sit within the traffic light
+// -----------------------------------------------------------------------------
+
+.bulb {
+  height: $bulb-size;
+  position: relative;
+  width: $bulb-size;
+
+  &__glow {
+    display: block;
+    height: $bulb-shadow-size;
+    left: 50%;
+    margin-left: -($bulb-shadow-size / 2);
+    margin-top: -($bulb-shadow-size / 2);
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    transform: scale(.5);
+    transition: transform $slow-transition-speed, opacity $slow-transition-speed;
+    transition-delay: $fast-transition-speed;
+    width: $bulb-shadow-size;
+    z-index: 1;
+
+    // Ensure that the building bulb's glow doesn't overpower the failing bulb
+    [data-failing][data-building] .bulb--yellow & {
+      opacity: .2;
+      transform: scale(.75);
+    }
+  }
+
+  &__disc {
+    background-color: rgba($black, .2);
+    border-radius: 50%;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: background-color $fast-transition-speed;
+    z-index: 2;
+  }
+
+  &__text {
+    font-size: $bulb-size / 7;
+    font-weight: 800;
+    left: $bulb-size / 2;
+    line-height: 1;
+    margin-left: -($bulb-size / 2);
+    margin-top: -($bulb-size / 7 / 2);
+    opacity: 0;
+    position: absolute;
+    text-align: center;
+    text-transform: lowercase;
+    top: $bulb-size / 2;
+    transition: opacity $base-transition-speed;
+    width: $bulb-size;
+    z-index: 3;
+  }
+
+  @mixin bulb($color, $state) {
+    [data-#{ $state }] & {
+      .bulb__glow {
+        background-image: radial-gradient(
+          ellipse at center,
+          rgba($color, .6) 20%,
+          rgba($color, 0) 70%
+        );
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .bulb__disc { background-color: $color; }
+      .bulb__text { opacity: 1; }
+    }
+  }
+
+  &--red { @include bulb($red, "failing"); }
+  &--yellow { @include bulb($yellow, "building"); }
+  &--green { @include bulb($green, "passing"); }
+}

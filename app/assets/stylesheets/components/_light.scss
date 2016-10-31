@@ -1,0 +1,35 @@
+// Traffic light - the box that holds the light bulbs
+// -----------------------------------------------------------------------------
+
+.light {
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  &__box {
+    display: flex;
+    flex-direction: column;
+    height: $light-height;
+    justify-content: space-between;
+    left: calc(50vw - (#{ $bulb-size } / 2));
+    position: absolute;
+    top: calc(50vh - (#{ $light-height } / 2));
+    transition: margin-top $base-transition-speed;
+    width: $bulb-size;
+
+    [data-failing] & {
+      margin-top: $bulb-size + $bulb-gutter;
+    }
+
+    [data-failing][data-building] & {
+      margin-top: ($bulb-size + $bulb-gutter) / 2;
+    }
+
+    [data-passing] & {
+      margin-top: -($bulb-size + $bulb-gutter);
+    }
+  }
+}
