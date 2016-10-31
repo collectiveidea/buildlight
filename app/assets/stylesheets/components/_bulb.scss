@@ -21,8 +21,10 @@
     width: $bulb-shadow-size;
     z-index: 1;
 
-    // Ensure that the building bulb's glow doesn't overpower the failing bulb
-    [data-failing][data-building] .bulb--yellow & {
+    // Ensure that the building bulb's glow doesn't overpower
+    // the other lights, if/when they're also on
+    [data-failing][data-building] .bulb--yellow &,
+    [data-passing][data-building] .bulb--yellow & {
       opacity: .2;
       transform: scale(.75);
     }

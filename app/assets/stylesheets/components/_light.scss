@@ -31,5 +31,9 @@
     [data-passing] & {
       margin-top: -($bulb-size + $bulb-gutter);
     }
+
+    [data-passing][data-building] & {
+      margin-top: -($bulb-size + $bulb-gutter) / 2;
+    }
   }
 }
