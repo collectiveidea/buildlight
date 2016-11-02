@@ -10,6 +10,8 @@
   &__footer {
     font-size: .8em;
     opacity: .5;
+
+    :first-child { margin-top: 0; }
   }
 }
 
@@ -31,6 +33,7 @@
 
   > :first-child {
     font-size: 1.5em;
+    line-height: 1.2;
     margin-bottom: .25em;
   }
 

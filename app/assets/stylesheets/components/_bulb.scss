@@ -7,6 +7,7 @@
   width: $bulb-size;
 
   &__glow {
+    animation: pulse $animation-pulse-duration infinite;
     display: block;
     height: $bulb-shadow-size;
     left: 50%;
@@ -19,15 +20,11 @@
     transition: transform $slow-transition-speed, opacity $slow-transition-speed;
     transition-delay: $fast-transition-speed;
     width: $bulb-shadow-size;
-    z-index: 1;
+    z-index: 2;
 
-    // Ensure that the building bulb's glow doesn't overpower
-    // the other lights, if/when they're also on
-    [data-failing][data-building] .bulb--yellow &,
-    [data-passing][data-building] .bulb--yellow & {
-      opacity: .2;
-      transform: scale(.75);
-    }
+    // 1 - Make sure the building glow displays underneath the
+    //     passing/failing glows; they should take precedence
+    .bulb--yellow & { z-index: 1; } // 1
   }
 
   &__disc {
@@ -39,7 +36,7 @@
     right: 0;
     top: 0;
     transition: background-color $fast-transition-speed;
-    z-index: 2;
+    z-index: 3;
   }
 
   &__text {
@@ -56,7 +53,7 @@
     top: $bulb-size / 2;
     transition: opacity $base-transition-speed;
     width: $bulb-size;
-    z-index: 3;
+    z-index: 4;
   }
 
   @mixin bulb($color, $state) {
@@ -64,7 +61,9 @@
       .bulb__glow {
         background-image: radial-gradient(
           ellipse at center,
+          rgba($color, .9) 10%,
           rgba($color, .6) 20%,
+          rgba($color, .3) 40%,
           rgba($color, 0) 70%
         );
         opacity: 1;
@@ -77,6 +76,14 @@
   }
 
   &--red { @include bulb($red, "failing"); }
-  &--yellow { @include bulb($yellow, "building"); }
+
+  &--yellow {
+    @include bulb($yellow, "building");
+
+    // 1 - offset glow animation so that the building light
+    //     balances well with the failing/passing ones
+    .bulb__glow { animation-delay: -($animation-pulse-duration / 2); } // 1
+  }
+
   &--green { @include bulb($green, "passing"); }
 }
