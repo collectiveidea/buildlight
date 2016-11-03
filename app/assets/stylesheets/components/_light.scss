@@ -35,5 +35,10 @@
     [data-passing][data-building] & {
       margin-top: -($bulb-size + $bulb-gutter) / 2;
     }
+
+    [data-failing][data-passing] & {
+      margin-top: 0;
+      transform: scale(.75);
+    }
   }
 }

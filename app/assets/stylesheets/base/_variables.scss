@@ -28,3 +28,6 @@ $bulb-size: 50vmin;
 $bulb-shadow-size: 150vmax;
 $bulb-gutter: 6vmin;
 $light-height: ($bulb-size * 3) + ($bulb-gutter * 2);
+
+// Animations
+$animation-pulse-duration: 5s;
