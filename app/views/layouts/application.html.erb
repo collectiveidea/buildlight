@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
   </head>
 
   <body<% if defined? @colors %><%= " data-failing" if @colors[:red] %><%= " data-building" if @colors[:yellow] %><%= " data-passing" if @colors[:green] %><% end %>>
