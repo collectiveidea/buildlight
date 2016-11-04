@@ -29,6 +29,6 @@ module ColorHelper
     end
 
     filename << ".ico"
-    favicon_link_tag(filename)
+    favicon_link_tag filename, id: "favicon"
   end
 end
