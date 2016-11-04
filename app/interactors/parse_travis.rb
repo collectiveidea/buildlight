@@ -8,9 +8,7 @@ class ParseTravis
       status.project_name = json["repository"]["name"]
       set_colors(status, json["status_message"])
       status.save!
-      status.devices.each do |device|
-        TriggerParticle.call(device)
-      end
+      status.trigger
     end
   end
 

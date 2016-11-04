@@ -28,4 +28,13 @@ class Status < ApplicationRecord
     green = "passing" if !red
     [green, red, yellow].compact.join("-") # combines status to send "passing|failing-building"
   end
+
+  # Trigger updates to devices and channels
+  def trigger
+    ColorsChannel.broadcast_to("*", colors: Status.colors)
+    ColorsChannel.broadcast_to(username, colors: Status.colors(username))
+    devices.each do |device|
+      TriggerParticle.call(device)
+    end
+  end
 end

@@ -5,12 +5,14 @@
     <meta content="IE=edge" http-equiv="X-UA-Compatible" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>[i] Buildlight</title>
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <%= color_favicon_link_tag(@colors) %>
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= csrf_meta_tags %>
+    <%= action_cable_meta_tag %>
   </head>
 
-  <body<% if defined? @colors %><%= " data-failing" if @colors[:red] %><%= " data-building" if @colors[:yellow] %><%= " data-passing" if @colors[:green] %><% end %>>
+  <body<%= color_attrs_for_body(@colors) %>>
     <%= yield %>
+    <%= javascript_include_tag "application" %>
   </body>
 </html>
