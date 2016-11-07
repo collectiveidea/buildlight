@@ -24,7 +24,7 @@ Dir.chdir APP_ROOT do
   run "cp -n config/application.example.yml config/application.yml", error_on_failure: false
 
   puts "\n== Preparing database =="
-  run "bin/rake db:create"
+  run "bin/rake db:create" unless ENV["DATABASE_URL"]
   run "bin/rake db:migrate"
 
   # puts "\n== Removing old logs and tempfiles =="

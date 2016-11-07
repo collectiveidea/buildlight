@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test-setup": "bin/setup && bundle exec rake db:migrate",
+    "test-setup": "bin/setup",
     "test": "RAILS_ENV=test bundle exec rake"
   },
   "addons":[
