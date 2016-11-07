@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "test-setup": "bin/setup && bundle exec rake db:migrate",
+    "test": "RAILS_ENV=test bundle exec rake"
+  },
+  "addons":[
+     "heroku-postgresql:hobby-dev"
+   ]
+}
