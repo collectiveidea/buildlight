@@ -1,7 +1,7 @@
 {
   "scripts": {
     "test-setup": "bin/setup",
-    "test": "RAILS_ENV=test bundle exec rake"
+    "test": "RAILS_ENV=test bundle exec rake spec"
   },
   "addons":[
      "heroku-postgresql:hobby-dev"
