@@ -1,7 +1,7 @@
 {
   "scripts": {
     "test-setup": "bin/setup",
-    "test": "RAILS_ENV=test bundle exec rake spec"
+    "test": "RAILS_ENV=test SPEC_OPTS='-f RSpec::TapY' bundle exec rake spec"
   },
   "addons":[
      "heroku-postgresql:hobby-dev"
