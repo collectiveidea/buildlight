@@ -4,6 +4,7 @@ require: rubocop-rspec
 Rails:
   Enabled: true
 AllCops:
+  TargetRubyVersion: 2.3
   Exclude:
     - 'db/schema.rb'
 
