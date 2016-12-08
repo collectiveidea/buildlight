@@ -15,6 +15,9 @@ AllCops:
 RSpec/DescribedClass:
   Enabled: false
 
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 Style/CollectionMethods:
   Enabled: true
   # Mapping from undesired method to desired_method

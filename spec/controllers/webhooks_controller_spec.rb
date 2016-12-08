@@ -1,19 +1,19 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe WebhooksController do
-  describe 'POST create' do
+  describe "POST create" do
     before do
       allow(Particle).to receive(:publish)
     end
 
     describe "from Travis CI" do
-      it 'recieves a json payload' do
-        post :create, params: {payload: json_fixture('travis.json')}
+      it "recieves a json payload" do
+        post :create, params: {payload: json_fixture("travis.json")}
         expect(response).to be_success
       end
 
-      it 'saves useful data' do
-        post :create, params: {payload: json_fixture('travis.json')}
+      it "saves useful data" do
+        post :create, params: {payload: json_fixture("travis.json")}
         status = Status.order("created_at DESC").first
         expect(status.red).to be(false)
         expect(status.service).to eq("travis")
@@ -22,27 +22,27 @@ describe WebhooksController do
         expect(status.username).to eq("collectiveidea")
       end
 
-      it 'ignores pull requests' do
+      it "ignores pull requests" do
         expect(Status.count).to eq(0)
-        post :create, params: {payload: json_fixture('travis.json').sub(%("type":"push"), %("type":"pull_request"))}
+        post :create, params: {payload: json_fixture("travis.json").sub(%("type":"push"), %("type":"pull_request"))}
         expect(Status.count).to eq(0)
       end
 
-      it 'notifies Particle' do
+      it "notifies Particle" do
         FactoryGirl.create(:device, usernames: ["collectiveidea"])
-        expect(Particle).to receive(:publish).with({name: "build_state", data: "passing", ttl: 3600, private: false})
-        post :create, params: {payload: json_fixture('travis.json')}
+        expect(Particle).to receive(:publish).with(name: "build_state", data: "passing", ttl: 3600, private: false)
+        post :create, params: {payload: json_fixture("travis.json")}
       end
     end
 
     describe "from Circle CI" do
-      it 'recieves a json payload' do
-        post :create, params: JSON.parse(json_fixture('circle.json'))
+      it "recieves a json payload" do
+        post :create, params: JSON.parse(json_fixture("circle.json"))
         expect(response).to be_success
       end
 
-      it 'saves useful data' do
-        post :create, params: JSON.parse(json_fixture('circle.json'))
+      it "saves useful data" do
+        post :create, params: JSON.parse(json_fixture("circle.json"))
         status = Status.order("created_at DESC").first
         expect(status.red).to be(false)
         expect(status.service).to eq("circle")
@@ -51,18 +51,18 @@ describe WebhooksController do
         expect(status.username).to eq("collectiveidea")
       end
 
-      it 'ignores pull requests' do
+      it "ignores pull requests" do
         expect(Status.count).to eq(0)
-        data = JSON.parse(json_fixture('circle_pr.json'))
+        data = JSON.parse(json_fixture("circle_pr.json"))
         data["payload"]["pull_requests"] = [{"not": "empty"}]
         post :create, params: data
         expect(Status.count).to eq(0)
       end
 
-      it 'notifies Particle' do
+      it "notifies Particle" do
         FactoryGirl.create(:device, usernames: ["collectiveidea"])
-        expect(Particle).to receive(:publish).with({name: "build_state", data: "passing", ttl: 3600, private: false})
-        post :create, params: JSON.parse(json_fixture('circle.json'))
+        expect(Particle).to receive(:publish).with(name: "build_state", data: "passing", ttl: 3600, private: false)
+        post :create, params: JSON.parse(json_fixture("circle.json"))
       end
     end
   end

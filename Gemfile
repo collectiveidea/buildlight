@@ -20,10 +20,10 @@ group :production do
 end
 
 group :development, :test do
+  gem "byebug"
+  gem "factory_girl_rails"
   gem "figaro"
   gem "rspec-rails"
-  gem "factory_girl_rails"
-  gem "byebug"
 end
 
 group :test do

@@ -7,7 +7,7 @@ module ColorHelper
                 " data-failing"
               else
                 " data-passing"
-      end
+              end
 
       html << " data-building" if colors[:yellow]
     end
@@ -23,7 +23,7 @@ module ColorHelper
                     "-failing"
                   else
                     "-passing"
-      end
+                  end
 
       filename << "-building" if colors[:yellow]
     end
