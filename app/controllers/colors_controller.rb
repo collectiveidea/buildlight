@@ -5,11 +5,11 @@ class ColorsController < ApplicationController
     respond_to do |format|
       format.html do
         @colors = Status.colors(@ids)
-        render 'index'
+        render "index"
       end
       format.ryg do
         begin
-          response.headers['Content-Type'] = 'text/ryg'
+          response.headers["Content-Type"] = "text/ryg"
 
           ActiveRecord::Base.connection_pool.release_connection
 
@@ -29,7 +29,7 @@ class ColorsController < ApplicationController
   end
 
   def show
-    @ids = params[:id].split(',')
+    @ids = params[:id].split(",")
     index
   end
 end

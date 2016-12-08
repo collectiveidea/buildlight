@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Status do
   describe "colors" do
@@ -33,36 +33,36 @@ describe Status do
 
     describe "with a username" do
       before do
-        FactoryGirl.create :status, username: 'danielmorrison', red: true, yellow: true
+        FactoryGirl.create :status, username: "danielmorrison", red: true, yellow: true
       end
 
       it "shows the red light on if the last status is red" do
-        FactoryGirl.create :status, username: 'collectiveidea', red: true
-        colors = Status.colors('collectiveidea')
+        FactoryGirl.create :status, username: "collectiveidea", red: true
+        colors = Status.colors("collectiveidea")
         expect(colors[:red]).to be_truthy
       end
 
       it "shows the red and yellow lights on if the last status is yellow, but previous non-yellow was red" do
-        FactoryGirl.create :status, username: 'collectiveidea', red: true
-        2.times { FactoryGirl.create :status, username: 'collectiveidea', red: false, yellow: true }
-        colors = Status.colors('collectiveidea')
+        FactoryGirl.create :status, username: "collectiveidea", red: true
+        2.times { FactoryGirl.create :status, username: "collectiveidea", red: false, yellow: true }
+        colors = Status.colors("collectiveidea")
         expect(colors[:yellow]).to be(true)
         expect(colors[:red]).to be_truthy
       end
 
       it "shows the red light on if the last status is green, but another project is red" do
-        FactoryGirl.create :status, username: 'collectiveidea', red: true
-        FactoryGirl.create :status, username: 'collectiveidea', red: false
-        colors = Status.colors('collectiveidea')
+        FactoryGirl.create :status, username: "collectiveidea", red: true
+        FactoryGirl.create :status, username: "collectiveidea", red: false
+        colors = Status.colors("collectiveidea")
         expect(colors[:red]).to be_truthy
       end
     end
 
     describe "with multiple usernames" do
       it "shows the red light on if the last status is red" do
-        FactoryGirl.create :status, username: 'collectiveidea', red: true,  yellow: false
-        FactoryGirl.create :status, username: 'danielmorrison', red: false, yellow: true
-        colors = Status.colors(['collectiveidea', 'danielmorrison'])
+        FactoryGirl.create :status, username: "collectiveidea", red: true,  yellow: false
+        FactoryGirl.create :status, username: "danielmorrison", red: false, yellow: true
+        colors = Status.colors(["collectiveidea", "danielmorrison"])
         expect(colors[:red]).to be_truthy
         expect(colors[:yellow]).to be(true)
       end

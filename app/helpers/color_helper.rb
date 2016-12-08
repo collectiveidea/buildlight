@@ -3,10 +3,10 @@ module ColorHelper
     html = ""
 
     if colors
-      if colors[:red]
-        html << " data-failing"
-      else
-        html << " data-passing"
+      html << if colors[:red]
+                " data-failing"
+              else
+                " data-passing"
       end
 
       html << " data-building" if colors[:yellow]
@@ -19,10 +19,10 @@ module ColorHelper
     filename = "/favicon"
 
     if colors
-      if colors[:red]
-        filename << "-failing"
-      else
-        filename << "-passing"
+      filename << if colors[:red]
+                    "-failing"
+                  else
+                    "-passing"
       end
 
       filename << "-building" if colors[:yellow]

@@ -5,8 +5,8 @@ class Status < ApplicationRecord
 
   # Devices that are "watching" this Status
   def devices
-    Device.where("usernames @> ARRAY[?]::varchar[]", [username]).
-      or(Device.where("projects @> ARRAY[?]::varchar[]", [name]))
+    Device.where("usernames @> ARRAY[?]::varchar[]", [username])
+          .or(Device.where("projects @> ARRAY[?]::varchar[]", [name]))
   end
 
   def self.colors(username = nil)
@@ -15,7 +15,7 @@ class Status < ApplicationRecord
     red    = false if red.zero?
     yellow = user_scope.where(yellow: true).any?
 
-    {red: red, yellow: yellow, green: !red }
+    {red: red, yellow: yellow, green: !red}
   end
 
   def self.ryg(username = nil)

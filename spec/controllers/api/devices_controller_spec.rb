@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe API::DevicesController do
   describe "POST trigger" do
@@ -8,7 +8,7 @@ describe API::DevicesController do
     end
 
     it "notifies Particle" do
-      expect(Particle).to receive(:publish).with({name: "build_state", data: "passing", ttl: 3600, private: false})
+      expect(Particle).to receive(:publish).with(name: "build_state", data: "passing", ttl: 3600, private: false)
       post :trigger, params: {name: "ready", data: "true", coreid: "abc123", published_at: "2016-06-14T22:06:10.976Z"}
     end
 

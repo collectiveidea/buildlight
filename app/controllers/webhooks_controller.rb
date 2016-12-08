@@ -1,4 +1,4 @@
-require 'digest'
+require "digest"
 class WebhooksController < ApplicationController
   def create
     if params[:payload].is_a?(String)

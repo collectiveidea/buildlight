@@ -11,6 +11,9 @@ AllCops:
 # [i] Overrides #
 #################
 
+RSpec/DescribedClass:
+  Enabled: false
+
 Style/CollectionMethods:
   Enabled: true
   # Mapping from undesired method to desired_method

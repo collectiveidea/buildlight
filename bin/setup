@@ -1,13 +1,13 @@
 #!/usr/bin/env ruby
-require 'pathname'
+require "pathname"
 
 # path to your application root.
-APP_ROOT = Pathname.new File.expand_path('../../',  __FILE__)
+APP_ROOT = Pathname.new File.expand_path("../../", __FILE__)
 
 def run(command, error_on_failure: true)
   system(command).tap do |result|
     if error_on_failure && !result
-      raise "Setup can't complete.\nCommand: #{command}\n exited with a non-zero status code: #{result.inspect}\n#{$?}"
+      raise "Setup can't complete.\nCommand: #{command}\n exited with a non-zero status code: #{result.inspect}\n#{$CHILD_STATUS}"
     end
   end
 end

@@ -2,7 +2,7 @@ class ParseCircle
   def self.call(payload)
     if payload["pull_requests"].blank?
       status = Status.find_or_initialize_by(service: "circle", username: payload["username"], project_name: payload["reponame"])
-      status.payload = payload if ENV['DEBUG']
+      status.payload = payload if ENV["DEBUG"]
       set_colors(status, payload["status"])
       status.save!
       status.trigger

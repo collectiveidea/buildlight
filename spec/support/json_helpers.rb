@@ -1,8 +1,8 @@
 module JSONHelpers
-  ENV = {'CONTENT_TYPE' => 'application/json'}
+  ENV = {"CONTENT_TYPE" => "application/json"}.freeze
 
   def json_fixture(filename)
-    File.read(Rails.root.join('spec', 'fixtures', filename))
+    File.read(Rails.root.join("spec", "fixtures", filename))
   end
 end
 
