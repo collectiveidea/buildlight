@@ -1,4 +1,4 @@
-class AddUserToStatuses < ActiveRecord::Migration
+class AddUserToStatuses < ActiveRecord::Migration[4.2]
   def change
     add_column :statuses, :username, :string
     add_index :statuses, :username

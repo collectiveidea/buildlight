@@ -1,4 +1,4 @@
-class RenameStatusToColorOnStatuses < ActiveRecord::Migration
+class RenameStatusToColorOnStatuses < ActiveRecord::Migration[4.2]
   def change
     remove_index :statuses, :status
     remove_index :statuses, [:project_id, :status]

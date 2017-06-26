@@ -1,4 +1,4 @@
-class SplitColorsOnStatuses < ActiveRecord::Migration
+class SplitColorsOnStatuses < ActiveRecord::Migration[4.2]
   def change
     remove_index :statuses, :color
     remove_index :statuses, [:project_id, :color]
