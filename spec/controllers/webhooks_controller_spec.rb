@@ -29,7 +29,7 @@ describe WebhooksController do
       end
 
       it "notifies Particle" do
-        FactoryGirl.create(:device, usernames: ["collectiveidea"])
+        FactoryBot.create(:device, usernames: ["collectiveidea"])
         expect(Particle).to receive(:publish).with(name: "build_state", data: "passing", ttl: 3600, private: false)
         post :create, params: {payload: json_fixture("travis.json")}
       end
@@ -60,7 +60,7 @@ describe WebhooksController do
       end
 
       it "notifies Particle" do
-        FactoryGirl.create(:device, usernames: ["collectiveidea"])
+        FactoryBot.create(:device, usernames: ["collectiveidea"])
         expect(Particle).to receive(:publish).with(name: "build_state", data: "passing", ttl: 3600, private: false)
         post :create, params: JSON.parse(json_fixture("circle.json"))
       end

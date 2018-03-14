@@ -1,15 +1,15 @@
 require "rails_helper"
 
 describe API::RedController do
-  let!(:red1) { FactoryGirl.create :status, red: true, username: "user1" }
-  let!(:red2) { FactoryGirl.create :status, red: true, username: "user2" }
-  let!(:green1) { FactoryGirl.create :status, username: "user1" }
-  let!(:green2) { FactoryGirl.create :status, username: "user2" }
+  let!(:red1) { FactoryBot.create :status, red: true, username: "user1" }
+  let!(:red2) { FactoryBot.create :status, red: true, username: "user2" }
+  let!(:green1) { FactoryBot.create :status, username: "user1" }
+  let!(:green2) { FactoryBot.create :status, username: "user2" }
 
   describe "#show" do
     render_views
 
-    let!(:device) { FactoryGirl.create(:device, identifier: "abc123", usernames: ["user1"]) }
+    let!(:device) { FactoryBot.create(:device, identifier: "abc123", usernames: ["user1"]) }
 
     it "responds with the list of red project names" do
       get :show, params: {id: "abc123"}

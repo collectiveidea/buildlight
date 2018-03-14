@@ -3,7 +3,7 @@ require "rails_helper"
 describe API::DevicesController do
   describe "POST trigger" do
     before do
-      FactoryGirl.create(:device, identifier: "abc123")
+      FactoryBot.create(:device, identifier: "abc123")
       allow(Particle).to receive(:publish)
     end
 
