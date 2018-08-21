@@ -40,7 +40,11 @@ GEM
       tzinfo (~> 1.1)
     ansi (1.5.0)
     arel (8.0.0)
+<<<<<<< HEAD
     autoprefixer-rails (9.1.1)
+=======
+    autoprefixer-rails (9.1.2)
+>>>>>>> Upgrade autoprefixer-rails
       execjs
     builder (3.2.3)
     byebug (10.0.2)
