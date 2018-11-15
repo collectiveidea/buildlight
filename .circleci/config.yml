@@ -6,6 +6,15 @@ jobs:
       RAILS_ENV: test
     docker:
     - image: circleci/ruby:2.5.3-node-browsers
+      environment:
+        PGHOST: localhost
+        PGUSER: buildlight
+        RAILS_ENV: test
+    - image: postgres:10.1-alpine
+      environment:
+        POSTGRES_USER: buildlight
+        POSTGRES_DB: buildlight_test
+        POSTGRES_PASSWORD: ""
     steps:
     - checkout
     - run: echo -e "export RAILS_ENV=test\nexport RACK_ENV=test" >> $BASH_ENV
@@ -13,11 +22,11 @@ jobs:
         --jobs=4 --retry=3 '
     - run: |-
         mkdir -p config && echo 'test:
-          database: circle_ruby_test
+          database: buildlight_test
           adapter: postgresql
           encoding: unicode
           pool: 15
-          username: ubuntu
+          username: buildlight
           host: localhost
         ' > config/database.yml
     - run:
