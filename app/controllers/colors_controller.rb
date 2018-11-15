@@ -14,7 +14,7 @@ class ColorsController < ApplicationController
 
         loop do
           ActiveRecord::Base.connection_pool.with_connection do
-            response.stream.write Status.uncached { Status.ryg(@ids) }
+            response.stream.write(Status.uncached { Status.ryg(@ids) })
           end
 
           sleep 1
