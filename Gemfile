@@ -24,6 +24,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "figaro"
   gem "rspec-rails"
+  gem "standard"
 end
 
 group :test do
