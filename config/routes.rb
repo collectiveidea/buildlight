@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get "/.well-known/acme-challenge/:id",
-      to: proc {|_env|	[200, {"Content-Type" => "text/plain"}, [ENV["LETS_ENCRYPT_CHALLENGE"]]] }
+    to: proc {|_env|  [200, {"Content-Type" => "text/plain"}, [ENV["LETS_ENCRYPT_CHALLENGE"]]] }
 
   # use a namespace to avoid resources colliding with usernames
   namespace :api do

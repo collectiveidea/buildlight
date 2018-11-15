@@ -4,10 +4,10 @@ module ColorHelper
 
     if colors
       html << if colors[:red]
-                " data-failing"
-              else
-                " data-passing"
-              end
+        " data-failing"
+      else
+        " data-passing"
+      end
 
       html << " data-building" if colors[:yellow]
     end
@@ -20,10 +20,10 @@ module ColorHelper
 
     if colors
       filename << if colors[:red]
-                    "-failing"
-                  else
-                    "-passing"
-                  end
+        "-failing"
+      else
+        "-passing"
+      end
 
       filename << "-building" if colors[:yellow]
     end

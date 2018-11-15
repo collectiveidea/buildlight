@@ -8,21 +8,19 @@ class ColorsController < ApplicationController
         render "index"
       end
       format.ryg do
-        begin
-          response.headers["Content-Type"] = "text/ryg"
+        response.headers["Content-Type"] = "text/ryg"
 
-          ActiveRecord::Base.connection_pool.release_connection
+        ActiveRecord::Base.connection_pool.release_connection
 
-          loop do
-            ActiveRecord::Base.connection_pool.with_connection do
-              response.stream.write Status.uncached { Status.ryg(@ids) }
-            end
-
-            sleep 1
+        loop do
+          ActiveRecord::Base.connection_pool.with_connection do
+            response.stream.write Status.uncached { Status.ryg(@ids) }
           end
-        rescue IOError
-          response.stream.close
+
+          sleep 1
         end
+      rescue IOError
+        response.stream.close
       end
       format.json { render json: Status.colors(@ids) }
     end

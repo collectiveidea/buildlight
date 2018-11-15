@@ -5,8 +5,8 @@ class Status < ApplicationRecord
 
   # Devices that are "watching" this Status
   def devices
-    Device.where("usernames @> ARRAY[?]::varchar[]", [username])
-          .or(Device.where("projects @> ARRAY[?]::varchar[]", [name]))
+    Device.where("usernames @> ARRAY[?]::varchar[]", [username]).
+      or(Device.where("projects @> ARRAY[?]::varchar[]", [name]))
   end
 
   def self.colors(username = nil)
@@ -25,7 +25,7 @@ class Status < ApplicationRecord
   def self.current_status
     red    = "failing" if where(red: true).any?
     yellow = "building" if where(yellow: true).any?
-    green = "passing" if !red
+    green = "passing" unless red
     [green, red, yellow].compact.join("-") # combines status to send "passing|failing-building"
   end
 
