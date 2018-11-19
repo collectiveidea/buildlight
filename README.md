@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/collectiveidea/buildlight.svg?branch=master)](https://travis-ci.org/collectiveidea/buildlight) [![CircleCI](https://circleci.com/gh/collectiveidea/buildlight.svg?style=shield)](https://circleci.com/gh/collectiveidea/buildlight) [![Ruby Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/testdouble/standard)
 
-Catches webhooks from Travis CI and CircleCI and provides data to power our office stoplight.
+Catches webhooks from Travis CI and other build services and provides data to power our office stoplight.
 
 ![Collective Idea stoplight](https://buildlight.collectiveidea.com/collectiveidea.gif)
 
@@ -22,7 +22,9 @@ notifications:
 
 ### Circle CI
 
-Simply add this to your `circle.yml` file:
+*Note:* Webhooks aren't officially supported with the 2.0 platform yet. Some people report it working.
+
+Simply add this to your `.circle/config.yml` file:
 
 ```
 notify:
