@@ -12,7 +12,7 @@ gem "puma"
 gem "autoprefixer-rails"
 gem "coffee-rails"
 gem "jquery-rails"
-gem "sass-rails"
+gem "sassc-rails"
 gem "uglifier"
 
 group :production do
