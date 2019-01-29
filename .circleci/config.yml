@@ -33,3 +33,6 @@ jobs:
         command: bundle exec rake db:create db:schema:load --trace
     - run:
         command: bundle exec rspec --color --require spec_helper --format progress spec
+notify:
+  webhooks:
+    - url: https://buildlight.collectiveidea.com
