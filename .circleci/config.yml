@@ -5,7 +5,7 @@ jobs:
     environment:
       RAILS_ENV: test
     docker:
-    - image: circleci/ruby:2.5.3-node-browsers
+    - image: circleci/ruby:2.6.0-node-browsers
       environment:
         PGHOST: localhost
         PGUSER: buildlight
