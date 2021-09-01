@@ -60,7 +60,7 @@ describe Status do
 
     describe "with multiple usernames" do
       it "shows the red light on if the last status is red" do
-        FactoryBot.create :status, username: "collectiveidea", red: true,  yellow: false
+        FactoryBot.create :status, username: "collectiveidea", red: true, yellow: false
         FactoryBot.create :status, username: "danielmorrison", red: false, yellow: true
         colors = Status.colors(["collectiveidea", "danielmorrison"])
         expect(colors[:red]).to be_truthy

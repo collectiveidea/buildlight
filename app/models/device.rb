@@ -3,8 +3,8 @@ class Device < ApplicationRecord
   validates :identifier, uniqueness: true, presence: true
 
   def statuses
-    Status.where(username: usernames).
-      or(Status.where("(username || '/' || project_name) IN (?)", projects))
+    Status.where(username: usernames)
+      .or(Status.where("(username || '/' || project_name) IN (?)", projects))
   end
 
   def status
