@@ -38,7 +38,7 @@ describe ColorsController do
 
     it "shows the status for all users separated by a comma" do
       FactoryBot.create :status, username: "collectiveidea", red: false, yellow: true
-      FactoryBot.create :status, username: "danielmorrison", red: true,  yellow: false
+      FactoryBot.create :status, username: "danielmorrison", red: true, yellow: false
       get :show, params: {id: "collectiveidea,danielmorrison", format: :json}
       json = JSON.parse(response.body)
       expect(json["red"]).to be_truthy

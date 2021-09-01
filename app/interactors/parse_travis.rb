@@ -5,7 +5,7 @@ class ParseTravis
 
     status = Status.find_or_initialize_by(service: "travis", project_id: json["repository"]["id"].to_s)
     status.payload = payload if ENV["DEBUG"]
-    status.username     = json["repository"]["owner_name"]
+    status.username = json["repository"]["owner_name"]
     status.project_name = json["repository"]["name"]
     set_colors(status, json["status_message"])
     status.save!
