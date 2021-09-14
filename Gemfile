@@ -1,10 +1,11 @@
 source "https://rubygems.org"
-ruby "2.6.6"
+ruby "2.7.3"
 
-gem "rails", "~> 5.1.0"
+gem "rails", "~> 5.2.6"
 
 gem "pg"
 
+gem "bootsnap"
 gem "honeybadger"
 gem "particlerb"
 gem "puma"

@@ -9,7 +9,7 @@ describe WebhooksController do
     describe "from Travis CI" do
       it "recieves a json payload" do
         post :create, params: {payload: json_fixture("travis.json")}
-        expect(response).to be_success
+        expect(response).to be_successful
       end
 
       it "saves useful data" do
@@ -38,7 +38,7 @@ describe WebhooksController do
     describe "from Circle CI" do
       it "recieves a json payload" do
         post :create, params: JSON.parse(json_fixture("circle.json"))
-        expect(response).to be_success
+        expect(response).to be_successful
       end
 
       it "saves useful data" do
