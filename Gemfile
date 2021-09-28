@@ -10,11 +10,9 @@ gem "honeybadger"
 gem "particlerb"
 gem "puma"
 
-gem "autoprefixer-rails"
-gem "coffee-rails"
-gem "jquery-rails"
-gem "sassc-rails"
-gem "uglifier"
+gem "jsbundling-rails"
+# gem "coffee-rails"
+gem "cssbundling-rails"
 
 group :production do
   gem "lograge"
