@@ -19,7 +19,7 @@ $base-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Ari
 
 // Transitions
 $base-transition-speed: 500ms;
-$fast-transition-speed: $base-transition-speed / 2;
+$fast-transition-speed: $base-transition-speed * 0.5;
 $slow-transition-speed: $base-transition-speed * 2;
 $slug-transition-speed: $base-transition-speed * 8;
 

@@ -25,7 +25,7 @@
     }
 
     [data-failing][data-building] & {
-      margin-top: ($bulb-size + $bulb-gutter) / 2;
+      margin-top: ($bulb-size + $bulb-gutter) * 0.5;
     }
 
     [data-passing] & {
@@ -33,7 +33,7 @@
     }
 
     [data-passing][data-building] & {
-      margin-top: -($bulb-size + $bulb-gutter) / 2;
+      margin-top: -($bulb-size + $bulb-gutter) * 0.5;
     }
 
     [data-failing][data-passing] & {
