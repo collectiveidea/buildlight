@@ -3,7 +3,8 @@
   "private": "true",
   "dependencies": {
     "esbuild": "^0.13.2",
-    "sass": "^1.42.1"
+    "sass": "^1.42.1",
+    "yarn": "^1.22.13"
   },
   "scripts": {
     "build:css": "sass ./app/assets/stylesheets/application.sass.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules"

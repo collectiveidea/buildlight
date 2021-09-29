@@ -7,3 +7,8 @@ require File.expand_path("../config/application", __FILE__)
 Buildlight::Application.load_tasks
 
 task default: [:standard, "css:build", :spec]
+
+task("assets:precompile").clear
+namespace :assets do
+  task precompile: ["yarn:install", "css:build"]
+end
