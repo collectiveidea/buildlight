@@ -1,7 +1,7 @@
 source "https://rubygems.org"
-ruby "2.7.3"
+ruby "3.0.2"
 
-gem "rails", "~> 5.2.6"
+gem "rails", "~> 7.0.0.alpha2"
 
 gem "pg"
 
@@ -10,18 +10,15 @@ gem "honeybadger"
 gem "particlerb"
 gem "puma"
 
-gem "autoprefixer-rails"
-gem "coffee-rails"
-gem "jquery-rails"
-gem "sassc-rails"
-gem "uglifier"
+gem "importmap-rails"
+gem "cssbundling-rails"
 
 group :production do
   gem "lograge"
 end
 
 group :development, :test do
-  gem "byebug"
+  gem "debug"
   gem "factory_bot_rails"
   gem "figaro"
   gem "rspec-rails"

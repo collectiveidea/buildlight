@@ -6,4 +6,4 @@ require File.expand_path("../config/application", __FILE__)
 
 Buildlight::Application.load_tasks
 
-task default: [:standard, :spec]
+task default: [:standard, "css:build", :spec]

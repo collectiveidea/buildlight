@@ -1,6 +1,8 @@
 // Lightbulbs - the circles that sit within the traffic light
 // -----------------------------------------------------------------------------
 
+@use "sass:math";
+
 .bulb {
   height: $bulb-size;
   position: relative;
@@ -11,8 +13,8 @@
     display: block;
     height: $bulb-shadow-size;
     left: 50%;
-    margin-left: -($bulb-shadow-size / 2);
-    margin-top: -($bulb-shadow-size / 2);
+    margin-left: -($bulb-shadow-size * 0.5);
+    margin-top: -($bulb-shadow-size * 0.5);
     opacity: 0;
     position: absolute;
     top: 50%;
@@ -40,17 +42,17 @@
   }
 
   &__text {
-    font-size: $bulb-size / 7;
+    font-size: math.div($bulb-size, 7);
     font-weight: 800;
-    left: $bulb-size / 2;
+    left: $bulb-size * 0.5;
     line-height: 1;
-    margin-left: -($bulb-size / 2);
-    margin-top: -($bulb-size / 7 / 2);
+    margin-left: -($bulb-size * 0.5);
+    margin-top: -(math.div($bulb-size, 7) * 0.5);
     opacity: 0;
     position: absolute;
     text-align: center;
     text-transform: lowercase;
-    top: $bulb-size / 2;
+    top: $bulb-size * 0.5;
     transition: opacity $base-transition-speed;
     width: $bulb-size;
     z-index: 4;
@@ -82,7 +84,7 @@
 
     // 1 - offset glow animation so that the building light
     //     balances well with the failing/passing ones
-    .bulb__glow { animation-delay: -($animation-pulse-duration / 2); } // 1
+    .bulb__glow { animation-delay: -($animation-pulse-duration * 0.5); } // 1
   }
 
   &--green { @include bulb($green, "passing"); }

@@ -1,7 +1,22 @@
 {
+  "buildpacks": [
+    {
+      "url": "https://github.com/gaffneyc/heroku-buildpack-jemalloc.git"
+    },
+    {
+      "url": "heroku/metrics"
+    },
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "heroku/ruby"
+    }
+  ],
+
   "scripts": {
-    "test-setup": "bundle install --with test && bin/setup",
-    "test": "RAILS_ENV=test bundle exec rspec -f RSpec::TapY | tapout tap"
+    "test-setup": "bundle install --with test && bin/setup && npm install yarn && yarn install",
+    "test": "RAILS_ENV=test bundle exec rake standard css:build && bundle exec rspec -f RSpec::TapY | tapout tap"
   },
   "addons":[
      "heroku-postgresql:hobby-dev"
