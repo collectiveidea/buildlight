@@ -18,7 +18,7 @@ group :production do
 end
 
 group :development, :test do
-  gem "byebug"
+  gem "debug"
   gem "factory_bot_rails"
   gem "figaro"
   gem "rspec-rails"
