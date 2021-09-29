@@ -1,6 +1,6 @@
 module ColorHelper
   def color_attrs_for_body(colors)
-    html = ""
+    html = +""
 
     if colors
       html << if colors[:red]
@@ -16,7 +16,7 @@ module ColorHelper
   end
 
   def color_favicon_link_tag(colors)
-    filename = "/favicon"
+    filename = +"/favicon"
 
     if colors
       filename << if colors[:red]
