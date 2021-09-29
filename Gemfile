@@ -10,8 +10,7 @@ gem "honeybadger"
 gem "particlerb"
 gem "puma"
 
-gem "jsbundling-rails"
-# gem "coffee-rails"
+gem "importmap-rails"
 gem "cssbundling-rails"
 
 group :production do
