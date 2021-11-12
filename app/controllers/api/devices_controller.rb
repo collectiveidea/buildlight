@@ -1,4 +1,4 @@
-class API::DevicesController < ApplicationController
+class API::DevicesController < API::ApplicationController
   def trigger
     device = Device.find_by(identifier: params[:coreid])
     if device
