@@ -1,5 +1,5 @@
 require "digest"
-class WebhooksController < ApplicationController
+class WebhooksController < API::ApplicationController
   def create
     if params[:payload].is_a?(String)
       ParseTravis.call(params[:payload])
