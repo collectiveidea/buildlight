@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 ruby "3.0.2"
 
-gem "rails", "~> 7.0.0.alpha2"
+gem "rails", "~> 7.0.1"
 
 gem "pg"
 
@@ -12,6 +12,7 @@ gem "puma"
 
 gem "importmap-rails"
 gem "cssbundling-rails"
+gem "propshaft"
 
 group :production do
   gem "lograge"
