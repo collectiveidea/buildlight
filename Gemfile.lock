@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/danielmorrison/websocket-driver-ruby.git
+  revision: 0e950c51343045221f8414611994439105e32b86
+  branch: support-frozen-by-default
+  specs:
+    websocket-driver (0.7.5)
+      websocket-extensions (>= 0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -266,8 +274,6 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.1.0)
-    websocket-driver (0.7.5)
-      websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     zeitwerk (2.5.3)
 
@@ -291,6 +297,7 @@ DEPENDENCIES
   rspec-ontap
   rspec-rails
   standard
+  websocket-driver!
 
 RUBY VERSION
    ruby 3.0.2p107
