@@ -1,4 +1,4 @@
-import consumer from "./consumer"
+import consumer from "channels/consumer"
 
 let ids = document.location.pathname.match(/^\/([^\/\?]*)/)[1].split(",");
 ids.forEach( function(id) {
