@@ -17,5 +17,5 @@ jobs:
       - name: Webhook
         uses: joelwmale/webhook-action@master
         with:
-          url: https://bin.webhookrelay.com/v1/webhooks/4ead3ee1-717d-492b-81b0-9a3d8c0afe91
+          url: https://buildlight.collectiveidea.com
           body: '{"status": "${{ github.event.workflow_run.conclusion }}", "repository": "${{ github.repository }}"}'
