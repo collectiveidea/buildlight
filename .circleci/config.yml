@@ -20,6 +20,9 @@ jobs:
     - run: echo -e "export RAILS_ENV=test\nexport RACK_ENV=test" >> $BASH_ENV
     - run: 'bundle check --path=vendor/bundle || bundle install --path=vendor/bundle
         --jobs=4 --retry=3 '
+    - run:
+        name: Install Yarn Dependencies
+        command: yarn install --cache-folder ~/.yarn-cache
     - run: |-
         mkdir -p config && echo 'test:
           database: buildlight_test
@@ -31,6 +34,8 @@ jobs:
         ' > config/database.yml
     - run:
         command: bundle exec rake db:create db:schema:load --trace
+    - run:
+        command: yarn build:css
     - run:
         command: bundle exec rake
 notify:
