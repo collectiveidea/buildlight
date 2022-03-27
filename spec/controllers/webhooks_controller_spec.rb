@@ -65,5 +65,28 @@ describe WebhooksController do
         post :create, params: JSON.parse(json_fixture("circle.json"))
       end
     end
+
+    describe "from GitHub Actions" do
+      it "recieves a json payload" do
+        post :create, params: JSON.parse(json_fixture("github.json"))
+        expect(response).to be_successful
+      end
+
+      it "saves useful data" do
+        post :create, params: JSON.parse(json_fixture("github.json"))
+        status = Status.order("created_at DESC").first
+        expect(status.red).to be(false)
+        expect(status.service).to eq("github")
+        expect(status.project_id).to be_nil
+        expect(status.project_name).to eq("buildlight")
+        expect(status.username).to eq("collectiveidea")
+      end
+
+      it "notifies Particle" do
+        FactoryBot.create(:device, usernames: ["collectiveidea"])
+        expect(Particle).to receive(:publish).with(name: "build_state", data: "passing", ttl: 3600, private: false)
+        post :create, params: JSON.parse(json_fixture("github.json"))
+      end
+    end
   end
 end
