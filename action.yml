@@ -1,0 +1,11 @@
+name: 'Buildlight'
+description: 'Notify Buildlight of workflow status'
+author: Daniel Morrison (@danielmorrison), [i] Collective Idea
+runs:
+  using: "composite"
+  steps:
+    - name: Webhook
+      uses: joelwmale/webhook-action@df5c9b34f7981978f7ae287d90855067e2b61d95
+      with:
+        url: https://buildlight.collectiveidea.com/
+        body: '{"status": "${{ github.event.workflow_run.conclusion }}", "repository": "${{ github.repository }}"}'
