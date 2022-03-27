@@ -29,16 +29,6 @@ jobs:
       - uses: collectiveidea/buildlight@main
 ```
 
-Simply add this to your `.travis.yml` file:
-
-```yaml
-notifications:
-  webhooks:
-    urls:
-      - https://buildlight.collectiveidea.com/
-    on_start: always
-```
-
 ### Travis CI
 
 Simply add this to your `.travis.yml` file:
