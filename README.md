@@ -43,8 +43,6 @@ notifications:
 
 ### Circle CI
 
-*Note:* Webhooks aren't officially supported with the 2.0 platform yet. Some people report it working.
-
 Simply add this to your `.circle/config.yml` file:
 
 ```
