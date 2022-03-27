@@ -4,9 +4,6 @@ on:
   workflow_run:
     workflows:
       - CI
-    # types:
-    #   - requested
-    #   - completed
     branches:
       - main
 
@@ -15,7 +12,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Webhook
-        uses: joelwmale/webhook-action@master
-        with:
-          url: https://buildlight.collectiveidea.com
-          body: '{"status": "${{ github.event.workflow_run.conclusion }}", "repository": "${{ github.repository }}"}'
+        uses: collectiveidea/buildlight@main
