@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+    - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: correcthorsebatterystaple
+          POSTGRES_DB: test
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    env:
+      DATABASE_URL: postgres://test:correcthorsebatterystaple@localhost:5432/test
+      RAILS_ENV: test
+      RUBYOPT: --enable=frozen-string-literal
+
+    steps:
+    - uses: actions/checkout@master
+    - name: Set up Ruby 3.1.1
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.1.1
+        bundler-cache: true
+        bundler: none # Ruby includes the bundler we currently want  (2.3.0.dev, and it isn't a gem yet). Remove this if/when we start using a newer one.
+    - uses: actions/cache@v1
+      with:
+        path: ~/.yarn-cache
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+    - name: Yarn Install
+      run: yarn install --cache-folder ~/.yarn-cache
+
+    - name: App Setup
+      run: bin/setup
+
+    - name: Build CSS
+      run: yarn build:css
+
+    - name: Standard
+      run: bundle exec rake standard
+
+    - name: Run Tests
+      run: bundle exec rspec --format progress --color
