@@ -6,6 +6,16 @@ describe WebhooksController do
       allow(Particle).to receive(:publish)
     end
 
+    describe "unknown data" do
+      it "ignores non-useful data" do
+        expect(Status.count).to eq(0)
+        data = {foo: "bar"}
+        post :create, params: data
+        expect(response.code).to eq("400")
+        expect(Status.count).to eq(0)
+      end
+    end
+
     describe "from Travis CI" do
       it "recieves a json payload" do
         post :create, params: {payload: json_fixture("travis.json")}
