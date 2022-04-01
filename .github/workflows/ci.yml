@@ -30,12 +30,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@master
-    - name: Set up Ruby 3.1.1
+
+    # setup-ruby can infer the Ruby version
+    - name: Create .ruby-version based on Gemfile
+      run: grep -oP '^ruby .\K\d+\.\d+\.\d+' Gemfile > .ruby-version
+
+    - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.1.1
         bundler-cache: true
-        bundler: none # Ruby includes the bundler we currently want  (2.3.0.dev, and it isn't a gem yet). Remove this if/when we start using a newer one.
+
     - uses: actions/cache@v1
       with:
         path: ~/.yarn-cache
