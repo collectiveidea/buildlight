@@ -49,4 +49,24 @@ RSpec.describe Device, type: :model do
       expect(device.status).to eq("failing-building")
     end
   end
+
+  describe "#trigger" do
+    context "when the device has a webhook_url" do
+      it "sends a webhook" do
+        device = FactoryBot.create(:device, webhook_url: "https://localhost/fake/path")
+        allow(TriggerWebhook).to receive(:call)
+        device.trigger
+        expect(TriggerWebhook).to have_received(:call).with(device)
+      end
+    end
+
+    context "when the device has an identifier" do
+      it "sends a webhook" do
+        device = FactoryBot.create(:device, identifier: "fake")
+        allow(TriggerParticle).to receive(:call)
+        device.trigger
+        expect(TriggerParticle).to have_received(:call).with(device)
+      end
+    end
+  end
 end

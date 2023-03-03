@@ -33,8 +33,6 @@ class Status < ApplicationRecord
   def trigger
     ColorsChannel.broadcast_to("*", colors: Status.colors)
     ColorsChannel.broadcast_to(username, colors: Status.colors(username))
-    devices.each do |device|
-      TriggerParticle.call(device)
-    end
+    devices.each(&:trigger)
   end
 end
