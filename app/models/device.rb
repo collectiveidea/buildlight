@@ -15,6 +15,10 @@ class Device < ApplicationRecord
     statuses.colors
   end
 
+  def colors_as_booleans
+    statuses.colors_as_booleans
+  end
+
   def ryg
     statuses.ryg
   end
