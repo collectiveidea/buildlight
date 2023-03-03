@@ -8,7 +8,11 @@ describe TriggerWebhook do
     it "it sends a basic webhook" do
       allow(Faraday).to receive(:post)
       TriggerWebhook.call(device)
-      expect(Faraday).to have_received(:post).with("https://localhost/fake/path", {colors: {red: false, yellow: false, green: true}}.to_json, "Content-Type": "application/json")
+      expect(Faraday).to have_received(:post).with(
+        "https://localhost/fake/path",
+        {colors: {red: false, yellow: false, green: true}}.to_json,
+        {"Content-Type": "application/json", "x-ryg": "ryG"}
+      )
     end
   end
 end
