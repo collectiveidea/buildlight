@@ -11,7 +11,7 @@ describe TriggerWebhook do
       expect(Faraday).to have_received(:post).with(
         "https://localhost/fake/path",
         {colors: {red: false, yellow: false, green: true}}.to_json,
-        {"Content-Type": "application/json", "x-ryg": "ryG"}
+        {"Content-Type": "application/json", "x-ryg": "ryG", "x-device-url": "http://locahost:3000/api/devices/#{device.id}"}
       )
     end
   end
