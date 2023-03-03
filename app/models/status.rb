@@ -19,7 +19,7 @@ class Status < ApplicationRecord
   end
 
   def self.ryg(username = nil)
-    Status.colors(username).map { |k, v| v ? k[0].upcase : k[0].downcase }.join
+    colors(username).map { |k, v| v ? k[0].upcase : k[0].downcase }.join
   end
 
   def self.current_status
@@ -33,8 +33,6 @@ class Status < ApplicationRecord
   def trigger
     ColorsChannel.broadcast_to("*", colors: Status.colors)
     ColorsChannel.broadcast_to(username, colors: Status.colors(username))
-    devices.each do |device|
-      TriggerParticle.call(device)
-    end
+    devices.each(&:trigger)
   end
 end

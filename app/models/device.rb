@@ -10,4 +10,17 @@ class Device < ApplicationRecord
   def status
     statuses.current_status
   end
+
+  def colors
+    statuses.colors
+  end
+
+  def ryg
+    statuses.ryg
+  end
+
+  def trigger
+    TriggerWebhook.call(self) if webhook_url
+    TriggerParticle.call(self) if identifier
+  end
 end
