@@ -1,6 +1,17 @@
 require "rails_helper"
 
 describe API::DevicesController do
+  describe "GET show" do
+    it "returns the colors" do
+      device = FactoryBot.create(:device, usernames: ["test"])
+      FactoryBot.create(:status, username: "test", red: false, yellow: true)
+
+      get :show, params: {id: device.id}
+      expect(response.status).to eq(200)
+      expect(response.body).to eq({colors: {red: false, yellow: true, green: true}, ryg: "rYG"}.to_json)
+    end
+  end
+
   describe "POST trigger" do
     before do
       FactoryBot.create(:device, identifier: "abc123")

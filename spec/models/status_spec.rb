@@ -1,6 +1,14 @@
 require "rails_helper"
 
 describe Status do
+  describe "colors_as_booleans" do
+    it "shows the red light as a boolean if the last status is red" do
+      FactoryBot.create :status, red: true
+      colors = Status.colors_as_booleans
+      expect(colors[:red]).to eq(true)
+    end
+  end
+
   describe "colors" do
     describe "without a username" do
       it "shows the red light on if the last status is red" do

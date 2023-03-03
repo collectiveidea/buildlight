@@ -9,6 +9,8 @@ class Status < ApplicationRecord
       .or(Device.where("projects @> ARRAY[?]::varchar[]", [name]))
   end
 
+  # Colors for all statuses
+  # Red may be a count not a boolean. Use colors_as_booleans for boolean values.
   def self.colors(username = nil)
     user_scope = username.present? ? where(username: username) : all
     red = user_scope.where(red: true).count
@@ -16,6 +18,10 @@ class Status < ApplicationRecord
     yellow = user_scope.where(yellow: true).any?
 
     {red: red, yellow: yellow, green: !red}
+  end
+
+  def self.colors_as_booleans(username = nil)
+    colors(username).transform_values { |v| !!v }
   end
 
   def self.ryg(username = nil)

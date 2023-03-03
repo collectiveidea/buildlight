@@ -2,3 +2,4 @@
 #
 SECRET_TOKEN: something-random-and-at-least-30-characters
 PARTICLE_ACCESS_TOKEN: "abcd5c82f7a646d8337cb575c45d6f9bf2bf12e69"
+HOST: locahost:3000
