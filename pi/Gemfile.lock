@@ -1,0 +1,23 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    json (2.6.3)
+    nio4r (2.5.8)
+    puma (6.1.1)
+      nio4r (~> 2.0)
+    rack (3.0.4.2)
+
+PLATFORMS
+  arm64-darwin-21
+  armv7l-linux-eabihf
+
+DEPENDENCIES
+  json
+  puma
+  rack
+
+RUBY VERSION
+   ruby 3.2.1p31
+
+BUNDLED WITH
+   2.4.7
