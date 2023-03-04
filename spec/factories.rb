@@ -4,6 +4,7 @@ FactoryBot.define do
     projects { [] }
     sequence(:name) { |i| "Device #{i}" }
     sequence(:identifier) { |i| "device-#{i}" }
+    sequence(:slug) { |i| "slug-#{i}" }
   end
 
   factory :status do

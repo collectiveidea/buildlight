@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_03_181951) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_04_144230) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "citext"
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
@@ -20,11 +21,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_03_181951) do
     t.string "projects", default: [], null: false, array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "identifier", null: false
+    t.string "identifier"
     t.string "name", null: false
     t.string "webhook_url"
+    t.citext "slug"
     t.index ["identifier"], name: "index_devices_on_identifier", unique: true
     t.index ["name"], name: "index_devices_on_name"
+    t.index ["slug"], name: "index_devices_on_slug", unique: true
   end
 
   create_table "statuses", force: :cascade do |t|
