@@ -33,7 +33,7 @@ jobs:
           host: localhost
         ' > config/database.yml
     - run:
-        command: bundle exec rake db:create db:schema:load --trace
+        command: bundle exec bin/setup
     - run:
         command: yarn build:css
     - run:
