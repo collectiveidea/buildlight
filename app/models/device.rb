@@ -1,6 +1,7 @@
 class Device < ApplicationRecord
   validates :name, presence: true
   validates :identifier, uniqueness: true, presence: true
+  validates :slug, uniqueness: true, presence: false
 
   def statuses
     Status.where(username: usernames)

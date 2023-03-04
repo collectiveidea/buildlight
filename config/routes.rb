@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :devices, only: :show
   get ":id(.:format)" => "colors#show"
   get "/(.:format)" => "colors#index"
   post "/" => "webhooks#create"
