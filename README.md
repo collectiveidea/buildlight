@@ -53,7 +53,9 @@ notify:
 
 ## Viewing Status
 
-The [main website](https://buildlight.collectiveidea.com/) shows the basic status for all projects. Adding a user/organization name to the url shows just those projects, for example: [https://buildlight.collectiveidea.com/collectiveidea](https://buildlight.collectiveidea.com/collectiveidea)
+The [main website](https://buildlight.collectiveidea.com/) shows the basic status for all projects. Adding a user/organization name to the url shows just those projects, for example: [https://buildlight.collectiveidea.com/collectiveidea](https://buildlight.collectiveidea.com/collectiveidea). 
+
+Devices (editable only manually for now) can aggregate multiple organizations & projects, and have their own URL. For example, our office's physical light (see gif above) aggregates [@collectiveidea](https://github.com/collectiveidea), [@deadmanssnitch](https://github.com/deadmanssnitch), and client projects. Its URL is: https://buildlight.collectiveidea.com/devices/collectiveidea-office
 
 ## License
 
