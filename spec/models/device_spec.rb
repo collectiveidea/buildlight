@@ -43,17 +43,20 @@ RSpec.describe Device, type: :model do
       FactoryBot.create(:status, username: "deadmanssnitch", project_name: "bar", red: true, yellow: true)
 
       device = FactoryBot.create(:device, usernames: ["collectiveidea"], projects: ["deadmanssnitch/foo"])
-      expect(device.status).to eq("passing-building")
+      expect(device.reload.status).to eq("passing-building")
 
       FactoryBot.create(:status, username: "collectiveidea", project_name: "baz", red: true, yellow: false)
-      expect(device.status).to eq("failing-building")
+      expect(device.reload.status).to eq("failing-building")
     end
   end
 
   describe "#trigger" do
     context "when the device has a webhook_url" do
       it "sends a webhook" do
-        device = FactoryBot.create(:device, webhook_url: "https://localhost/fake/path")
+        device = FactoryBot.create(:device)
+        # Add webhook without triggering callbacks
+        device.update_column(:webhook_url, "https://localhost/fake/path")
+
         allow(TriggerWebhook).to receive(:call)
         device.trigger
         expect(TriggerWebhook).to have_received(:call).with(device)

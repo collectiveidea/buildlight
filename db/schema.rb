@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_04_144230) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_05_131208) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -25,6 +25,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_04_144230) do
     t.string "name", null: false
     t.string "webhook_url"
     t.citext "slug"
+    t.string "status"
+    t.datetime "status_changed_at"
     t.index ["identifier"], name: "index_devices_on_identifier", unique: true
     t.index ["name"], name: "index_devices_on_name"
     t.index ["slug"], name: "index_devices_on_slug", unique: true

@@ -6,7 +6,6 @@ class ParseCircle
     status.payload = payload if ENV["DEBUG"]
     set_colors(status, payload["status"])
     status.save!
-    status.trigger
   end
 
   # Options

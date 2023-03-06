@@ -39,9 +39,10 @@ describe WebhooksController do
       end
 
       it "notifies Particle" do
-        FactoryBot.create(:device, usernames: ["collectiveidea"])
-        expect(Particle).to receive(:publish).with(name: "build_state", data: "passing", ttl: 3600, private: false)
+        FactoryBot.create(:device, :with_identifier, usernames: ["collectiveidea"])
+        allow(Particle).to receive(:publish)
         post :create, params: {payload: json_fixture("travis.json")}
+        expect(Particle).to have_received(:publish).with(name: "build_state", data: "passing", ttl: 3600, private: false)
       end
     end
 
@@ -70,9 +71,10 @@ describe WebhooksController do
       end
 
       it "notifies Particle" do
-        FactoryBot.create(:device, usernames: ["collectiveidea"])
-        expect(Particle).to receive(:publish).with(name: "build_state", data: "passing", ttl: 3600, private: false)
+        FactoryBot.create(:device, :with_identifier, usernames: ["collectiveidea"])
+        allow(Particle).to receive(:publish)
         post :create, params: JSON.parse(json_fixture("circle.json"))
+        expect(Particle).to have_received(:publish).with(name: "build_state", data: "passing", ttl: 3600, private: false)
       end
     end
 
@@ -93,9 +95,10 @@ describe WebhooksController do
       end
 
       it "notifies Particle" do
-        FactoryBot.create(:device, usernames: ["collectiveidea"])
-        expect(Particle).to receive(:publish).with(name: "build_state", data: "passing", ttl: 3600, private: false)
+        FactoryBot.create(:device, :with_identifier, usernames: ["collectiveidea"])
+        allow(Particle).to receive(:publish)
         post :create, params: JSON.parse(json_fixture("github.json"))
+        expect(Particle).to have_received(:publish).with(name: "build_state", data: "passing", ttl: 3600, private: false)
       end
     end
   end

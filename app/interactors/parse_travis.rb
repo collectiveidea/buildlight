@@ -9,7 +9,6 @@ class ParseTravis
     status.project_name = json["repository"]["name"]
     set_colors(status, json["status_message"])
     status.save!
-    status.trigger
   end
 
   # Set colors based on travis-ci's status code
