@@ -1,4 +1,6 @@
 class Status < ApplicationRecord
+  after_commit :update_devices, on: [:create, :update]
+
   def name
     "#{username}/#{project_name}"
   end
@@ -35,10 +37,9 @@ class Status < ApplicationRecord
     [green, red, yellow].compact.join("-") # combines status to send "passing|failing-building"
   end
 
-  # Trigger updates to devices and channels
-  def trigger
+  def update_devices
     ColorsChannel.broadcast_to("*", colors: Status.colors)
     ColorsChannel.broadcast_to(username, colors: Status.colors(username))
-    devices.each(&:trigger)
+    devices.each(&:update_status)
   end
 end

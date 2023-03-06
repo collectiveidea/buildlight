@@ -1,15 +1,14 @@
 class Device < ApplicationRecord
   validates :name, presence: true
-  validates :identifier, uniqueness: true, presence: false
-  validates :slug, uniqueness: true, presence: false
+  validates :identifier, uniqueness: {allow_blank: true}
+  validates :slug, uniqueness: {allow_blank: true}
+
+  # Ensure the status is updated if we change anything
+  after_commit :update_status, on: [:create, :update]
 
   def statuses
     Status.where(username: usernames)
       .or(Status.where("(username || '/' || project_name) IN (?)", projects))
-  end
-
-  def status
-    statuses.current_status
   end
 
   def colors
@@ -22,6 +21,16 @@ class Device < ApplicationRecord
 
   def ryg
     statuses.ryg
+  end
+
+  def update_status
+    self.status = statuses.current_status
+    if status_changed?
+      self.status_changed_at = Time.current
+      save!
+      # Currenly only triggering on status change to reduce webhooks
+      trigger
+    end
   end
 
   def trigger

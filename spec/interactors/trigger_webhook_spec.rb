@@ -2,10 +2,13 @@ require "rails_helper"
 
 describe TriggerWebhook do
   describe "triggering a webhook" do
-    let(:device) { FactoryBot.create(:device, usernames: ["hooks"], webhook_url: "https://localhost/fake/path") }
-    let(:status) { FactoryBot.create(:status, username: "hooks", project_name: "buildlight") }
+    let!(:status) { FactoryBot.create(:status, username: "hooks", project_name: "buildlight") }
+    let!(:device) { FactoryBot.create(:device, usernames: ["hooks"]) }
 
     it "it sends a basic webhook" do
+      # Add webhook without triggering callbacks
+      device.update_column(:webhook_url, "https://localhost/fake/path")
+
       allow(Faraday).to receive(:post)
       TriggerWebhook.call(device)
       expect(Faraday).to have_received(:post).with(

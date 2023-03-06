@@ -3,8 +3,11 @@ FactoryBot.define do
     usernames { [] }
     projects { [] }
     sequence(:name) { |i| "Device #{i}" }
-    sequence(:identifier) { |i| "device-#{i}" }
     sequence(:slug) { |i| "slug-#{i}" }
+
+    trait :with_identifier do
+      sequence(:identifier) { |i| "device-#{i}" }
+    end
   end
 
   factory :status do
