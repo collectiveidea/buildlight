@@ -25,6 +25,8 @@ class Device < ApplicationRecord
 
   def update_status
     self.status = statuses.current_status
+    DeviceChannel.broadcast_to(slug, colors: colors) if slug
+
     if status_changed?
       self.status_changed_at = Time.current
       save!
