@@ -1,12 +1,21 @@
 import consumer from "channels/consumer"
 
-let ids = document.location.pathname.match(/^\/([^\/\?]*)/)[1].split(",");
-ids.forEach( function(id) {
+let ids, channel;
+
+if (document.location.pathname.match(/^\/devices\//)) {
+  ids = document.location.pathname.match(/^\/devices\/([^\/\?]*)/)[1].split(",");
+  channel = "DeviceChannel";
+} else {
+  ids = document.location.pathname.match(/^\/([^\/\?]*)/)[1].split(",");
+  channel = "ColorsChannel";
+}
+
+ids.forEach(function (id) {
   if (id === "") {
     id = "*";
   }
 
-  consumer.subscriptions.create({channel: "ColorsChannel", id: id}, {
+  consumer.subscriptions.create({ channel: channel, id: id }, {
     connected() {
       // Called when the subscription is ready for use on the server
     },
