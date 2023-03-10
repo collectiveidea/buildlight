@@ -1,0 +1,30 @@
+[Unit]
+Description=Buildlight Listener
+After=network.target
+
+[Service]
+Type=notify
+
+# If theprocess locks up, systemd's watchdog will restart it within seconds.
+WatchdogSec=60
+
+# Preferably configure a non-privileged user
+User=pi
+
+# The path to your application code root directory.
+# Also replace the "<YOUR_APP_PATH>" placeholders below with this path.
+# Example /home/username/myapp
+WorkingDirectory=/home/pi/listener
+
+# Helpful for debugging socket activation, etc.
+# Environment=PUMA_DEBUG=1
+
+# SystemD will not run puma even if it is in your path. You must specify
+# an absolute URL to puma. For example /usr/local/bin/puma
+# Alternatively, create a binstub with `bundle binstubs puma --path ./sbin` in the WorkingDirectory
+ExecStart=/home/pi/listener/listener.rb
+
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
