@@ -5,13 +5,11 @@ require "json"
 require "action_cable_client"
 require "sd_notify"
 
-$running = true
-
 if ENV["NOTIFY_SOCKET"]
-  STDOUT.reopen "listener.log", "a"
-  STDERR.reopen "listener.log", "a"
-  STDOUT.sync = true
-  STDERR.sync = true
+  $stdout.reopen "listener.log", "a"
+  $stderr.reopen "listener.log", "a"
+  $stdout.sync = true
+  $stderr.sync = true
 end
 
 class StopLight
@@ -25,6 +23,7 @@ class StopLight
   @yellow = true
   @green = true
   @blink_state = true
+  @running = true
 
   def self.startup
     export_pin(RED_LED)
@@ -104,7 +103,7 @@ class StopLight
     EventMachine.run do
       client = ActionCableClient.new("wss://#{HOST}/cable", params, true, headers)
       client.connected { puts "[#{Time.now}] successfully connected." }
-      client.received do | message |
+      client.received do |message|
         puts "[#{Time.now}] #{message["message"]["colors"]}"
         set_colors(message["message"]["colors"])
       end
@@ -122,12 +121,12 @@ class StopLight
 
   def self.shutdown
     SdNotify.stopping
-    $running = false
+    @running = false
     exit
   end
 
   def self.restart
-    return unless $running
+    return unless @running
 
     puts "[#{Time.now}] restarting"
     SdNotify.reloading
