@@ -25,7 +25,7 @@ class Device < ApplicationRecord
 
   def update_status
     self.status = statuses.current_status
-    DeviceChannel.broadcast_to(slug, colors: colors) if slug
+    broadcast
 
     if status_changed?
       self.status_changed_at = Time.current
@@ -33,6 +33,10 @@ class Device < ApplicationRecord
       # Currenly only triggering on status change to reduce webhooks
       trigger
     end
+  end
+
+  def broadcast
+    DeviceChannel.broadcast_to(slug, colors: colors) if slug
   end
 
   def trigger
