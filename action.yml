@@ -8,4 +8,4 @@ runs:
       uses: joelwmale/webhook-action@448a17bf857ead98546cfbdbe3b9d4cf979dda95
       with:
         url: https://buildlight.collectiveidea.com/
-        body: '{"status": "${{ github.event.workflow_run.conclusion }}", "repository": "${{ github.repository }}"}'
+        body: '{"status": "${{ github.event.workflow_run.conclusion }}", "repository": "${{ github.repository }}", "workflow": "${{ github.event.workflow_run.workflow.name }}"}'
