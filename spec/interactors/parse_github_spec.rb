@@ -1,6 +1,15 @@
 require "rails_helper"
 
 describe ParseGithub do
+  describe "call" do
+    it "uses worflow column to differentiate between statuses" do
+      other_status = FactoryBot.create :status, service: "github", username: "collectiveidea", project_name: "buildlight", workflow: "Other Workflow", red: true
+      ParseGithub.call(JSON.parse(json_fixture("github.json")))
+      expect(other_status.reload.red).to be(true)
+      expect(Status.where(service: "github", username: "collectiveidea", project_name: "buildlight").count).to eq(2)
+    end
+  end
+
   describe "set_colors" do
     before do
       @status = Status.new(service: "github")

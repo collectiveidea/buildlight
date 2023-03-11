@@ -1,4 +1,5 @@
 {
     "status": "success",
-    "repository": "collectiveidea/buildlight"
+    "repository": "collectiveidea/buildlight",
+    "workflow": "CI"
 }

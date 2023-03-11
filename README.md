@@ -10,7 +10,7 @@ Catches webhooks from build services (GitHub Actions, Travis CI, Circle CI, etc.
 
 ### GitHub Actions
 
-We assume you have a primary GitHub action workflow you use. You'll need its `name` below.
+We assume you have one or more GitHub Action workflow(s) you use. You'll need their `name` below in the `workflows` section.
 
 Copy this to `.github/workflows/buildlight.yml` :
 
@@ -19,7 +19,7 @@ name: Buildlight
 
 on:
   workflow_run:
-    workflows: [Run Tests] # Replace with what your GitHub Action's name is
+    workflows: [Run Tests] # Replace with your GitHub Action's name(s)
     branches: [main] # Your default branch.
 
 jobs:

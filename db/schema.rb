@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_05_131208) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_11_115915) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_05_131208) do
     t.boolean "yellow"
     t.string "username"
     t.string "service", null: false
+    t.string "workflow"
     t.index ["project_id"], name: "index_statuses_on_project_id"
     t.index ["project_name"], name: "index_statuses_on_project_name"
     t.index ["red"], name: "index_statuses_on_red"
