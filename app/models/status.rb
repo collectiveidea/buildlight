@@ -1,5 +1,5 @@
 class Status < ApplicationRecord
-  after_commit :update_devices, on: [:create, :update]
+  after_commit :update_devices
 
   def name
     "#{username}/#{project_name}"
