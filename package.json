@@ -2,7 +2,7 @@
   "name": "app",
   "private": "true",
   "dependencies": {
-    "sass": "^1.59.2",
+    "sass": "^1.59.3",
     "yarn": "^1.22.19"
   },
   "scripts": {
