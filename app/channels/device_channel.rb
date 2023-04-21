@@ -15,6 +15,14 @@ class DeviceChannel < ApplicationCable::Channel
 
   def initial_broadcast
     # Trigger an initial broadcast.
-    Device.find_by(slug: @slug)&.broadcast
+    Thread.new do
+      device = Device.find_by(slug: @slug)
+      if device
+        5.times do
+          device.broadcast
+          sleep 30
+        end
+      end
+    end
   end
 end
