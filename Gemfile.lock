@@ -173,7 +173,7 @@ GEM
     particlerb (2.1.0)
       faraday (>= 0.9.0)
       faraday_middleware (>= 0.9.0)
-    pg (1.4.6)
+    pg (1.5.2)
     propshaft (0.7.0)
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
