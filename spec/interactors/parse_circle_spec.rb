@@ -12,27 +12,10 @@ describe ParseCircle do
       expect(@status.yellow).to be(false)
     end
 
-    it "sets fixed to green" do
-      ParseCircle.set_colors(@status, "fixed")
-      expect(@status.red).to be(false)
-      expect(@status.yellow).to be(false)
-    end
-
-    it "sets timedout to red" do
-      ParseCircle.set_colors(@status, "timedout")
+    it "sets failed to red" do
+      ParseCircle.set_colors(@status, "failed")
       expect(@status.red).to be(true)
       expect(@status.yellow).to be(false)
-    end
-
-    it "sets running to yellow" do
-      ParseCircle.set_colors(@status, "running")
-      expect(@status.yellow).to be(true)
-    end
-
-    it "keeps the red color if yellow" do
-      @status.red = true
-      ParseCircle.set_colors(@status, "running")
-      expect(@status.red).to be(true)
     end
   end
 end

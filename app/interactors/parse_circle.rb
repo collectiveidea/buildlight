@@ -1,25 +1,18 @@
 class ParseCircle
   def self.call(payload)
-    return unless payload["pull_requests"].blank?
+    return unless payload["type"] == "workflow-completed"
 
-    status = Status.find_or_initialize_by(service: "circle", username: payload["username"], project_name: payload["reponame"])
+    status = Status.find_or_initialize_by(service: "circle", username: payload["organization"]["name"], project_name: payload["project"]["name"])
     status.payload = payload if Rails.configuration.x.debug
-    set_colors(status, payload["status"])
+    set_colors(status, payload["workflow"]["status"])
     status.save!
   end
 
-  # Options
-  # :retried, :canceled, :infrastructure_fail, :timedout, :not_run, :running,
-  # :failed, :queued, :scheduled, :not_running, :no_tests, :fixed, :success
+  # Potential Statuses
+  # See: https://circleci.com/docs/webhooks/#event-specifications
+  # "success", "failed", "error", "canceled", "unauthorized"
   def self.set_colors(status, code)
-    status.yellow = false
-    case code
-    when "running", "queued", "scheduled"
-      status.yellow = true
-    when "success", "fixed"
-      status.red = false
-    else
-      status.red = true
-    end
+    status.yellow = false # currently no way to set yellow on Circle
+    status.red = code != "success"
   end
 end
