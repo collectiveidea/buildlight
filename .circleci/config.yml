@@ -38,6 +38,3 @@ jobs:
         command: yarn build:css
     - run:
         command: bundle exec rake
-notify:
-  webhooks:
-    - url: https://buildlight.collectiveidea.com

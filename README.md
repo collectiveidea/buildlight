@@ -43,13 +43,7 @@ notifications:
 
 ### Circle CI
 
-Simply add this to your `.circle/config.yml` file:
-
-```
-notify:
-  webhooks:
-    - url: https://buildlight.collectiveidea.com
-```
+Go to your project settings in Circle CI and add a new Webhook with `https://buildlight.collectiveidea.com` as the Receiver URL. Ensure the the "Workflow Completed" event is checked.
 
 ## Viewing Status
 
