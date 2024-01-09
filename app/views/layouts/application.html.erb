@@ -9,7 +9,7 @@
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag "application", :media => "all" %>
-    <%= javascript_importmap_tags shim: !Rails.env.test? %>
+    <%= javascript_importmap_tags %>
   </head>
 
   <body<%= color_attrs_for_body(@colors) %>>
