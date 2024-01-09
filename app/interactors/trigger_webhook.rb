@@ -5,7 +5,7 @@ class TriggerWebhook
       {
         "Content-Type": "application/json",
         "x-ryg": device.ryg,
-        "x-device-url": Rails.application.routes.url_helpers.api_device_url(device, host: ENV["HOST"])
+        "x-device-url": Rails.application.routes.url_helpers.api_device_url(device, host: Rails.configuration.x.host)
       })
   end
 end

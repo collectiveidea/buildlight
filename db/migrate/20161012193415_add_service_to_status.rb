@@ -1,5 +1,5 @@
 class AddServiceToStatus < ActiveRecord::Migration[5.0]
-  class Status < ActiveRecord::Base
+  class Status < ApplicationRecord
   end
 
   def up

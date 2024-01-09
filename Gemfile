@@ -28,6 +28,8 @@ group :development, :test do
   gem "figaro"
   gem "rspec-rails"
   gem "standard"
+  gem "standard-performance"
+  gem "standard-rails"
 end
 
 group :test do

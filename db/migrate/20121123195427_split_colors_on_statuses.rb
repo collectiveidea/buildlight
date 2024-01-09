@@ -1,14 +1,16 @@
 class SplitColorsOnStatuses < ActiveRecord::Migration[4.2]
   def change
-    remove_index :statuses, :color
-    remove_index :statuses, [:project_id, :color]
-    remove_index :statuses, [:project_id, :color, :created_at]
+    change_table :statuses, bulk: true do |t|
+      t.remove_index :color
+      t.remove_index [:project_id, :color]
+      t.remove_index [:project_id, :color, :created_at]
 
-    add_column :statuses, :red, :boolean
-    add_column :statuses, :yellow, :boolean
-    remove_column :statuses, :color
+      t.boolean :red
+      t.boolean :yellow
+      t.remove :color, type: :string
 
-    add_index :statuses, :red
-    add_index :statuses, :yellow
+      t.index :red
+      t.index :yellow
+    end
   end
 end

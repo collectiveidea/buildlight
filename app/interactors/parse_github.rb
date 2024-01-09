@@ -3,7 +3,7 @@ class ParseGithub
     username, project_name = payload["repository"].split("/")
     workflow = payload["workflow"]
     status = Status.find_or_initialize_by(service: "github", username: username, project_name: project_name, workflow: workflow)
-    status.payload = payload if ENV["DEBUG"]
+    status.payload = payload if Rails.configuration.x.debug
     set_colors(status, payload["status"])
     status.save!
   end
