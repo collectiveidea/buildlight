@@ -18,5 +18,8 @@ module Buildlight
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.x.debug = ENV["DEBUG"].present?
+    config.x.host = ENV["HOST"]
   end
 end

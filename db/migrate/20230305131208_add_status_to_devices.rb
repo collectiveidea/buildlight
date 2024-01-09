@@ -1,6 +1,8 @@
 class AddStatusToDevices < ActiveRecord::Migration[7.0]
   def change
-    add_column :devices, :status, :string
-    add_column :devices, :status_changed_at, :datetime
+    change_table :devices, bulk: true do |t|
+      t.string :status
+      t.datetime :status_changed_at
+    end
   end
 end
