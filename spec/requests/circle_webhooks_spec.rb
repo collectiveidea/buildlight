@@ -20,6 +20,12 @@ describe "Webhooks from Circle CI" do
     expect(status.username).to eq("collectiveidea")
   end
 
+  it "ignores pull requests" do
+    expect(Status.count).to eq(0)
+    post "/", params: json_fixture("circle_pr.json"), headers: {"content-type": "application/json", "Circleci-Event-Type": "workflow-completed"}
+    expect(Status.count).to eq(0)
+  end
+
   it "notifies Particle" do
     FactoryBot.create(:device, :with_identifier, usernames: ["collectiveidea"])
     allow(Particle).to receive(:publish)

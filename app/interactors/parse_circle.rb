@@ -1,6 +1,8 @@
 class ParseCircle
   def self.call(payload)
     return unless payload["type"] == "workflow-completed"
+    # Ignore pull requests. We can't really determine a PR build, so we ignore any branches other than main/master.
+    return unless payload.dig("pipeline", "vcs", "branch").in? ["main", "master"]
 
     status = Status.find_or_initialize_by(service: "circle", username: payload["organization"]["name"], project_name: payload["project"]["name"])
     status.payload = payload if Rails.configuration.x.debug
