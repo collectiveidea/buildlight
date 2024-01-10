@@ -7,8 +7,8 @@ class WebhooksController < API::ApplicationController
     elsif params[:payload].blank? && params[:repository]&.include?("/")
       ParseGithub.call(params)
       head :ok && return
-    elsif params[:payload]
-      ParseCircle.call(params[:payload])
+    elsif request.headers.env["HTTP_CIRCLECI_EVENT_TYPE"].present?
+      ParseCircle.call(params)
       head :ok && return
     end
 
