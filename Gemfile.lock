@@ -137,7 +137,7 @@ GEM
       thor (>= 0.14.0, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    honeybadger (5.4.1)
+    honeybadger (5.5.0)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
