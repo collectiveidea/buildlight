@@ -5,7 +5,7 @@ runs:
   using: "composite"
   steps:
     - name: Webhook
-      uses: joelwmale/webhook-action@448a17bf857ead98546cfbdbe3b9d4cf979dda95
+      uses: joelwmale/webhook-action@cc1a66f987e1591785273fd6f9d2f7a9d8d7c9cd
       with:
         url: https://buildlight.collectiveidea.com/
         body: '{"status": "${{ github.event.workflow_run.conclusion }}", "repository": "${{ github.repository }}", "workflow": "${{ github.event.workflow_run.name }}"}'
