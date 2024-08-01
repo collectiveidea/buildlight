@@ -35,19 +35,17 @@ RUN apk update && \
 
 FROM prebuild as node
 
-# Install JavaScript dependencies
+# Install Node.js
 ARG NODE_VERSION=22.4.0
-ARG YARN_VERSION=1.22.19
 ENV PATH=/usr/local/node/bin:$PATH
 RUN curl -sL https://unofficial-builds.nodejs.org/download/release/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64-musl.tar.gz | tar xz -C /tmp/ && \
     mkdir /usr/local/node && \
     cp -rp /tmp/node-v${NODE_VERSION}-linux-x64-musl/* /usr/local/node/ && \
-    npm install -g yarn@$YARN_VERSION && \
     rm -rf /tmp/node-v${NODE_VERSION}-linux-x64-musl
 
 # Install node modules
-COPY --link package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+COPY --link package.json package-lock.json ./
+RUN npm install
 
 
 FROM prebuild as build
