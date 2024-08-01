@@ -1,0 +1,38 @@
+# fly.toml app configuration file generated for buildlight on 2024-08-01T14:11:40-04:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'buildlight'
+primary_region = 'iad'
+console_command = '/rails/bin/rails console'
+
+[build]
+
+[deploy]
+  release_command = './bin/rails db:migrate'
+
+[env]
+  HOST = 'buildlight.collectiveidea.com'
+  PORT = '8080'
+  RUBYOPT = '--enable=frozen-string-literal'
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+  [[http_service.checks]]
+    grace_period = "10s"
+    interval = "30s"
+    method = "GET"
+    timeout = "5s"
+    path = "/up"
+
+[[vm]]
+  memory = '512mb'
+  cpu_kind = 'shared'
+  cpus = 1
