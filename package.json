@@ -7,5 +7,6 @@
   },
   "scripts": {
     "build:css": "sass ./app/assets/stylesheets/application.sass.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules"
-  }
+  },
+  "packageManager": "yarn@1.22.19"
 }

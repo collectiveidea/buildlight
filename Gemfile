@@ -6,6 +6,7 @@ gem "rails", "~> 7.1.3"
 gem "pg"
 
 gem "bootsnap"
+gem "dockerfile-rails"
 gem "honeybadger"
 gem "particlerb"
 gem "puma"
