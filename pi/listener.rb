@@ -62,11 +62,11 @@ class StopLight
 
     Thread.new do
       loop do
-        start = Time.now
+        start = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         write_colors
         @blink_state = !@blink_state
         SdNotify.status("{red: #{@red}, yellow: #{@yellow}, green: #{@green}}")
-        sleep Time.now - start + 1
+        sleep Process.clock_gettime(Process::CLOCK_MONOTONIC) - start + 1
       end
     end
     @started_light_thread = true
@@ -83,7 +83,7 @@ class StopLight
     ping_f = sec_f / 2
 
     Thread.new do
-      puts "[#{Time.now}] Pinging systemd watchdog every #{ping_f.round(1)} sec"
+      puts "[#{Time.current}] Pinging systemd watchdog every #{ping_f.round(1)} sec"
       loop do
         sleep ping_f
         SdNotify.watchdog
@@ -96,9 +96,9 @@ class StopLight
     headers = {"ORIGIN" => "https://#{HOST}"}
     EventMachine.run do
       client = ActionCableClient.new("wss://#{HOST}/cable", params, true, headers)
-      client.connected { puts "[#{Time.now}] successfully connected." }
+      client.connected { puts "[#{Time.current}] successfully connected." }
       client.received do |message|
-        puts "[#{Time.now}] #{message["message"]["colors"]}"
+        puts "[#{Time.current}] #{message["message"]["colors"]}"
         set_colors(message["message"]["colors"])
       end
       client.disconnected { restart }
@@ -122,7 +122,7 @@ class StopLight
   def self.restart
     return unless @running
 
-    puts "[#{Time.now}] restarting"
+    puts "[#{Time.current}] restarting"
     SdNotify.reloading
     Kernel.exec(__FILE__)
   end
