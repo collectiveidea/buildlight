@@ -30,19 +30,9 @@ class StopLight
     export_pin(YELLOW_LED)
     export_pin(GREEN_LED)
 
-    sleep 1
-
-    write_colors
-
-    sleep 1
-
-    set_colors("red" => false, "yellow" => false, "green" => false)
-    write_colors
-
     trap_signals
     SdNotify.ready
     setup_watchdog
-    start_light_thread
     start_client
   end
 
@@ -50,6 +40,7 @@ class StopLight
     @red = colors["red"]
     @yellow = colors["yellow"]
     @green = colors["green"]
+    start_light_thread
   end
 
   def self.write_colors
@@ -67,6 +58,8 @@ class StopLight
   end
 
   def self.start_light_thread
+    return if @started_light_thread
+
     Thread.new do
       loop do
         start = Time.now
@@ -76,6 +69,7 @@ class StopLight
         sleep Time.now - start + 1
       end
     end
+    @started_light_thread = true
   end
 
   def self.setup_watchdog
