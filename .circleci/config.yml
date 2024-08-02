@@ -5,24 +5,24 @@ jobs:
     environment:
       RAILS_ENV: test
     docker:
-    - image: cimg/ruby:3.3.0-node
+    - image: cimg/ruby:3.3.4-node
       environment:
         PGHOST: localhost
         PGUSER: buildlight
         RAILS_ENV: test
-    - image: postgres:10.1-alpine
+    - image: postgres:16-alpine
       environment:
         POSTGRES_USER: buildlight
         POSTGRES_DB: buildlight_test
-        POSTGRES_PASSWORD: ""
+        POSTGRES_PASSWORD: "correcthorsebatterystaple"
     steps:
     - checkout
     - run: echo -e "export RAILS_ENV=test\nexport RACK_ENV=test" >> $BASH_ENV
     - run: 'bundle check --path=vendor/bundle || bundle install --path=vendor/bundle
         --jobs=4 --retry=3 '
     - run:
-        name: Install Yarn Dependencies
-        command: yarn install --cache-folder ~/.yarn-cache
+        name: Install NPM Dependencies
+        command: npm install
     - run: |-
         mkdir -p config && echo 'test:
           database: buildlight_test
@@ -30,11 +30,12 @@ jobs:
           encoding: unicode
           pool: 15
           username: buildlight
+          password: correcthorsebatterystaple
           host: localhost
         ' > config/database.yml
     - run:
         command: bundle exec bin/setup
     - run:
-        command: yarn build:css
+        command: npm run build:css
     - run:
         command: bundle exec rake
