@@ -19,10 +19,6 @@ gem "propshaft"
 # https://github.com/faye/websocket-driver-ruby/pull/85
 gem "websocket-driver", github: "danielmorrison/websocket-driver-ruby", branch: "support-frozen-by-default"
 
-group :production do
-  gem "lograge"
-end
-
 group :development, :test do
   gem "debug"
   gem "factory_bot_rails"
