@@ -1,3 +1,7 @@
 plugins:
   - standard-performance
   - standard-rails
+ignore:
+  - 'config/**/*':
+    # This will be disabled in the next standard release
+    - Rails/EnvironmentVariableAccess
