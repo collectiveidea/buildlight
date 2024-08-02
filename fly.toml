@@ -26,11 +26,11 @@ console_command = '/rails/bin/rails console'
   processes = ['app']
 
   [[http_service.checks]]
-    grace_period = "10s"
-    interval = "30s"
-    method = "GET"
-    timeout = "5s"
-    path = "/up"
+    grace_period = '5s'
+    interval = '30s'
+    method = 'GET'
+    timeout = '2s'
+    path = '/up'
 
 [[vm]]
   memory = '512mb'
