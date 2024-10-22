@@ -100,7 +100,7 @@ GEM
       irb (~> 1.10)
       reline (>= 0.3.8)
     diff-lcs (1.5.1)
-    dockerfile-rails (1.6.17)
+    dockerfile-rails (1.6.22)
       rails (>= 3.0.0)
     drb (2.2.1)
     erubi (1.13.0)
@@ -147,7 +147,7 @@ GEM
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
     io-console (0.7.2)
-    irb (1.13.1)
+    irb (1.14.1)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     json (2.7.2)
@@ -169,7 +169,7 @@ GEM
     msgpack (1.7.2)
     multipart-post (2.4.0)
     mutex_m (0.2.0)
-    net-imap (0.4.12)
+    net-imap (0.5.0)
       date
       net-protocol
     net-pop (0.1.2)
@@ -248,7 +248,7 @@ GEM
     rdoc (6.7.0)
       psych (>= 4.0.0)
     regexp_parser (2.9.2)
-    reline (0.5.8)
+    reline (0.5.10)
       io-console (~> 0.5)
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
@@ -311,18 +311,18 @@ GEM
     standard-rails (1.2.0)
       lint_roller (~> 1.0)
       rubocop-rails (~> 2.26.0)
-    stringio (3.1.0)
+    stringio (3.1.1)
     tapout (0.4.5)
       ansi
       json
-    thor (1.3.1)
+    thor (1.3.2)
     timeout (0.4.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.6.0)
     webrick (1.8.2)
     websocket-extensions (0.1.5)
-    zeitwerk (2.6.15)
+    zeitwerk (2.7.1)
 
 PLATFORMS
   aarch64-linux
