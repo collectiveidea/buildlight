@@ -97,7 +97,7 @@ GEM
     factory_bot_rails (6.4.4)
       factory_bot (~> 6.5)
       railties (>= 5.0.0)
-    faraday (1.10.3)
+    faraday (1.10.4)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
       faraday-excon (~> 1.1)
@@ -115,7 +115,7 @@ GEM
     faraday-httpclient (1.0.1)
     faraday-multipart (1.0.4)
       multipart-post (~> 2)
-    faraday-net_http (1.0.1)
+    faraday-net_http (1.0.2)
     faraday-net_http_persistent (1.2.0)
     faraday-patron (1.0.0)
     faraday-rack (1.0.0)
@@ -155,7 +155,7 @@ GEM
     mini_portile2 (2.8.7)
     minitest (5.25.1)
     msgpack (1.7.3)
-    multipart-post (2.4.0)
+    multipart-post (2.4.1)
     net-imap (0.5.0)
       date
       net-protocol
