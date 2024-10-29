@@ -15,10 +15,6 @@ gem "importmap-rails"
 gem "cssbundling-rails"
 gem "propshaft"
 
-# This gem is pulled in via ActionCable, so remove when the PR is merged.
-# https://github.com/faye/websocket-driver-ruby/pull/85
-gem "websocket-driver", github: "danielmorrison/websocket-driver-ruby", branch: "support-frozen-by-default"
-
 group :development, :test do
   gem "debug"
   gem "factory_bot_rails"
