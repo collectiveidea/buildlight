@@ -1,7 +1,6 @@
 require_relative "boot"
 
 require "rails"
-
 # Pick the frameworks you want:
 require "active_model/railtie"
 require "active_job/railtie"
@@ -22,7 +21,7 @@ Bundler.require(*Rails.groups)
 module Buildlight
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.1
+    config.load_defaults 7.2
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
@@ -39,5 +38,7 @@ module Buildlight
 
     config.x.debug = ENV["DEBUG"].present?
     config.x.host = ENV["HOST"]
+    # Don't generate system test files.
+    config.generators.system_tests = nil
   end
 end
