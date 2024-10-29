@@ -1,6 +1,8 @@
 class Status < ApplicationRecord
   after_commit :update_devices
 
+  scope :red, -> { where(red: true) }
+
   def name
     "#{username}/#{project_name}"
   end
