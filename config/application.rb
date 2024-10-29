@@ -1,7 +1,6 @@
 require_relative "boot"
 
 require "rails"
-
 # Pick the frameworks you want:
 require "active_model/railtie"
 require "active_job/railtie"
@@ -39,5 +38,7 @@ module Buildlight
 
     config.x.debug = ENV["DEBUG"].present?
     config.x.host = ENV["HOST"]
+    # Don't generate system test files.
+    config.generators.system_tests = nil
   end
 end
