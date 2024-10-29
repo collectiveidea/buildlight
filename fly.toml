@@ -10,7 +10,7 @@ console_command = '/rails/bin/rails console'
 [build]
 
 [deploy]
-  release_command = './bin/rails db:migrate'
+  release_command = "./bin/rails db:prepare"
 
 [env]
   HOST = 'buildlight.collectiveidea.com'
@@ -36,3 +36,7 @@ console_command = '/rails/bin/rails console'
   memory = '256mb'
   cpu_kind = 'shared'
   cpus = 1
+[[statics]]
+  guest_path = "/rails/public"
+  url_prefix = "/"
+
