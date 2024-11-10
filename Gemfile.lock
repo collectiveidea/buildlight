@@ -254,7 +254,7 @@ GEM
     rspec-ontap (0.3.1)
       rspec
       tapout
-    rspec-rails (7.0.1)
+    rspec-rails (7.1.0)
       actionpack (>= 7.0)
       activesupport (>= 7.0)
       railties (>= 7.0)
