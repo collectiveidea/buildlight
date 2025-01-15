@@ -128,8 +128,9 @@ GEM
       thor (>= 0.14.0, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    honeybadger (5.26.0)
+    honeybadger (5.26.2)
       logger
+      ostruct
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.3)
@@ -143,7 +144,7 @@ GEM
     json (2.9.1)
     language_server-protocol (3.17.0.3)
     lint_roller (1.1.0)
-    logger (1.6.3)
+    logger (1.6.5)
     loofah (2.23.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
