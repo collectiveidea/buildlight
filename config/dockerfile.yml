@@ -8,7 +8,6 @@ options:
   label:
     fly_launch_runtime: rails
   parallel: true
-  platform: linux/amd64
   prepare: false
   packages:
     build:
