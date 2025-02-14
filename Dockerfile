@@ -1,6 +1,7 @@
-# syntax = docker/dockerfile:1
+# syntax=docker/dockerfile:1
+# check=error=true
 
-# Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
+# Make sure RUBY_VERSION matches the Ruby version in .ruby-version
 ARG RUBY_VERSION=3.4.1
 FROM --platform=linux/amd64 ruby:$RUBY_VERSION-alpine AS base
 
@@ -9,28 +10,26 @@ LABEL fly_launch_runtime="rails"
 # Rails app lives here
 WORKDIR /rails
 
+# Update gems and bundler
+RUN gem update --system --no-document && \
+    gem install -N bundler && \
+    rm -rf ~/.cache/gem
+
+# Install base packages
+RUN apk add --no-cache curl jemalloc postgresql-client tzdata
+
 # Set production environment
 ENV BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development:test" \
     RAILS_ENV="production"
 
-# Update gems and bundler
-RUN gem update --system --no-document && \
-    gem install -N bundler
-
-# Install packages
-RUN apk update && \
-    apk add tzdata && \
-    rm -rf /var/cache/apk/*
-
 
 # Throw-away build stages to reduce size of final image
 FROM base AS prebuild
 
 # Install packages needed to build gems and node modules
-RUN apk update && \
-    apk add build-base curl git gyp libpq-dev pkgconfig python3
+RUN apk add --no-cache build-base git gyp libpq-dev pkgconfig python3 yaml-dev
 
 
 FROM prebuild AS node
@@ -53,8 +52,8 @@ FROM prebuild AS build
 # Install application gems
 COPY Gemfile Gemfile.lock ./
 RUN bundle install && \
-    bundle exec bootsnap precompile --gemfile && \
-    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git
+    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
+    bundle exec bootsnap precompile --gemfile
 
 # Copy node modules
 COPY --from=node /rails/node_modules /rails/node_modules
@@ -73,14 +72,14 @@ RUN grep -l '#!/usr/bin/env ruby' /rails/bin/* | xargs sed -i '/^#!/aDir.chdir F
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
+# KEEP ME: Cleanup before copying build to final stage
+RUN rm -rf node_modules log/*
 
 # Final stage for app image
 FROM base
 
 # Install packages needed for deployment
-RUN apk update && \
-    apk add curl gzip jemalloc libpq postgresql-client && \
-    rm -rf /var/cache/apk/*
+RUN apk add --no-cache gzip libpq
 
 # Copy built artifacts: gems, application
 COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
@@ -91,10 +90,6 @@ RUN addgroup --system --gid 1000 rails && \
     adduser --system rails --uid 1000 --ingroup rails --home /home/rails --shell /bin/sh rails && \
     chown -R 1000:1000 db log tmp
 USER 1000:1000
-
-# Deployment options
-ENV LD_PRELOAD="libjemalloc.so.2" \
-    MALLOC_CONF="dirty_decay_ms:1000,narenas:2,background_thread:true"
 
 # Entrypoint sets up the container.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
