@@ -2,7 +2,7 @@
   "name": "app",
   "private": "true",
   "dependencies": {
-    "sass": "^1.83.4"
+    "sass": "^1.86.0"
   },
   "engines": {
     "node": "^22.0.0"
