@@ -12,8 +12,7 @@ WORKDIR /rails
 
 # Update gems and bundler
 RUN gem update --system --no-document && \
-    gem install -N bundler && \
-    rm -rf ~/.cache/gem
+    gem install -N bundler
 
 # Install base packages
 RUN apk add --no-cache curl jemalloc postgresql-client tzdata
@@ -50,7 +49,7 @@ RUN npm install
 FROM prebuild AS build
 
 # Install application gems
-COPY Gemfile Gemfile.lock ./
+COPY Gemfile Gemfile.lock .ruby-version ./
 RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
@@ -72,8 +71,6 @@ RUN grep -l '#!/usr/bin/env ruby' /rails/bin/* | xargs sed -i '/^#!/aDir.chdir F
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
-# KEEP ME: Cleanup before copying build to final stage
-RUN rm -rf node_modules log/*
 
 # Final stage for app image
 FROM base
