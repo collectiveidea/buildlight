@@ -2,7 +2,7 @@
 # check=error=true
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
-ARG RUBY_VERSION=3.4.1
+ARG RUBY_VERSION=3.4.4
 FROM ruby:$RUBY_VERSION-alpine AS base
 
 LABEL fly_launch_runtime="rails"
