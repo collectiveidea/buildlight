@@ -3,15 +3,15 @@ class WebhooksController < API::ApplicationController
   def create
     if params[:payload].is_a?(String)
       ParseTravis.call(params[:payload])
-      head :ok && return
+      head :ok
     elsif params[:payload].blank? && params[:repository]&.include?("/")
       ParseGithub.call(params)
-      head :ok && return
+      head :ok
     elsif request.headers.env["HTTP_CIRCLECI_EVENT_TYPE"].present?
       ParseCircle.call(params)
-      head :ok && return
+      head :ok
+    else
+      head :bad_request
     end
-
-    head :bad_request
   end
 end
