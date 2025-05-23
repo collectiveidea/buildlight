@@ -31,10 +31,6 @@ jobs:
     steps:
     - uses: actions/checkout@master
 
-    # setup-ruby can infer the Ruby version
-    - name: Create .ruby-version based on Gemfile
-      run: grep -oP '^ruby .\K\d+\.\d+\.\d+' Gemfile > .ruby-version
-
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
