@@ -1,0 +1,256 @@
+/* Reset */
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+}
+
+a:active,
+a:hover {
+  outline-width: 0;
+}
+
+/* Elements */
+html {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+body {
+  background-color: #404040;
+  color: #e6e6e6;
+  font-size: 1em;
+}
+
+ol,
+ul {
+  padding-left: 1rem;
+}
+
+a {
+  color: currentColor;
+}
+
+a:focus,
+a:hover {
+  color: #fff;
+}
+
+/* Keyframes */
+@keyframes pulse {
+  50% { transform: scale(.8); }
+}
+
+/* Bulb */
+.bulb {
+  height: 50vmin;
+  position: relative;
+  width: 50vmin;
+}
+
+.bulb__glow {
+  animation: pulse 5s infinite;
+  display: block;
+  height: 150vmax;
+  left: 50%;
+  margin-left: -75vmax;
+  margin-top: -75vmax;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  transform: scale(.5);
+  transition: transform 1000ms, opacity 1000ms;
+  transition-delay: 250ms;
+  width: 150vmax;
+  z-index: 2;
+}
+
+.bulb--yellow .bulb__glow {
+  z-index: 1;
+  animation-delay: -2.5s;
+}
+
+.bulb__disc {
+  background-color: rgba(0, 0, 0, .2);
+  border-radius: 50%;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: background-color 250ms;
+  z-index: 3;
+}
+
+.bulb__text {
+  font-size: 7.14286vmin;
+  font-weight: 800;
+  left: 25vmin;
+  line-height: 1;
+  margin-left: -25vmin;
+  margin-top: -3.57143vmin;
+  opacity: 0;
+  position: absolute;
+  text-align: center;
+  text-transform: lowercase;
+  top: 25vmin;
+  transition: opacity 500ms;
+  width: 50vmin;
+  z-index: 4;
+}
+
+/* Red bulb active state */
+[data-failing] .bulb--red .bulb__glow {
+  background-image: radial-gradient(
+    ellipse at center,
+    rgba(207, 76, 41, .9) 10%,
+    rgba(207, 76, 41, .6) 20%,
+    rgba(207, 76, 41, .3) 40%,
+    rgba(207, 76, 41, 0) 70%
+  );
+  opacity: 1;
+  transform: scale(1);
+}
+
+[data-failing] .bulb--red .bulb__disc {
+  background-color: #cf4c29;
+}
+
+[data-failing] .bulb--red .bulb__text {
+  opacity: 1;
+}
+
+/* Yellow bulb active state */
+[data-building] .bulb--yellow .bulb__glow {
+  background-image: radial-gradient(
+    ellipse at center,
+    rgba(236, 197, 97, .9) 10%,
+    rgba(236, 197, 97, .6) 20%,
+    rgba(236, 197, 97, .3) 40%,
+    rgba(236, 197, 97, 0) 70%
+  );
+  opacity: 1;
+  transform: scale(1);
+}
+
+[data-building] .bulb--yellow .bulb__disc {
+  background-color: #ecc561;
+}
+
+[data-building] .bulb--yellow .bulb__text {
+  opacity: 1;
+}
+
+/* Green bulb active state */
+[data-passing] .bulb--green .bulb__glow {
+  background-image: radial-gradient(
+    ellipse at center,
+    rgba(40, 181, 110, .9) 10%,
+    rgba(40, 181, 110, .6) 20%,
+    rgba(40, 181, 110, .3) 40%,
+    rgba(40, 181, 110, 0) 70%
+  );
+  opacity: 1;
+  transform: scale(1);
+}
+
+[data-passing] .bulb--green .bulb__disc {
+  background-color: #28b56e;
+}
+
+[data-passing] .bulb--green .bulb__text {
+  opacity: 1;
+}
+
+/* Light (traffic light container) */
+.light {
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.light__box {
+  display: flex;
+  flex-direction: column;
+  height: 162vmin;
+  justify-content: space-between;
+  left: calc(50vw - 25vmin);
+  position: absolute;
+  top: calc(50vh - 81vmin);
+  transition: margin-top 500ms;
+  width: 50vmin;
+}
+
+[data-failing] .light__box {
+  margin-top: 56vmin;
+}
+
+[data-failing][data-building] .light__box {
+  margin-top: 28vmin;
+}
+
+[data-passing] .light__box {
+  margin-top: -56vmin;
+}
+
+[data-passing][data-building] .light__box {
+  margin-top: -28vmin;
+}
+
+[data-failing][data-passing] .light__box {
+  margin-top: 0;
+  transform: scale(.75);
+}
+
+/* Messages */
+.messages {
+  left: 5vmin;
+  position: absolute;
+  top: 5vmin;
+  z-index: 10;
+}
+
+.messages__footer {
+  font-size: .8em;
+  opacity: .5;
+}
+
+.messages__footer :first-child {
+  margin-top: 0;
+}
+
+.message {
+  font-size: 0;
+  overflow: hidden;
+  padding-bottom: .5em;
+  transition: font-size 500ms, opacity 500ms;
+}
+
+.message > * {
+  margin-top: 0;
+}
+
+.message > :first-child {
+  font-size: 1.5em;
+  line-height: 1.2;
+  margin-bottom: .25em;
+}
+
+[data-failing] .message--failure,
+[data-building] .message--building,
+[data-passing] .message--passing {
+  font-size: 1em;
+  opacity: 1;
+}
