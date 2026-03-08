@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>[i] Buildlight</title>
+    <link id="favicon" rel="icon" href="{{.Favicon}}" />
+    <link rel="stylesheet" href="/public/application.css" media="all" />
+  </head>
+
+  <body{{.BodyAttrs}}>
+    <div class="messages">
+      <div class="message message--passing">
+        <p>
+          Hooray! All projects are passing. &#127881;
+        </p>
+      </div>
+      <div class="message message--failure">
+        <p>Rats. <span id="failing-count">{{if .Colors.Red}}{{pluralize .Colors.Red "project is" "projects are"}}{{end}}</span> <em>failing.</em></p>
+      </div>
+
+      <div class="messages__footer">
+        <p>
+          Like this?
+          <a href="https://github.com/collectiveidea/buildlight">Fork it on Github</a>.
+        </p>
+      </div>
+    </div>
+
+    <div class="light" aria-hidden="true">
+      <div class="light__box">
+        <div class="light__box__bulb bulb bulb--red">
+          <span class="bulb__glow"></span>
+          <span class="bulb__disc"></span>
+          <span class="bulb__text">Uh oh.</span>
+        </div>
+
+        <div class="light__box__bulb bulb bulb--yellow">
+          <span class="bulb__glow"></span>
+          <span class="bulb__disc"></span>
+          <span class="bulb__text">Building&hellip;</span>
+        </div>
+
+        <div class="light__box__bulb bulb bulb--green">
+          <span class="bulb__glow"></span>
+          <span class="bulb__disc"></span>
+          <span class="bulb__text">All good.</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="/public/websocket.js"></script>
+  </body>
+</html>

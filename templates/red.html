@@ -1,0 +1,18 @@
+<div id="what-is-red">
+  {{if .RedProjects}}
+  <h2>The following projects are failing</h2>
+  <ul>
+    {{range .RedProjects}}
+    <li>{{.ProjectName}}</li>
+    {{end}}
+  </ul>
+  {{else}}
+  <div>
+    &#127881;&#127881;&#127881;&#127881;&#127881;
+  </div>
+  <h1>You have no failing projects.</h1>
+  <div>
+    &#127881;&#127881;&#127881;&#127881;&#127881;
+  </div>
+  {{end}}
+</div>

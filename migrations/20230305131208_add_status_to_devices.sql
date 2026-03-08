@@ -1,0 +1,2 @@
+ALTER TABLE devices ADD COLUMN status VARCHAR;
+ALTER TABLE devices ADD COLUMN status_changed_at TIMESTAMP;
