@@ -1,21 +1,11 @@
-# fly.toml app configuration file generated for buildlight on 2024-08-01T14:11:40-04:00
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
-
 app = 'buildlight'
 primary_region = 'iad'
-console_command = '/rails/bin/rails console'
 
 [build]
-
-[deploy]
-  release_command = "./bin/rails db:prepare"
 
 [env]
   HOST = 'buildlight.collectiveidea.com'
   PORT = '8080'
-  RUBYOPT = '--enable=frozen-string-literal'
 
 [http_service]
   internal_port = 8080
@@ -36,7 +26,7 @@ console_command = '/rails/bin/rails console'
   memory = '256mb'
   cpu_kind = 'shared'
   cpus = 1
-[[statics]]
-  guest_path = "/rails/public"
-  url_prefix = "/"
 
+[[statics]]
+  guest_path = "/app/public"
+  url_prefix = "/"

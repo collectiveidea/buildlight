@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS devices;
+DROP TABLE IF EXISTS statuses;
