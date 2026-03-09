@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>[i] Buildlight</title>
+    {% if colors and colors.red is number %}
+    <link rel="icon" id="favicon" href="/favicon-failing{% if colors.yellow %}-building{% endif %}.ico" />
+    {% elif colors and colors.yellow %}
+    <link rel="icon" id="favicon" href="/favicon-passing-building.ico" />
+    {% elif colors %}
+    <link rel="icon" id="favicon" href="/favicon-passing.ico" />
+    {% else %}
+    <link rel="icon" id="favicon" href="/favicon.ico" />
+    {% endif %}
+    <link rel="stylesheet" href="/css/application.css" media="all" />
+  </head>
+
+  <body{% if colors %} {% if colors.red is number %}data-failing{% else %}data-passing{% endif %}{% if colors.yellow %} data-building{% endif %}{% endif %}>
+    {% block content %}{% endblock %}
+    <script src="/js/application.js"></script>
+  </body>
+</html>

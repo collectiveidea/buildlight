@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="messages">
+  <div class="message message--passing">
+    <p>
+      Hooray! All projects are passing. 🎉
+    </p>
+  </div>
+  <div class="message message--failure">
+    <p>Rats. <span id="failing-count">{% if red_count == 1 %}{{ red_count }} project is{% else %}{{ red_count }} projects are{% endif %}</span> <em>failing.</em></p>
+  </div>
+
+  <div class="messages__footer">
+    <p>
+      Like this?
+      <a href="https://github.com/collectiveidea/buildlight">Fork it on Github</a>.
+    </p>
+  </div>
+</div>
+
+<div class="light" aria-hidden="true">
+  <div class="light__box">
+    <div class="light__box__bulb bulb bulb--red">
+      <span class="bulb__glow"></span>
+      <span class="bulb__disc"></span>
+      <span class="bulb__text">Uh oh.</span>
+    </div>
+
+    <div class="light__box__bulb bulb bulb--yellow">
+      <span class="bulb__glow"></span>
+      <span class="bulb__disc"></span>
+      <span class="bulb__text">Building&hellip;</span>
+    </div>
+
+    <div class="light__box__bulb bulb bulb--green">
+      <span class="bulb__glow"></span>
+      <span class="bulb__disc"></span>
+      <span class="bulb__text">All good.</span>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div id="what-is-red">
+  {% if red_projects | length > 0 %}
+  <h2>The following projects are failing</h2>
+  <ul>
+    {% for project in red_projects %}
+    <li>{{ project.project_name }}</li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <div>
+    🎉🎉🎉🎉🎉
+  </div>
+  <h1>You have no failing projects.</h1>
+  <div>
+    🎉🎉🎉🎉🎉
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

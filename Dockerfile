@@ -1,96 +1,55 @@
 # syntax=docker/dockerfile:1
-# check=error=true
 
-# Make sure RUBY_VERSION matches the Ruby version in .ruby-version
-ARG RUBY_VERSION=3.4.4
-FROM ruby:$RUBY_VERSION-alpine AS base
+# Build stage
+FROM rust:1 AS build
 
-LABEL fly_launch_runtime="rails"
+WORKDIR /app
 
-# Rails app lives here
-WORKDIR /rails
+# Install sqlx-cli for migrations
+RUN cargo install sqlx-cli --no-default-features --features postgres
 
-# Update gems and bundler
-RUN gem update --system --no-document && \
-    gem install -N bundler
+# Copy manifests first for dependency caching
+COPY Cargo.toml Cargo.lock ./
 
-# Install base packages
-RUN apk add --no-cache curl jemalloc postgresql-client tzdata
+# Create a dummy main to build dependencies
+RUN mkdir src && echo "fn main() {}" > src/main.rs && echo "" > src/lib.rs
+RUN cargo build --release && rm -rf src
 
-# Set production environment
-ENV BUNDLE_DEPLOYMENT="1" \
-    BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development:test" \
-    RAILS_ENV="production"
+# Copy the actual source code and assets
+COPY src ./src
+COPY migrations ./migrations
+COPY templates ./templates
+COPY public ./public
+COPY tests ./tests
 
+# Touch main.rs so cargo rebuilds with actual code
+RUN touch src/main.rs src/lib.rs
+RUN cargo build --release
 
-# Throw-away build stages to reduce size of final image
-FROM base AS prebuild
+# Runtime stage
+FROM debian:stable-slim
 
-# Install packages needed to build gems and node modules
-RUN apk add --no-cache build-base git gyp libpq-dev pkgconfig python3 yaml-dev
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates libpq5 \
+    && rm -rf /var/lib/apt/lists/*
 
+WORKDIR /app
 
-FROM prebuild AS node
+# Copy the binary
+COPY --from=build /app/target/release/buildlight ./bin/buildlight
 
-# Install Node.js
-ARG NODE_VERSION=22.4.0
-ENV PATH=/usr/local/node/bin:$PATH
-RUN curl -sL https://unofficial-builds.nodejs.org/download/release/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64-musl.tar.gz | tar xz -C /tmp/ && \
-    mkdir /usr/local/node && \
-    cp -rp /tmp/node-v${NODE_VERSION}-linux-x64-musl/* /usr/local/node/ && \
-    rm -rf /tmp/node-v${NODE_VERSION}-linux-x64-musl
+# Copy sqlx-cli for running migrations manually if needed
+COPY --from=build /usr/local/cargo/bin/sqlx ./bin/sqlx
 
-# Install node modules
-COPY package.json ./
-RUN npm install
+# Copy runtime assets
+COPY --from=build /app/migrations ./migrations
+COPY --from=build /app/templates ./templates
+COPY --from=build /app/public ./public
 
-
-FROM prebuild AS build
-
-# Install application gems
-COPY Gemfile Gemfile.lock .ruby-version ./
-RUN bundle install && \
-    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
-    bundle exec bootsnap precompile --gemfile
-
-# Copy node modules
-COPY --from=node /rails/node_modules /rails/node_modules
-COPY --from=node /usr/local/node /usr/local/node
-ENV PATH=/usr/local/node/bin:$PATH
-
-# Copy application code
-COPY . .
-
-# Precompile bootsnap code for faster boot times
-RUN bundle exec bootsnap precompile app/ lib/
-
-# Adjust binfiles to set current working directory
-RUN grep -l '#!/usr/bin/env ruby' /rails/bin/* | xargs sed -i '/^#!/aDir.chdir File.expand_path("..", __dir__)'
-
-# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
-
-
-# Final stage for app image
-FROM base
-
-# Install packages needed for deployment
-RUN apk add --no-cache gzip libpq
-
-# Copy built artifacts: gems, application
-COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
-COPY --from=build /rails /rails
-
-# Run and own only the runtime files as a non-root user for security
-RUN addgroup --system --gid 1000 rails && \
-    adduser --system rails --uid 1000 --ingroup rails --home /home/rails --shell /bin/sh rails && \
-    chown -R 1000:1000 db log tmp
+# Run as non-root
+RUN groupadd --system --gid 1000 app && \
+    useradd --system --uid 1000 --gid app app
 USER 1000:1000
 
-# Entrypoint sets up the container.
-ENTRYPOINT ["/rails/bin/docker-entrypoint"]
-
-# Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
-CMD ["./bin/rails", "server"]
+EXPOSE 8080
+CMD ["./bin/buildlight"]

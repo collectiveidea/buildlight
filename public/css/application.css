@@ -1,0 +1,277 @@
+@charset "utf-8";
+
+/* Variables */
+:root {
+  --black: #000;
+  --white: #fff;
+  --red: #cf4c29;
+  --yellow: #ecc561;
+  --green: #28b56e;
+
+  --base-background-color: color-mix(in srgb, var(--black) 75%, var(--white));
+  --base-text-color: color-mix(in srgb, var(--black) 10%, var(--white));
+  --strong-text-color: var(--white);
+  --muted-text-color: color-mix(in srgb, var(--black) 50%, var(--white));
+
+  --base-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+  --base-transition-speed: 500ms;
+  --fast-transition-speed: 250ms;
+  --slow-transition-speed: 1000ms;
+  --slug-transition-speed: 4000ms;
+
+  --bulb-size: 50vmin;
+  --bulb-shadow-size: 150vmax;
+  --bulb-gutter: 6vmin;
+  --light-height: calc(var(--bulb-size) * 3 + var(--bulb-gutter) * 2);
+
+  --animation-pulse-duration: 5s;
+}
+
+/* Reset */
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+
+  &:active,
+  &:hover {
+    outline-width: 0;
+  }
+}
+
+/* Elements */
+html {
+  font-family: var(--base-font-family);
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+body {
+  background-color: var(--base-background-color);
+  color: var(--base-text-color);
+  font-size: 1em;
+}
+
+ol,
+ul {
+  padding-left: 1rem;
+}
+
+a {
+  color: currentColor;
+
+  &:focus,
+  &:hover {
+    color: var(--strong-text-color);
+  }
+}
+
+/* Keyframes */
+@keyframes pulse {
+  50% { transform: scale(.8); }
+}
+
+/* Bulb */
+.bulb {
+  height: var(--bulb-size);
+  position: relative;
+  width: var(--bulb-size);
+
+  &__glow {
+    animation: pulse var(--animation-pulse-duration) infinite;
+    display: block;
+    height: var(--bulb-shadow-size);
+    left: 50%;
+    margin-left: calc(var(--bulb-shadow-size) * -0.5);
+    margin-top: calc(var(--bulb-shadow-size) * -0.5);
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    transform: scale(.5);
+    transition: transform var(--slow-transition-speed), opacity var(--slow-transition-speed);
+    transition-delay: var(--fast-transition-speed);
+    width: var(--bulb-shadow-size);
+    z-index: 2;
+  }
+
+  &__disc {
+    background-color: rgba(0, 0, 0, .2);
+    border-radius: 50%;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: background-color var(--fast-transition-speed);
+    z-index: 3;
+  }
+
+  &__text {
+    font-size: calc(var(--bulb-size) / 7);
+    font-weight: 800;
+    left: calc(var(--bulb-size) * 0.5);
+    line-height: 1;
+    margin-left: calc(var(--bulb-size) * -0.5);
+    margin-top: calc(var(--bulb-size) / 7 * -0.5);
+    opacity: 0;
+    position: absolute;
+    text-align: center;
+    text-transform: lowercase;
+    top: calc(var(--bulb-size) * 0.5);
+    transition: opacity var(--base-transition-speed);
+    width: var(--bulb-size);
+    z-index: 4;
+  }
+}
+
+/* Yellow glow sits underneath other glows */
+.bulb--yellow .bulb__glow {
+  z-index: 1;
+  animation-delay: calc(var(--animation-pulse-duration) * -0.5);
+}
+
+/* Red bulb active state */
+[data-failing] .bulb--red {
+  & .bulb__glow {
+    background-image: radial-gradient(
+      ellipse at center,
+      rgba(207, 76, 41, .9) 10%,
+      rgba(207, 76, 41, .6) 20%,
+      rgba(207, 76, 41, .3) 40%,
+      rgba(207, 76, 41, 0) 70%
+    );
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  & .bulb__disc { background-color: var(--red); }
+  & .bulb__text { opacity: 1; }
+}
+
+/* Yellow bulb active state */
+[data-building] .bulb--yellow {
+  & .bulb__glow {
+    background-image: radial-gradient(
+      ellipse at center,
+      rgba(236, 197, 97, .9) 10%,
+      rgba(236, 197, 97, .6) 20%,
+      rgba(236, 197, 97, .3) 40%,
+      rgba(236, 197, 97, 0) 70%
+    );
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  & .bulb__disc { background-color: var(--yellow); }
+  & .bulb__text { opacity: 1; }
+}
+
+/* Green bulb active state */
+[data-passing] .bulb--green {
+  & .bulb__glow {
+    background-image: radial-gradient(
+      ellipse at center,
+      rgba(40, 181, 110, .9) 10%,
+      rgba(40, 181, 110, .6) 20%,
+      rgba(40, 181, 110, .3) 40%,
+      rgba(40, 181, 110, 0) 70%
+    );
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  & .bulb__disc { background-color: var(--green); }
+  & .bulb__text { opacity: 1; }
+}
+
+/* Traffic light */
+.light {
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  &__box {
+    display: flex;
+    flex-direction: column;
+    height: var(--light-height);
+    justify-content: space-between;
+    left: calc(50vw - var(--bulb-size) / 2);
+    position: absolute;
+    top: calc(50vh - var(--light-height) / 2);
+    transition: margin-top var(--base-transition-speed);
+    width: var(--bulb-size);
+  }
+}
+
+[data-failing] .light__box {
+  margin-top: calc(var(--bulb-size) + var(--bulb-gutter));
+}
+
+[data-failing][data-building] .light__box {
+  margin-top: calc((var(--bulb-size) + var(--bulb-gutter)) * 0.5);
+}
+
+[data-passing] .light__box {
+  margin-top: calc((var(--bulb-size) + var(--bulb-gutter)) * -1);
+}
+
+[data-passing][data-building] .light__box {
+  margin-top: calc((var(--bulb-size) + var(--bulb-gutter)) * -0.5);
+}
+
+[data-failing][data-passing] .light__box {
+  margin-top: 0;
+  transform: scale(.75);
+}
+
+/* Messages */
+.messages {
+  left: 5vmin;
+  position: absolute;
+  top: 5vmin;
+  z-index: 10;
+
+  &__footer {
+    font-size: .8em;
+    opacity: .5;
+
+    & :first-child { margin-top: 0; }
+  }
+}
+
+.message {
+  font-size: 0;
+  overflow: hidden;
+  padding-bottom: .5em;
+  transition: font-size var(--base-transition-speed),
+              opacity var(--base-transition-speed);
+
+  & > * {
+    margin-top: 0;
+  }
+
+  & > :first-child {
+    font-size: 1.5em;
+    line-height: 1.2;
+    margin-bottom: .25em;
+  }
+}
+
+[data-failing] .message--failure,
+[data-building] .message--building,
+[data-passing] .message--passing {
+  font-size: 1em;
+  opacity: 1;
+}
