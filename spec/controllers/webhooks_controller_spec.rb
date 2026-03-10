@@ -2,10 +2,6 @@ require "rails_helper"
 
 describe WebhooksController do
   describe "POST create" do
-    before do
-      allow(Particle).to receive(:publish)
-    end
-
     describe "unknown data" do
       it "ignores non-useful data" do
         expect(Status.count).to eq(0)
@@ -38,11 +34,13 @@ describe WebhooksController do
         expect(Status.count).to eq(0)
       end
 
-      it "notifies Particle" do
-        FactoryBot.create(:device, :with_identifier, usernames: ["collectiveidea"])
-        allow(Particle).to receive(:publish)
+      it "triggers a webhook" do
+        stub = stub_request(:post, "https://localhost/fake/path")
+          .with(body: {colors: {red: false, yellow: false, green: true}}.to_json)
+        device = FactoryBot.create(:device, usernames: ["collectiveidea"], webhook_url: "https://localhost/fake/path")
+        device.update_column(:status, nil)
         post :create, params: {payload: json_fixture("travis.json")}
-        expect(Particle).to have_received(:publish).with(name: "build_state", data: "passing", ttl: 3600, private: false)
+        expect(stub).to have_been_requested
       end
     end
 
@@ -62,11 +60,13 @@ describe WebhooksController do
         expect(status.username).to eq("collectiveidea")
       end
 
-      it "notifies Particle" do
-        FactoryBot.create(:device, :with_identifier, usernames: ["collectiveidea"])
-        allow(Particle).to receive(:publish)
+      it "triggers a webhook" do
+        stub = stub_request(:post, "https://localhost/fake/path")
+          .with(body: {colors: {red: false, yellow: false, green: true}}.to_json)
+        device = FactoryBot.create(:device, usernames: ["collectiveidea"], webhook_url: "https://localhost/fake/path")
+        device.update_column(:status, nil)
         post :create, params: JSON.parse(json_fixture("github.json"))
-        expect(Particle).to have_received(:publish).with(name: "build_state", data: "passing", ttl: 3600, private: false)
+        expect(stub).to have_been_requested
       end
     end
   end

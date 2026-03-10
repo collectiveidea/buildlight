@@ -13,19 +13,18 @@ describe API::DevicesController do
   end
 
   describe "POST trigger" do
-    before do
-      FactoryBot.create(:device, identifier: "abc123")
-      allow(Particle).to receive(:publish)
-    end
+    let!(:device) { FactoryBot.create(:device, identifier: "abc123", webhook_url: "https://localhost/fake/path") }
 
-    it "notifies Particle" do
-      expect(Particle).to receive(:publish).with(name: "build_state", data: "passing", ttl: 3600, private: false)
+    it "triggers a webhook" do
+      stub = stub_request(:post, "https://localhost/fake/path")
       post :trigger, params: {name: "ready", data: "true", coreid: "abc123", published_at: "2016-06-14T22:06:10.976Z"}
+      expect(stub).to have_been_requested
     end
 
-    it "does not notify if there is no device" do
-      expect(Particle).not_to receive(:publish)
+    it "does not trigger if there is no device" do
+      stub = stub_request(:post, "https://localhost/fake/path")
       post :trigger, params: {name: "ready", data: "true", coreid: "FAKE", published_at: "2016-06-14T22:06:10.976Z"}
+      expect(stub).not_to have_been_requested
     end
   end
 end

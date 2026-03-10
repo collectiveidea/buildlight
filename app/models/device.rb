@@ -41,6 +41,5 @@ class Device < ApplicationRecord
 
   def trigger
     TriggerWebhook.call(self) if webhook_url
-    TriggerParticle.call(self) if identifier
   end
 end
