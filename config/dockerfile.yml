@@ -2,12 +2,12 @@
 
 ---
 options:
-  alpine: true
   bin-cd: true
   gemfile-updates: false
   label:
     fly_launch_runtime: rails
   parallel: true
+  postgresql: true
   prepare: false
   packages:
     build:
