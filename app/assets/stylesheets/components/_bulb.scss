@@ -1,27 +1,29 @@
+@use "../base/variables";
+
 // Lightbulbs - the circles that sit within the traffic light
 // -----------------------------------------------------------------------------
 
 @use "sass:math";
 
 .bulb {
-  height: $bulb-size;
+  height: variables.$bulb-size;
   position: relative;
-  width: $bulb-size;
+  width: variables.$bulb-size;
 
   &__glow {
-    animation: pulse $animation-pulse-duration infinite;
+    animation: pulse variables.$animation-pulse-duration infinite;
     display: block;
-    height: $bulb-shadow-size;
+    height: variables.$bulb-shadow-size;
     left: 50%;
-    margin-left: -($bulb-shadow-size * 0.5);
-    margin-top: -($bulb-shadow-size * 0.5);
+    margin-left: -(variables.$bulb-shadow-size * 0.5);
+    margin-top: -(variables.$bulb-shadow-size * 0.5);
     opacity: 0;
     position: absolute;
     top: 50%;
     transform: scale(.5);
-    transition: transform $slow-transition-speed, opacity $slow-transition-speed;
-    transition-delay: $fast-transition-speed;
-    width: $bulb-shadow-size;
+    transition: transform variables.$slow-transition-speed, opacity variables.$slow-transition-speed;
+    transition-delay: variables.$fast-transition-speed;
+    width: variables.$bulb-shadow-size;
     z-index: 2;
 
     // 1 - Make sure the building glow displays underneath the
@@ -30,31 +32,31 @@
   }
 
   &__disc {
-    background-color: rgba($black, .2);
+    background-color: rgba(variables.$black, .2);
     border-radius: 50%;
     bottom: 0;
     left: 0;
     position: absolute;
     right: 0;
     top: 0;
-    transition: background-color $fast-transition-speed;
+    transition: background-color variables.$fast-transition-speed;
     z-index: 3;
   }
 
   &__text {
-    font-size: math.div($bulb-size, 7);
+    font-size: math.div(variables.$bulb-size, 7);
     font-weight: 800;
-    left: $bulb-size * 0.5;
+    left: variables.$bulb-size * 0.5;
     line-height: 1;
-    margin-left: -($bulb-size * 0.5);
-    margin-top: -(math.div($bulb-size, 7) * 0.5);
+    margin-left: -(variables.$bulb-size * 0.5);
+    margin-top: -(math.div(variables.$bulb-size, 7) * 0.5);
     opacity: 0;
     position: absolute;
     text-align: center;
     text-transform: lowercase;
-    top: $bulb-size * 0.5;
-    transition: opacity $base-transition-speed;
-    width: $bulb-size;
+    top: variables.$bulb-size * 0.5;
+    transition: opacity variables.$base-transition-speed;
+    width: variables.$bulb-size;
     z-index: 4;
   }
 
@@ -77,15 +79,15 @@
     }
   }
 
-  &--red { @include bulb($red, "failing"); }
+  &--red { @include bulb(variables.$red, "failing"); }
 
   &--yellow {
-    @include bulb($yellow, "building");
+    @include bulb(variables.$yellow, "building");
 
     // 1 - offset glow animation so that the building light
     //     balances well with the failing/passing ones
-    .bulb__glow { animation-delay: -($animation-pulse-duration * 0.5); } // 1
+    .bulb__glow { animation-delay: -(variables.$animation-pulse-duration * 0.5); } // 1
   }
 
-  &--green { @include bulb($green, "passing"); }
+  &--green { @include bulb(variables.$green, "passing"); }
 }

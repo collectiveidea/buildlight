@@ -1,7 +1,7 @@
 // Entry point for your Sass build
 @charset "utf-8";
 
-@import "base/base";
-@import "components/bulb";
-@import "components/light";
-@import "components/message";
+@use "base/base";
+@use "components/bulb";
+@use "components/light";
+@use "components/message";

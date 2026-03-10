@@ -1,3 +1,5 @@
+@use "../base/variables";
+
 // Traffic light - the box that holds the light bulbs
 // -----------------------------------------------------------------------------
 
@@ -12,28 +14,28 @@
   &__box {
     display: flex;
     flex-direction: column;
-    height: $light-height;
+    height: variables.$light-height;
     justify-content: space-between;
-    left: calc(50vw - (#{ $bulb-size } / 2));
+    left: calc(50vw - (#{ variables.$bulb-size } / 2));
     position: absolute;
-    top: calc(50vh - (#{ $light-height } / 2));
-    transition: margin-top $base-transition-speed;
-    width: $bulb-size;
+    top: calc(50vh - (#{ variables.$light-height } / 2));
+    transition: margin-top variables.$base-transition-speed;
+    width: variables.$bulb-size;
 
     [data-failing] & {
-      margin-top: $bulb-size + $bulb-gutter;
+      margin-top: variables.$bulb-size + variables.$bulb-gutter;
     }
 
     [data-failing][data-building] & {
-      margin-top: ($bulb-size + $bulb-gutter) * 0.5;
+      margin-top: (variables.$bulb-size + variables.$bulb-gutter) * 0.5;
     }
 
     [data-passing] & {
-      margin-top: -($bulb-size + $bulb-gutter);
+      margin-top: -(variables.$bulb-size + variables.$bulb-gutter);
     }
 
     [data-passing][data-building] & {
-      margin-top: -($bulb-size + $bulb-gutter) * 0.5;
+      margin-top: -(variables.$bulb-size + variables.$bulb-gutter) * 0.5;
     }
 
     [data-failing][data-passing] & {
