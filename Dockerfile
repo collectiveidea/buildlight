@@ -38,7 +38,7 @@ RUN apt-get update -qq && \
 FROM prebuild AS node
 
 # Install Node.js
-ARG NODE_VERSION=22.4.0
+ARG NODE_VERSION=24.14.0
 ENV PATH=/usr/local/node/bin:$PATH
 RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
     /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
