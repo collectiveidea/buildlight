@@ -1,29 +1,25 @@
-@use "../base/variables";
-
 // Lightbulbs - the circles that sit within the traffic light
 // -----------------------------------------------------------------------------
 
-@use "sass:math";
-
 .bulb {
-  height: variables.$bulb-size;
+  height: var(--bulb-size);
   position: relative;
-  width: variables.$bulb-size;
+  width: var(--bulb-size);
 
   &__glow {
-    animation: pulse variables.$animation-pulse-duration infinite;
+    animation: pulse var(--animation-pulse-duration) infinite;
     display: block;
-    height: variables.$bulb-shadow-size;
+    height: var(--bulb-shadow-size);
     left: 50%;
-    margin-left: -(variables.$bulb-shadow-size * 0.5);
-    margin-top: -(variables.$bulb-shadow-size * 0.5);
+    margin-left: calc(var(--bulb-shadow-size) * -0.5);
+    margin-top: calc(var(--bulb-shadow-size) * -0.5);
     opacity: 0;
     position: absolute;
     top: 50%;
     transform: scale(.5);
-    transition: transform variables.$slow-transition-speed, opacity variables.$slow-transition-speed;
-    transition-delay: variables.$fast-transition-speed;
-    width: variables.$bulb-shadow-size;
+    transition: transform var(--slow-transition-speed), opacity var(--slow-transition-speed);
+    transition-delay: var(--fast-transition-speed);
+    width: var(--bulb-shadow-size);
     z-index: 2;
 
     // 1 - Make sure the building glow displays underneath the
@@ -32,62 +28,62 @@
   }
 
   &__disc {
-    background-color: rgba(variables.$black, .2);
+    background-color: rgba(var(--color-black), .2);
     border-radius: 50%;
     bottom: 0;
     left: 0;
     position: absolute;
     right: 0;
     top: 0;
-    transition: background-color variables.$fast-transition-speed;
+    transition: background-color var(--fast-transition-speed);
     z-index: 3;
   }
 
   &__text {
-    font-size: math.div(variables.$bulb-size, 7);
+    font-size: calc(var(--bulb-size) / 7);
     font-weight: 800;
-    left: variables.$bulb-size * 0.5;
+    left: calc(var(--bulb-size) * 0.5);
     line-height: 1;
-    margin-left: -(variables.$bulb-size * 0.5);
-    margin-top: -(math.div(variables.$bulb-size, 7) * 0.5);
+    margin-left: calc(var(--bulb-size) * -0.5);
+    margin-top: calc((var(--bulb-size) / 7) * -0.5);
     opacity: 0;
     position: absolute;
     text-align: center;
     text-transform: lowercase;
-    top: variables.$bulb-size * 0.5;
-    transition: opacity variables.$base-transition-speed;
-    width: variables.$bulb-size;
+    top: calc(var(--bulb-size) * 0.5);
+    transition: opacity var(--base-transition-speed);
+    width: var(--bulb-size);
     z-index: 4;
   }
 
-  @mixin bulb($color, $state) {
+  @mixin bulb($color-var, $state) {
     [data-#{ $state }] & {
       .bulb__glow {
         background-image: radial-gradient(
           ellipse at center,
-          rgba($color, .9) 10%,
-          rgba($color, .6) 20%,
-          rgba($color, .3) 40%,
-          rgba($color, 0) 70%
+          rgba(var(#{$color-var}), .9) 10%,
+          rgba(var(#{$color-var}), .6) 20%,
+          rgba(var(#{$color-var}), .3) 40%,
+          rgba(var(#{$color-var}), 0) 70%
         );
         opacity: 1;
         transform: scale(1);
       }
 
-      .bulb__disc { background-color: $color; }
+      .bulb__disc { background-color: rgb(var(#{$color-var})); }
       .bulb__text { opacity: 1; }
     }
   }
 
-  &--red { @include bulb(variables.$red, "failing"); }
+  &--red { @include bulb(--color-red, "failing"); }
 
   &--yellow {
-    @include bulb(variables.$yellow, "building");
+    @include bulb(--color-yellow, "building");
 
     // 1 - offset glow animation so that the building light
     //     balances well with the failing/passing ones
-    .bulb__glow { animation-delay: -(variables.$animation-pulse-duration * 0.5); } // 1
+    .bulb__glow { animation-delay: calc(var(--animation-pulse-duration) * -0.5); } // 1
   }
 
-  &--green { @include bulb(variables.$green, "passing"); }
+  &--green { @include bulb(--color-green, "passing"); }
 }

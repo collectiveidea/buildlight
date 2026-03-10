@@ -1,34 +1,34 @@
-@use "sass:color";
 // Variables
 // -----------------------------------------------------------------------------
 
-// Colors
-$black: #000;
-$white: #fff;
-$red: #cf4c29;
-$yellow: #ecc561;
-$green: #28b56e;
+:root {
+  // Colors - RGB components for alpha usage
+  --color-black: 0, 0, 0;
+  --color-red: 207, 76, 41;
+  --color-yellow: 236, 197, 97;
+  --color-green: 40, 181, 110;
 
-$base-background-color: color.mix($black, $white, 75%);
+  // Semantic colors - mix(black, white, 75%) = 75% black, 25% white
+  --base-background-color: color-mix(in srgb, #000 75%, #fff);
+  --base-text-color: color-mix(in srgb, #000 10%, #fff);
+  --strong-text-color: #fff;
+  --muted-text-color: color-mix(in srgb, #000 50%, #fff);
 
-$base-text-color: color.mix($black, $white, 10%);
-$strong-text-color: $white;
-$muted-text-color: color.mix($black, $white, 50%);
+  // Typography
+  --base-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
-// Typography
-$base-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  // Transitions
+  --base-transition-speed: 500ms;
+  --fast-transition-speed: calc(var(--base-transition-speed) * 0.5);
+  --slow-transition-speed: calc(var(--base-transition-speed) * 2);
+  --slug-transition-speed: calc(var(--base-transition-speed) * 8);
 
-// Transitions
-$base-transition-speed: 500ms;
-$fast-transition-speed: $base-transition-speed * 0.5;
-$slow-transition-speed: $base-transition-speed * 2;
-$slug-transition-speed: $base-transition-speed * 8;
+  // Traffic light
+  --bulb-size: 50vmin;
+  --bulb-shadow-size: 150vmax;
+  --bulb-gutter: 6vmin;
+  --light-height: calc(var(--bulb-size) * 3 + var(--bulb-gutter) * 2);
 
-// Traffic light
-$bulb-size: 50vmin;
-$bulb-shadow-size: 150vmax;
-$bulb-gutter: 6vmin;
-$light-height: ($bulb-size * 3) + ($bulb-gutter * 2);
-
-// Animations
-$animation-pulse-duration: 5s;
+  // Animations
+  --animation-pulse-duration: 5s;
+}

@@ -1,17 +1,15 @@
-@use "variables";
-
 // Elements
 // -----------------------------------------------------------------------------
 
 html {
-  font-family: variables.$base-font-family;
+  font-family: var(--base-font-family);
   font-weight: 300;
   line-height: 1.4;
 }
 
 body {
-  background-color: variables.$base-background-color;
-  color: variables.$base-text-color;
+  background-color: var(--base-background-color);
+  color: var(--base-text-color);
   font-size: 1em;
 }
 
@@ -25,6 +23,6 @@ a {
 
   &:focus,
   &:hover {
-    color: variables.$strong-text-color;
+    color: var(--strong-text-color);
   }
 }

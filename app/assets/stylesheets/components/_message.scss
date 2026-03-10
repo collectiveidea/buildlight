@@ -1,5 +1,3 @@
-@use "../base/variables";
-
 // Messages
 // -----------------------------------------------------------------------------
 
@@ -21,8 +19,8 @@
   font-size: 0;
   overflow: hidden;
   padding-bottom: .5em;
-  transition: font-size variables.$base-transition-speed,
-              opacity variables.$base-transition-speed;
+  transition: font-size var(--base-transition-speed),
+              opacity var(--base-transition-speed);
 
   .emoji {
     height: 1em;
