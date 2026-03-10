@@ -13,11 +13,7 @@ describe API::DevicesController do
   end
 
   describe "POST trigger" do
-    let!(:device) do
-      FactoryBot.create(:device, identifier: "abc123").tap do |d|
-        d.update_column(:webhook_url, "https://localhost/fake/path")
-      end
-    end
+    let!(:device) { FactoryBot.create(:device, identifier: "abc123", webhook_url: "https://localhost/fake/path") }
 
     it "triggers a webhook" do
       stub = stub_request(:post, "https://localhost/fake/path")

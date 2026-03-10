@@ -8,6 +8,17 @@ FactoryBot.define do
     trait :with_identifier do
       sequence(:identifier) { |i| "device-#{i}" }
     end
+
+    # Set webhook_url via update_column to avoid triggering callbacks
+    transient do
+      webhook_url { nil }
+    end
+
+    after(:create) do |device, evaluator|
+      if evaluator.webhook_url
+        device.update_column(:webhook_url, evaluator.webhook_url)
+      end
+    end
   end
 
   factory :status do

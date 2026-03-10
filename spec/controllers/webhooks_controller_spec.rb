@@ -36,7 +36,9 @@ describe WebhooksController do
 
       it "triggers a webhook" do
         stub = stub_request(:post, "https://localhost/fake/path")
-        FactoryBot.create(:device, usernames: ["collectiveidea"], webhook_url: "https://localhost/fake/path")
+          .with(body: {colors: {red: false, yellow: false, green: true}}.to_json)
+        device = FactoryBot.create(:device, usernames: ["collectiveidea"], webhook_url: "https://localhost/fake/path")
+        device.update_column(:status, nil)
         post :create, params: {payload: json_fixture("travis.json")}
         expect(stub).to have_been_requested
       end
@@ -60,7 +62,9 @@ describe WebhooksController do
 
       it "triggers a webhook" do
         stub = stub_request(:post, "https://localhost/fake/path")
-        FactoryBot.create(:device, usernames: ["collectiveidea"], webhook_url: "https://localhost/fake/path")
+          .with(body: {colors: {red: false, yellow: false, green: true}}.to_json)
+        device = FactoryBot.create(:device, usernames: ["collectiveidea"], webhook_url: "https://localhost/fake/path")
+        device.update_column(:status, nil)
         post :create, params: JSON.parse(json_fixture("github.json"))
         expect(stub).to have_been_requested
       end

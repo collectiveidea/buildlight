@@ -53,9 +53,7 @@ RSpec.describe Device, type: :model do
   describe "#trigger" do
     context "when the device has a webhook_url" do
       it "sends a webhook" do
-        device = FactoryBot.create(:device)
-        # Add webhook without triggering callbacks
-        device.update_column(:webhook_url, "https://localhost/fake/path")
+        device = FactoryBot.create(:device, webhook_url: "https://localhost/fake/path")
 
         allow(TriggerWebhook).to receive(:call)
         device.trigger
