@@ -36,7 +36,10 @@ console_command = '/rails/bin/rails console'
   memory = '256mb'
   cpu_kind = 'shared'
   cpus = 1
+
 [[statics]]
   guest_path = "/rails/public"
   url_prefix = "/"
 
+[processes]
+  app = "./bin/rails server"
