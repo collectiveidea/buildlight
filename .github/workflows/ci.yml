@@ -13,46 +13,28 @@ jobs:
 
     services:
       postgres:
-        image: postgres:14
+        image: postgres:16
         env:
-          POSTGRES_USER: test
-          POSTGRES_PASSWORD: correcthorsebatterystaple
-          POSTGRES_DB: test
+          POSTGRES_USER: buildlight
+          POSTGRES_PASSWORD: buildlight
+          POSTGRES_DB: buildlight_test
         ports:
           - 5432:5432
-        # needed because the postgres container does not provide a healthcheck
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     env:
-      DATABASE_URL: postgres://test:correcthorsebatterystaple@localhost:5432/test
-      RAILS_ENV: test
-      RUBYOPT: --enable=frozen-string-literal
+      TEST_DATABASE_URL: postgresql://buildlight:buildlight@localhost:5432/buildlight_test
 
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v4
 
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
+    - name: Set up Zig
+      uses: mlugg/setup-zig@v2
       with:
-        bundler-cache: true
+        version: 0.15.2
 
-    - name: Set up Node
-      uses: actions/setup-node@v4
-      with:
-        node-version-file: 'package.json'
-        cache: 'npm'
-
-    - name: NPM Install
-      run: npm ci
-
-    - name: App Setup
-      run: bin/setup
-
-    - name: Build CSS
-      run: npm run build:css
-
-    - name: Standard
-      run: bundle exec rake standard
+    - name: Build
+      run: zig build
 
     - name: Run Tests
-      run: bundle exec rspec --format progress --color
+      run: zig build test

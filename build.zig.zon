@@ -1,0 +1,16 @@
+.{
+    .name = .buildlight,
+    .version = "0.0.0",
+    .fingerprint = 0x314341060ffad66e,
+    .paths = .{""},
+    .dependencies = .{
+        .httpz = .{
+            .url = "git+https://github.com/karlseguin/http.zig?ref=master#844f8016e6616f00b05d4cc3c713307b0fe586c7",
+            .hash = "httpz-0.0.0-PNVzrBtMBwAPcQx3mNEgat3Xbsynw-eIC9SmOX5M9XtP",
+        },
+        .pg = .{
+            .url = "git+https://github.com/karlseguin/pg.zig?ref=master#e58b318b7867ef065b3135983f829219c5eef891",
+            .hash = "pg-0.0.0-Wp_7gXFoBgD0fQ72WICKa-bxLga03AXXQ3BbIsjjohQ3",
+        },
+    },
+}
