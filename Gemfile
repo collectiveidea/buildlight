@@ -7,9 +7,8 @@ gem "rails", "~> 8.0.1"
 gem "pg"
 
 gem "bootsnap"
+gem "faraday"
 gem "honeybadger"
-gem "ostruct" # Required by particlerb
-gem "particlerb"
 gem "puma"
 
 gem "importmap-rails"
@@ -32,4 +31,5 @@ end
 
 group :test do
   gem "rspec-ontap", require: false
+  gem "webmock"
 end
