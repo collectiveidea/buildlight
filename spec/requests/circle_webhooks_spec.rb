@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "Webhooks from Circle CI" do
-  it "recieves a json payload" do
+  it "receives a json payload" do
     post "/", params: json_fixture("circle.json"), headers: {"content-type": "application/json", "Circleci-Event-Type": "workflow-completed"}
     expect(response).to be_successful
   end
