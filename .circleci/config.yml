@@ -5,7 +5,7 @@ jobs:
     environment:
       RAILS_ENV: test
     docker:
-    - image: cimg/ruby:4.0.1-node
+    - image: cimg/ruby:4.0.2-node
       environment:
         PGHOST: localhost
         PGUSER: buildlight
